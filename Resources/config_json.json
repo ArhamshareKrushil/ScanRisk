@@ -1,0 +1,37 @@
+{
+    "Credentials": {
+        "marketdata_appkey": "8b3f3c064badc08e235598",
+        "marketdata_secretkey": "Inxa181@lI",
+        "interactive_appkey": "a9cda0be6e34b584d34242",
+        "interactive_secretkey": "Ppml141@YY",
+        "source": "WEBAPI"
+    },
+    "disable_ssl": "True",
+    "broadcastmode": "Partial",
+    "url": "http://192.168.102.9:3000",
+    "IAToken": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJBMTk0Nl9BOUNEQTBCRTZFMzRCNTg0RDM0MjQyIiwicHVibGljS2V5IjoiYTljZGEwYmU2ZTM0YjU4NGQzNDI0MiIsImlhdCI6MTY1NDgzMjA5NiwiZXhwIjoxNjU0OTE4NDk2fQ.bSfMb5eM_rz-Q-isMM31JbRfyMR31R0TiXU3smZMdUs",
+        "login_date": "22-06-10",
+        "login_time": "09:04:56",
+        "Client_list": [
+            "A1946"
+        ],
+        "client_list": "['A1946']"
+    },
+    "MDToken": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJBMTk0Nl84YjNmM2MwNjRiYWRjMDhlMjM1NTk4IiwicHVibGljS2V5IjoiOGIzZjNjMDY0YmFkYzA4ZTIzNTU5OCIsImlhdCI6MTY3NDgwMTg2MiwiZXhwIjoxNjc0ODg4MjYyfQ.NiV-0cM2jifcFJSlxyx3-m6nrFUY6NKVdw0tc1gY5YU",
+        "login_time": "12:14:22"
+    },
+    "DefaultClient": "A1946",
+    "userID": "A1946",
+    "UDP_FO": 28442,
+    "UDP_CASH": 34074,
+    "FastApiURL": "http://192.168.102.155:5000",
+    "FastApiToken": {
+        "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzU1MTM3NjAsImlhdCI6MTY3NTQyNzM2MCwiYnJhbmNoX2lkIjoibWFpbl9tYXN0ZXIifQ.ZifoOLMgiZcqAvWmsQGTmZZCExkH0VNFkY_WUyGuuYU",
+        "Type": "master",
+        "Type_id": "main_master",
+        "login_date": "23-02-03",
+        "login_time": "17:59:20"
+    }
+}

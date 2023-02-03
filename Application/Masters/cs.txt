@@ -1,0 +1,30 @@
+{
+    "Credentials": {
+        "marketdata_appkey": "ea197e3144b381899c6927",
+        "marketdata_secretkey": "Neqk211$Pk",
+        "interactive_appkey": "b270424f2247d52b006840",
+        "interactive_secretkey": "Bhqe750#i1",
+        "source": "WEBAPI"
+    },
+    "disable_ssl": "True",
+    "broadcastmode": "Partial",
+    "url": "http://192.168.102.22:3000",
+    "url2": "http://192.168.102.22:3000",
+    "url1": "http://14.97.72.10:3000",
+    "IAToken": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJBMDExOV9CMjcwNDI0RjIyNDdENTJCMDA2ODQwIiwicHVibGljS2V5IjoiYjI3MDQyNGYyMjQ3ZDUyYjAwNjg0MCIsImlhdCI6MTY3MDQ5OTI3MSwiZXhwIjoxNjcwNTg1NjcxfQ.wOFhVwlU1GravPvbdEkQs6CRtflpuzF0-sfAAUHwuf0",
+        "login_date": "22-12-08",
+        "login_time": "17:04:32",
+        "Client_list": [
+            "A0119"
+        ]
+    },
+    "MDToken": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJBMDExOV9lYTE5N2UzMTQ0YjM4MTg5OWM2OTI3IiwicHVibGljS2V5IjoiZWExOTdlMzE0NGIzODE4OTljNjkyNyIsImlhdCI6MTY3MDQ5OTI3MCwiZXhwIjoxNjcwNTg1NjcwfQ.Aa2zgBCCfFGxsWQrL3oH_y_CC6zi2hvYXtLk-Zb5ofI",
+        "login_time": "17:04:30"
+    },
+    "DefaultClient": "A0119",
+    "userID": "A0119",
+    "UDP_FO": 35099,
+    "UDP_CASH": 34044
+}

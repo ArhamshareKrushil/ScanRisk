@@ -1,0 +1,1225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>720</width>
+    <height>346</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowNestedDocks|QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks|QMainWindow::ForceTabbedDocks|QMainWindow::GroupedDragging|QMainWindow::VerticalTabs</set>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="horizontalSpacing">
+     <number>3</number>
+    </property>
+    <property name="verticalSpacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0" colspan="3">
+     <widget class="QFrame" name="headerFrame">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">/* (dot) .QFrame  fix #141, #126, #123 */
+.QFrame {
+background-color: #222222;
+  border-radius: 4px;
+  border: 0px solid transparent;
+
+  /* No frame */
+  /* HLine */
+  /* HLine */
+}
+
+.QFrame[frameShape=&quot;0&quot;] {
+  border-radius: 4px;
+  border: 1px transparent #2d2d2d;
+}
+
+.QFrame[frameShape=&quot;4&quot;] {
+  max-height: 2px;
+  border: none;
+  background-color: #2d2d2d;
+}
+
+.QFrame[frameShape=&quot;5&quot;] {
+  max-width: 2px;
+  border: none;
+  background-color: #2d2d2d;
+}
+
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="1" alignment="Qt::AlignRight|Qt::AlignTop">
+        <widget class="QFrame" name="btnframe_3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: transparent;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item alignment="Qt::AlignTop">
+           <widget class="QPushButton" name="bt_min_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>35</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: transparent;
+  border: 1px solid transparent;
+
+}
+QPushButton:hover {
+  background-color: #148CD2;    
+}
+</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../../../Autotrader-Reborn2.1/Resourses/icons/icons.qrc">
+              <normaloff>:/icon1/minus.svg</normaloff>:/icon1/minus.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>15</width>
+              <height>15</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight|Qt::AlignTop">
+           <widget class="QPushButton" name="bt_close_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>35</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+  background-color: transparent;
+  border: 1px solid transparent;
+
+}
+QPushButton:hover {
+  background-color: #148CD2;    
+}
+</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../../../Autotrader-Reborn2.1/Resourses/icons/icons.qrc">
+              <normaloff>:/icon1/x.svg</normaloff>:/icon1/x.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>15</width>
+              <height>15</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QFrame" name="frame_4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QFrame" name="mainFrame">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="currentIndex">
+          <number>2</number>
+         </property>
+         <widget class="QWidget" name="tab_MarketData">
+          <attribute name="title">
+           <string>MarketData</string>
+          </attribute>
+          <widget class="QLineEdit" name="lb_ia_secretKey">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>50</y>
+             <width>281</width>
+             <height>17</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_5">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>80</y>
+             <width>90</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:rgb(229, 229, 229)</string>
+           </property>
+           <property name="text">
+            <string>MD_APPKEY</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_2">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>50</y>
+             <width>90</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:rgb(229, 229, 229)</string>
+           </property>
+           <property name="text">
+            <string>IA_SECRETKEY</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lb_md_appKey">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>80</y>
+             <width>281</width>
+             <height>17</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="cbServer">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>10</y>
+             <width>141</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>ARHAM_DIRECT</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>ARHAM_WEB</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>TRADECIRCLE_DIRECT</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>TRADECIRCLE_WEB</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>UAT</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>UAT_WEB</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QLabel" name="label_6">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>10</y>
+             <width>90</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:rgb(229, 229, 229)</string>
+           </property>
+           <property name="text">
+            <string>Server</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pbLogin">
+           <property name="geometry">
+            <rect>
+             <x>320</x>
+             <y>120</y>
+             <width>70</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Login</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="cbCmaster">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>120</y>
+             <width>231</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:rgb(229, 229, 229)</string>
+           </property>
+           <property name="text">
+            <string>    DOWNLOAD CONTRACT MASTER.</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lbMDStatus">
+           <property name="geometry">
+            <rect>
+             <x>440</x>
+             <y>80</y>
+             <width>81</width>
+             <height>18</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(213, 213, 213);</string>
+           </property>
+           <property name="text">
+            <string>Not Connected</string>
+           </property>
+          </widget>
+          <widget class="QTextEdit" name="label_3">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>160</y>
+             <width>281</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: transparent;
+border-color: transparent;
+color: rgb(225,225,225);</string>
+           </property>
+           <property name="lineWidth">
+            <number>0</number>
+           </property>
+           <property name="textInteractionFlags">
+            <set>Qt::NoTextInteraction</set>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="tab_Download">
+          <attribute name="title">
+           <string>Downloads</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="3">
+            <widget class="Line" name="line_3">
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="Line" name="line_4">
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="5">
+            <widget class="Line" name="line_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QComboBox" name="comboBox">
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>SPAN</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="4">
+            <widget class="QPushButton" name="pushButton">
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>DOWNLOAD</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QComboBox" name="comboBox_2">
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="Line" name="line">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>BHAV COPY</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="4">
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>DOWNLOAD</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="Line" name="line_5">
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="Line" name="line_6">
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tab_Upload">
+          <attribute name="title">
+           <string>Upload</string>
+          </attribute>
+          <widget class="QLabel" name="label_8">
+           <property name="geometry">
+            <rect>
+             <x>9</x>
+             <y>9</y>
+             <width>62</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>AEL -General</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit">
+           <property name="geometry">
+            <rect>
+             <x>108</x>
+             <y>10</y>
+             <width>133</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_3">
+           <property name="geometry">
+            <rect>
+             <x>349</x>
+             <y>9</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>UPLOAD</string>
+           </property>
+          </widget>
+          <widget class="Line" name="line_8">
+           <property name="geometry">
+            <rect>
+             <x>77</x>
+             <y>19</y>
+             <width>25</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>25</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_10">
+           <property name="geometry">
+            <rect>
+             <x>318</x>
+             <y>19</y>
+             <width>25</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>25</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_11">
+           <property name="geometry">
+            <rect>
+             <x>320</x>
+             <y>49</y>
+             <width>25</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>25</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_9">
+           <property name="geometry">
+            <rect>
+             <x>79</x>
+             <y>49</y>
+             <width>25</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>25</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_9">
+           <property name="geometry">
+            <rect>
+             <x>11</x>
+             <y>39</y>
+             <width>62</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>AEL -General</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_4">
+           <property name="geometry">
+            <rect>
+             <x>351</x>
+             <y>39</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>UPLOAD</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_2">
+           <property name="geometry">
+            <rect>
+             <x>110</x>
+             <y>40</y>
+             <width>133</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QToolButton" name="toolButton">
+           <property name="geometry">
+            <rect>
+             <x>250</x>
+             <y>10</y>
+             <width>25</width>
+             <height>19</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+          <widget class="QToolButton" name="toolButton_2">
+           <property name="geometry">
+            <rect>
+             <x>250</x>
+             <y>40</y>
+             <width>25</width>
+             <height>19</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_10">
+           <property name="geometry">
+            <rect>
+             <x>11</x>
+             <y>69</y>
+             <width>62</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>AEL -General</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_3">
+           <property name="geometry">
+            <rect>
+             <x>110</x>
+             <y>70</y>
+             <width>133</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="Line" name="line_12">
+           <property name="geometry">
+            <rect>
+             <x>320</x>
+             <y>79</y>
+             <width>25</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>25</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_13">
+           <property name="geometry">
+            <rect>
+             <x>79</x>
+             <y>79</y>
+             <width>25</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>25</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_5">
+           <property name="geometry">
+            <rect>
+             <x>351</x>
+             <y>69</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>UPLOAD</string>
+           </property>
+          </widget>
+          <widget class="QToolButton" name="toolButton_3">
+           <property name="geometry">
+            <rect>
+             <x>250</x>
+             <y>70</y>
+             <width>25</width>
+             <height>19</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_11">
+           <property name="geometry">
+            <rect>
+             <x>11</x>
+             <y>109</y>
+             <width>62</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>AEL -General</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_4">
+           <property name="geometry">
+            <rect>
+             <x>110</x>
+             <y>110</y>
+             <width>133</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="Line" name="line_14">
+           <property name="geometry">
+            <rect>
+             <x>320</x>
+             <y>119</y>
+             <width>25</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>25</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_15">
+           <property name="geometry">
+            <rect>
+             <x>79</x>
+             <y>119</y>
+             <width>25</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>25</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_6">
+           <property name="geometry">
+            <rect>
+             <x>351</x>
+             <y>109</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>UPLOAD</string>
+           </property>
+          </widget>
+          <widget class="QToolButton" name="toolButton_4">
+           <property name="geometry">
+            <rect>
+             <x>250</x>
+             <y>110</y>
+             <width>25</width>
+             <height>19</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_12">
+           <property name="geometry">
+            <rect>
+             <x>11</x>
+             <y>149</y>
+             <width>62</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>AEL -General</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_5">
+           <property name="geometry">
+            <rect>
+             <x>110</x>
+             <y>150</y>
+             <width>133</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="Line" name="line_16">
+           <property name="geometry">
+            <rect>
+             <x>320</x>
+             <y>159</y>
+             <width>25</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>25</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="Line" name="line_17">
+           <property name="geometry">
+            <rect>
+             <x>79</x>
+             <y>159</y>
+             <width>25</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>25</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_7">
+           <property name="geometry">
+            <rect>
+             <x>351</x>
+             <y>149</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>UPLOAD</string>
+           </property>
+          </widget>
+          <widget class="QToolButton" name="toolButton_5">
+           <property name="geometry">
+            <rect>
+             <x>250</x>
+             <y>150</y>
+             <width>25</width>
+             <height>19</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QFrame" name="StatusBar">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_7">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(80, 80, 80);
+  border-radius: 0
+px;</string>
+         </property>
+         <property name="text">
+          <string>log:</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QFrame" name="gripFolio">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(25,25,25);
+  border-radius: 0px;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="lineWidth">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../../../Autotrader-Reborn2.1/Resourses/icons/icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

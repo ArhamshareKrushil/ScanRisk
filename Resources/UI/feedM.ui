@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>F</class>
+ <widget class="QWidget" name="F">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QComboBox" name="cbSelectFeed">
+   <property name="geometry">
+    <rect>
+     <x>146</x>
+     <y>20</y>
+     <width>130</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>API socket</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Rebroadcater</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Exchange</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="lbSelectFeed">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>101</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Select Feed</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbFOPort">
+   <property name="geometry">
+    <rect>
+     <x>28</x>
+     <y>105</y>
+     <width>70</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>FO</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbCMPort">
+   <property name="geometry">
+    <rect>
+     <x>28</x>
+     <y>155</y>
+     <width>70</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CM</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbCDPort">
+   <property name="geometry">
+    <rect>
+     <x>28</x>
+     <y>205</y>
+     <width>70</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CD</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="leFOPort">
+   <property name="geometry">
+    <rect>
+     <x>146</x>
+     <y>105</y>
+     <width>130</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="leCDPort">
+   <property name="geometry">
+    <rect>
+     <x>146</x>
+     <y>200</y>
+     <width>130</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="leCMPort">
+   <property name="geometry">
+    <rect>
+     <x>146</x>
+     <y>155</y>
+     <width>130</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pbConnect">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>260</y>
+     <width>130</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Connect</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbPreviousFeed">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>111</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Previous Feed</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbPreviousFeed_2">
+   <property name="geometry">
+    <rect>
+     <x>146</x>
+     <y>60</y>
+     <width>76</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>value</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pbDisconnect">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>260</y>
+     <width>130</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Disconnect</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="bt_close_3">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>0</y>
+     <width>35</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>35</width>
+     <height>25</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>35</width>
+     <height>25</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+  background-color: transparent;
+  border: 1px solid transparent;
+
+}
+QPushButton:hover {
+  background-color: #148CD2;    
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icon1/x.svg</normaloff>:/icon1/x.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>15</width>
+     <height>15</height>
+    </size>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

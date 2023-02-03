@@ -1,0 +1,782 @@
+{
+    "AARTIIND": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ABB": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ABBOTINDIA": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ABCAPITAL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ABFRL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ACC": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ADANIENT": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ADANIPORTS": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ALKEM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "AMBUJACEM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "APOLLOHOSP": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "APOLLOTYRE": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ASHOKLEY": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ASIANPAINT": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ASTRAL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ATUL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "AUBANK": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "AUROPHARMA": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "AXISBANK": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BAJAJ-AUTO": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BAJAJFINSV": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BAJFINANCE": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BALKRISIND": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BALRAMCHIN": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BANDHANBNK": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BANKBARODA": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BANKNIFTY": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BATAINDIA": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BEL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BERGEPAINT": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BHARATFORG": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BHARTIARTL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BHEL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BIOCON": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BOSCHLTD": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BPCL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BRITANNIA": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "BSOFT": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "CANBK": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "CANFINHOME": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "CHAMBLFERT": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "CHOLAFIN": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "CIPLA": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "COALINDIA": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "COFORGE": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "COLPAL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "CONCOR": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "COROMANDEL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "CROMPTON": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "CUB": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "CUMMINSIND": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "DABUR": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "DALBHARAT": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "DEEPAKNTR": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "DELTACORP": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "DIVISLAB": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "DIXON": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "DLF": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "DRREDDY": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "EICHERMOT": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ESCORTS": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "EXIDEIND": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "FEDERALBNK": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "FINNIFTY": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "FSL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "GAIL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "GLENMARK": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "GMRINFRA": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "GNFC": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "GODREJCP": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "GODREJPROP": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "GRANULES": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "GRASIM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "GUJGASLTD": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "HAL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "HAVELLS": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "HCLTECH": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "HDFC": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "HDFCAMC": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "HDFCBANK": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "HDFCLIFE": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "HEROMOTOCO": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "HINDALCO": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "HINDCOPPER": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "HINDPETRO": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "HINDUNILVR": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "HONAUT": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "IBULHSGFIN": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ICICIBANK": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ICICIGI": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ICICIPRULI": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "IDEA": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "IDFC": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "IDFCFIRSTB": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "IEX": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "IGL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "INDHOTEL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "INDIACEM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "INDIAMART": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "INDIGO": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "INDUSINDBK": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "INDUSTOWER": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "INFY": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "INTELLECT": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "IOC": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "IPCALAB": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "IRCTC": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ITC": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "JINDALSTEL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "JKCEMENT": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "JSWSTEEL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "JUBLFOOD": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "KOTAKBANK": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "L&TFH": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "LALPATHLAB": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "LAURUSLABS": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "LICHSGFIN": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "LT": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "LTIM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "LTTS": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "LUPIN": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "M&M": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "M&MFIN": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "MANAPPURAM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "MARICO": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "MARUTI": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "MCDOWELL-N": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "MCX": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "METROPOLIS": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "MFSL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "MGL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "MIDCPNIFTY": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "MOTHERSON": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "MPHASIS": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "MRF": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "MUTHOOTFIN": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "NATIONALUM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "NAUKRI": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "NAVINFLUOR": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "NESTLEIND": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "NIFTY": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "NMDC": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "NTPC": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "OBEROIRLTY": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "OFSS": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ONGC": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "PAGEIND": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "PEL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "PERSISTENT": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "PETRONET": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "PFC": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "PIDILITIND": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "PIIND": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "PNB": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "POLYCAB": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "POWERGRID": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "PVR": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "RAIN": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "RAMCOCEM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "RBLBANK": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "RECLTD": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "RELIANCE": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "SAIL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "SBICARD": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "SBILIFE": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "SBIN": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "SHREECEM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "SHRIRAMFIN": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "SIEMENS": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "SRF": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "SUNPHARMA": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "SUNTV": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "SYNGENE": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "TATACHEM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "TATACOMM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "TATACONSUM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "TATAMOTORS": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "TATAPOWER": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "TATASTEEL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "TCS": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "TECHM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "TITAN": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "TORNTPHARM": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "TORNTPOWER": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "TRENT": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "TVSMOTOR": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "UBL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ULTRACEMCO": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "UPL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "VEDL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "VOLTAS": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "WHIRLPOOL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "WIPRO": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ZEEL": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    },
+    "ZYDUSLIFE": {
+        "UP_Scn": 10,
+        "Down_Scn": 10
+    }
+}

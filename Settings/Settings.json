@@ -1,0 +1,50 @@
+{
+    "mainWindow": {
+        "defaultWindowState": "D:/scanRisk/Application/WindowProfile/abc",
+        "lastSavedColumnProfile": "D:/scanRisk/Application/WindowProfile/mainwindowDefault"
+    },
+    "CWSWM": {
+        "defaultColumnProfile": "D:/scanRisk/Resources/CWSWM_ColPro/ColumnProfile/default",
+        "lastSavedColumnProfile": "D:/scanRisk/Resources/CWSWM_ColPro/ColumnProfile/edited"
+    },
+    "CWM": {
+        "defaultColumnProfile": "D:/scanRisk/Resources/CWM_ColPro/ColumnProfile/default",
+        "lastSavedColumnProfile": ""
+    },
+    "TWM": {
+        "defaultColumnProfile": "D:/scanRisk/Resources/TWM_ColPro/ColumnProfile/default",
+        "lastSavedColumnProfile": ""
+    },
+    "TWSWM": {
+        "defaultColumnProfile": "D:/scanRisk/Resources/TWSWM_ColPro/ColumnProfile/default",
+        "lastSavedColumnProfile": ""
+    },
+    "POCW": {
+        "defaultColumnProfile": "D:/scanRisk/Resources/POCW_ColPro/ColumnProfile/default",
+        "lastSavedColumnProfile": "D:/scanRisk/Resources/POCW_ColPro/ColumnProfile/default"
+    },
+    "POTW": {
+        "defaultColumnProfile": "D:/scanRisk/Resources/POTW_ColPro/ColumnProfile/default",
+        "lastSavedColumnProfile": ""
+    },
+    "BWM": {
+        "defaultColumnProfile": "",
+        "lastSavedColumnProfile": ""
+    },
+    "CMPOTW": {
+        "defaultColumnProfile": "D:/scanRisk/Resources/CMPOTW_ColPro/default",
+        "lastSavedColumnProfile": ""
+    },
+    "CMPOCW": {
+        "defaultColumnProfile": "D:/scanRisk/Resources/CMPOCW_ColPro/default",
+        "lastSavedColumnProfile": ""
+    },
+    "CMTWM": {
+        "defaultColumnProfile": "D:/scanRisk/Resources/CMTWM_ColPro/ColumnProfile/default",
+        "lastSavedColumnProfile": ""
+    },
+    "CMCWM": {
+        "defaultColumnProfile": "D:/scanRisk/Resources/CMTWM_ColPro/ColumnProfile/default",
+        "lastSavedColumnProfile": ""
+    }
+}
