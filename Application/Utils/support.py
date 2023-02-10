@@ -99,22 +99,97 @@ def updatePOTW(main,data):
 
 
 
+# def updatePOTWopenPosition(main,data):
+#     # st=time.time()
+#     main.POTW.table[:data.shape[0], :] = data
+#     # main.POTW.model._data[:data.shape[0], :] = data[:, 1:]
+#
+#     main.POTW.lastSerialNo += data.shape[0]
+#
+#     main.POTW.model.lastSerialNo += data.shape[0]
+#
+#     main.POTW.model.insertMultiRows(rows=data.shape[0])
+#
+#     main.POTW.model.rowCount()
+#     ind = main.POTW.model.index(0, 0)
+#     ind1 = main.POTW.model.index(0, 1)
+#     main.POTW.model.dataChanged.emit(ind, ind1)
+#     # et=time.time()
+#     # print('timettt',et-st)
+#
+#     # main.POTW.table[main.POTW.model.lastSerialNo, :] = [data['UserID'], data['Exchange'], data['Token'], , sym, exp,
+#     #                                                     strike, opt, TQty, Tamt, 0,
+#     #                                                     0, main.POTW.model.lastSerialNo, 0, 0, TQty, Tamt, 0.0, 0.0,
+#     #                                                     0.0, netPrem, 0.0, 0.0, premMrg]
+#     # main.POTW.table[main.POTW.model.lastSerialNo, :] = data
+#
+#     # main.POTW.lastSerialNo += 1
+#     # main.POTW.model.lastSerialNo += 1
+#     # main.POTW.model.insertRows()
+#     # main.POTW.model.rowCount()
+#     # ind = main.POTW.model.index(0, 0)
+#     # ind1 = main.POTW.model.index(0, 1)
+#     # main.POTW.model.dataChanged.emit(ind, ind1)
+
 def updatePOTWopenPosition(main,data):
     # st=time.time()
-    main.POTW.table[:data.shape[0], :] = data
-    # main.POTW.model._data[:data.shape[0], :] = data[:, 1:]
+    # print(data)
 
-    main.POTW.lastSerialNo += data.shape[0]
+    fltrarr1 = main.POTW.table[np.where((main.POTW.table[:main.POTW.model.lastSerialNo, 0] == data[0]) & (
+            main.POTW.table[:main.POTW.model.lastSerialNo, 2] == data[2]))]
 
-    main.POTW.model.lastSerialNo += data.shape[0]
+    if (fltrarr1.size != 0):
+        # print('update')
+        #     isRecordExist=True
+        #
+        # if(isRecordExist):
+        #     # print('exist')
 
-    main.POTW.model.insertMultiRows(rows=data.shape[0])
+        SerialNo = fltrarr1[0][12]
 
-    main.POTW.model.rowCount()
-    ind = main.POTW.model.index(0, 0)
-    ind1 = main.POTW.model.index(0, 1)
-    main.POTW.model.dataChanged.emit(ind, ind1)
-    # et=time.time()
+        editList = [8, 9, 15, 16, 20, 23]
+        main.POTW.table[SerialNo, editList] = [data[8], data[9], data[15], data[16], data[20], data[23]]
+
+        for i in editList:
+            ind = main.POTW.model.index(SerialNo, i)
+            main.POTW.model.dataChanged.emit(ind, ind)
+
+
+
+    else:
+
+        main.POTW.table[main.POTW.model.lastSerialNo, :] = [data[0], data[1], data[2], data[3], data[4], data[5],
+                                                            data[6], data[7], data[8], data[9], data[10],
+                                                            data[11], main.POTW.model.lastSerialNo, data[13], data[14],
+                                                            data[15], data[16], data[17], data[18],
+                                                            data[19], data[20], data[21], data[22], data[23]]
+
+        # main.POTW.table[main.POTW.model.lastSerialNo, :] = data
+
+        main.POTW.lastSerialNo += 1
+        main.POTW.model.lastSerialNo += 1
+        main.POTW.model.insertRows()
+        main.POTW.model.rowCount()
+        ind = main.POTW.model.index(0, 0)
+        ind1 = main.POTW.model.index(0, 1)
+        main.POTW.model.dataChanged.emit(ind, ind1)
+
+    # print('ppp', main.POTW.lastSerialNo)
+
+    # main.POTW.table[:data.shape[0], :] = data
+    # # main.POTW.model._data[:data.shape[0], :] = data[:, 1:]
+    #
+    # main.POTW.lastSerialNo += data.shape[0]
+    #
+    # main.POTW.model.lastSerialNo += data.shape[0]
+    #
+    # main.POTW.model.insertMultiRows(rows=data.shape[0])
+    #
+    # main.POTW.model.rowCount()
+    # ind = main.POTW.model.index(0, 0)
+    # ind1 = main.POTW.model.index(0, 1)
+    # main.POTW.model.dataChanged.emit(ind, ind1)
+    # # et=time.time()
     # print('timettt',et-st)
 
     # main.POTW.table[main.POTW.model.lastSerialNo, :] = [data['UserID'], data['Exchange'], data['Token'], , sym, exp,
@@ -259,6 +334,8 @@ def TWMdoubleClicked(main):
 
     main.TWSWM.smodel.setClientCode(UserID)
     main.TWSWM.smodel.setFilterFixedString(UserID)
+
+
 
 
 

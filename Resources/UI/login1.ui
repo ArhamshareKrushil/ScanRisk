@@ -113,6 +113,9 @@ color:white
       <property name="styleSheet">
        <string notr="true"/>
       </property>
+      <property name="text">
+       <string>admin</string>
+      </property>
       <property name="placeholderText">
        <string>UserName</string>
       </property>
@@ -137,6 +140,9 @@ color:white
       </property>
       <property name="styleSheet">
        <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>admin123</string>
       </property>
       <property name="placeholderText">
        <string>Password</string>

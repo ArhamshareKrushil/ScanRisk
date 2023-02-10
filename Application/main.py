@@ -60,6 +60,7 @@ from Application.Services.Socket.SocketClient import SioClient
 from Application.Utils.SPAN import SPAN1,terminalSPAN
 from Application.Utils.VAR import terminalVAR,clientVAR
 from Application.Utils.PhysicalDel import PhysicalDel
+from Application.Services.FastApi.ApiServices import updatePOTW_DB
 
 class Ui_Main(QMainWindow):
     sgopenPosPOTW=pyqtSignal(object)
@@ -131,6 +132,11 @@ class Ui_Main(QMainWindow):
         self.timerBWM.timeout.connect(lambda: updateBWM(self))
         self.timerBWM.start()
 
+        # self.timergetPOTW = QTimer()
+        # self.timergetPOTW.setInterval(300000)
+        # self.timergetPOTW.timeout.connect(lambda: updatePOTW_DB(self))
+
+
 
 
 
@@ -142,7 +148,13 @@ class Ui_Main(QMainWindow):
 
     def createObjects(self):
         self.login=Ui_LogIn()
+
         self.SioClient=SioClient()
+        self.thread1 = QThread()
+        self.SioClient.moveToThread(self.thread1)
+        self.thread1.start()
+
+
 
         self.cFrame = Ui_cframe()
         self.mainFrame.layout().addWidget(self.cFrame,0,0)

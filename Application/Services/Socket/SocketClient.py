@@ -20,6 +20,10 @@ class SioClient(QMainWindow):
         super(SioClient, self).__init__()
         self.sio = socketio.Client()
         self.emmiters()
+        self.IN=0
+        self.UP=0
+
+
         # self.connect()
 
     def startSocket(self,token):
@@ -28,24 +32,30 @@ class SioClient(QMainWindow):
 
 
     def connect(self):
-        self.sio.connect('http://192.168.102.155:8000')
+        self.sio.connect('http://192.168.113.60:8000')
+
 
     def emmiters(self):
         self.sio.on('connect', self.on_connect)
-        self.sio.on('hello', self.on_data)
+        # self.sio.on('hello', self.on_data)
         self.sio.on('potwData', self.on_position)
-        self.sio.on('twmData', self.on_TWM)
+        # self.sio.on('potwData', self.UP_on_position)
+        self.sio.on('twm', self.on_TWM)
         self.sio.on('twswmData', self.on_TWSWM)
         self.sio.on('disconnect', self.on_disconnect)
 
 
     def on_connect(self):
-        print('Socket connected successfully!')
         self.sio.emit('on_message', self.token)
+        # self.sio.emit('on_message','hello')
+        # self.sio.emit("message", )
+
+        print('Socket connected successfully!')
 
 
     def on_disconnect(self):
-        print('Socket disconnected successfully!')
+        print('Socket disconnected successfully.....!')
+        self.connect()
 
     def on_data(self,data):
         # pass
@@ -54,8 +64,16 @@ class SioClient(QMainWindow):
         # print('Socket disconnected successfully!')
 
     def on_position(self,data):
-        print('POTW',data)
+        self.IN += 1
+
+        # print(self.IN,'POTW',data)
         self.sgOnPosition.emit(data)
+
+    def UP_on_position(self,data):
+        self.UP+=1
+
+        print(self.UP,'POTW',data)
+        # self.sgOnPosition.emit(data)
 
     def on_TWM(self,data):
         print('TWM', data)

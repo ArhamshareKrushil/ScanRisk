@@ -1,4 +1,6 @@
 import itertools
+import threading
+
 import numpy as np
 import json
 import requests
@@ -48,13 +50,21 @@ def login(main):
             Type_id = data['Type_id']
             writeAPIdetails(token, usertype,Type_id)
 
-            # getPositionPOTW(main,token)
-            # getTWSWM(main,token)
-
+            th1=threading.Thread(target=updatePOTW_DB,args=(main,token))
+            th1.start()
 
             main.SioClient.startSocket(token)
             main.login.hide()
             main.show()
+
+            # updatePOTW_DB(main,token)
+
+            # getPositionPOTW(main,token)
+            # # getTWSWM(main,token)
+            #
+            #
+
+            # main.timergetPOTW.start()
 
 
 
@@ -84,12 +94,13 @@ def login(main):
 
 
 def getPositionPOTW(main,token):
+    get_API_config(main)
     #####GetPosition API#############################
 
     DB_url = main.FastApiURL + '/dbpotw'
     DBheaders = {
         'Content-Type': 'application/json',
-        'authToken': token
+        'authToken': main.token
     }
     req = requests.request("POST", DB_url, headers=DBheaders)
     data = req.json()
@@ -105,7 +116,7 @@ def getPositionPOTW(main,token):
 
     df = pd.DataFrame(data['data']).to_numpy()
 
-    df[:,12]=np.arange(df.shape[0])
+    # df[:,12]=np.arange(df.shape[0])
     # print(df,df.shape)
     et = time.time()
     main.sgopenPosPOTW.emit(df)
@@ -129,7 +140,7 @@ def getPositionPOTW(main,token):
 
 
 def getTWSWM(main,token):
-    TWSWM_url = main.FastApiURL + '/dbTWSWM'
+    TWSWM_url = main.FastApiURL + '/dbtwswm'
     DBheaders = {
         'Content-Type': 'application/json',
         'authToken': token
@@ -155,7 +166,7 @@ def getTWSWM(main,token):
     print('timennn', et - st)
 
 def getTWM(main,token):
-    TWM_url = main.FastApiURL + '/dbTWM'
+    TWM_url = main.FastApiURL + '/dbtwm'
     DBheaders = {
         'Content-Type': 'application/json',
         'authToken': token
@@ -179,3 +190,30 @@ def getTWM(main,token):
 
     # print(df.shape)
     print('timennn', et - st)
+
+
+def updatePOTW_DB(main,token):
+
+    DB_url = main.FastApiURL + '/dbpotw'
+    DBheaders = {
+        'Content-Type': 'application/json',
+        'authToken': token
+    }
+    req = requests.request("POST", DB_url, headers=DBheaders)
+    data = req.json()
+    # print(type(data))
+
+    st = time.time()
+
+
+    for pos in data['data']:
+        p=list(pos.values())
+
+        main.sgopenPosPOTW.emit(p)
+
+    print('done')
+
+
+
+    # print(df.shape)
+    # print('timennn', et - st)

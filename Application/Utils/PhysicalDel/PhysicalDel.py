@@ -28,13 +28,13 @@ filepath = os.path.join(loc[0], 'Application', 'data1.csv')
 
 # mssql+pymssql://{domain}\{username}:{password}@{hostip}/{db}
 
-import  pyodbc
-
-conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=192.168.102.172;'
-                      'Database=ANVdb;'
-                      'UID=sa;PWD=Super@123;'
-                      )
+# import  pyodbc
+#
+# conn = pyodbc.connect('Driver={SQL Server};'
+#                       'Server=192.168.102.172;'
+#                       'Database=ANVdb;'
+#                       'UID=sa;PWD=Super@123;'
+#                       )
 
 
 # print(conn)
