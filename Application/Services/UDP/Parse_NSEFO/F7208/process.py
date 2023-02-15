@@ -25,7 +25,7 @@ def process(self,Decoded_Packet,Start_Pointof_Record):
         AuctionPrice = struct.unpack('!l', Decoded_Packet[Start_Pointof_Record + 48:Start_Pointof_Record + 52])[0] / 100
         AuctionQuantity = struct.unpack('!l', Decoded_Packet[Start_Pointof_Record + 52:Start_Pointof_Record + 56])[0]
 
-        symbol = self.fo_contract[Token - 35000, 3]
+        # symbol = self.fo_contract[Token - 35000, 3]
 
         buffer_sp = Start_Pointof_Record + 56
         Bids = []
@@ -84,7 +84,7 @@ def process(self,Decoded_Packet,Start_Pointof_Record):
         #           'BbTotalSellFlag':BbTotalSellFlag,'TotalBuyQuantity':TotalBuyQuantity,'TotalSellQuantity':TotalSellQuantity,'CLOSE':CLOSE,
         #           'OPEN':OPEN,'HIGH':HIGH,'LOW':LOW}
 
-        output1 = {'ID': 1501, 'Exch': 2, 'Token': Token, 'symbol': symbol, 'BookType': BookType,
+        output1 = {'ID': 1501, 'Exch': 2, 'Token': Token, 'BookType': BookType,
                    'TradingStatus': TradingStatus,
                    'Volume': Volume, 'LTP': round(LTP,2), 'Bid': Bids[0]['Price'], 'BQ': Bids[0]['Quantity'],
                    'Ask': Asks[0]['Price'], 'AQ': Bids[0]['Quantity'],

@@ -51,10 +51,10 @@ class Receiver(QtCore.QObject):
 
 
         # self.fo_contract,self.eq_contract,self.cd_contract,self.heads = getMaster(False)
-        self.sgData7208.connect(self.calculateIv)
-        self.sgData7202.connect(self.calculateIv)
-        self.sgData7202.connect(self.updateValues)
-        self.sgData7208.connect(self.updateValues)
+        # self.sgData7208.connect(self.calculateIv)
+        # self.sgData7202.connect(self.calculateIv)
+        # self.sgData7202.connect(self.updateValues)
+        # self.sgData7208.connect(self.updateValues)
 
     def join_grp(self):
         print('fo_receiver join',self.port)
@@ -161,177 +161,177 @@ class Receiver(QtCore.QObject):
 
 
 
-    def updateValues(self,data):
-        # print('data1',data)
-        if(data['Exch'] == 2):
-            if(data['ID']==7202):
-                prevData = self.fo_contract[data['Token'] - 35000]
-                prevVolume = prevData[32]
-                newVolume = prevVolume + data['FillVolume']
-                # print('prevVolume',prevVolume)
-                self.fo_contract[data['Token']-35000,[19,22,32]] = [data['LTP'],data['OpenInterest'],
-                                                                    newVolume]
-            elif(data['ID']==1501):
-                # print(data)
-                # prevData = self.fo_contract[data['Token'] - 35000]
-                self.fo_contract[data['Token'] - 35000,[19,32,35]]=[data['LTP'],data['Volume'],data['ATP']]
-
-
+    # def updateValues(self,data):
+    #     # print('data1',data)
+    #     if(data['Exch'] == 2):
+    #         if(data['ID']==7202):
+    #             prevData = self.fo_contract[data['Token'] - 35000]
+    #             prevVolume = prevData[32]
+    #             newVolume = prevVolume + data['FillVolume']
+    #             # print('prevVolume',prevVolume)
+    #             self.fo_contract[data['Token']-35000,[19,22,32]] = [data['LTP'],data['OpenInterest'],
+    #                                                                 newVolume]
+    #         elif(data['ID']==1501):
+    #             # print(data)
+    #             # prevData = self.fo_contract[data['Token'] - 35000]
+    #             self.fo_contract[data['Token'] - 35000,[19,32,35]]=[data['LTP'],data['Volume'],data['ATP']]
+    #
+    #
+    # #
+    # #
+    # #
+    # #
+    # def calculateIv(self,data):
+    #
+    #     if (data['Exch'] == 2):
+    #         if(data['ID']==7202):
+    #             prevData = self.fo_contract[data['Token'] - 35000]
+    #             if(prevData[7]!=' ' and prevData[6]!= ''):
+    #                 try:
+    #                     futureToken = prevData[17]
+    #                     fPrice = self.fo_contract[futureToken-35000,19]
+    #                     exp = prevData[6]
+    #                     strikeP = prevData[12]
+    #                     optionType = prevData[8][0].lower()
+    #                     expiryDay = datetime.datetime.strptime(exp,'%Y%m%d')
+    #                     daysRemaaining1 =(expiryDay - self.todate).days
+    #                     daysRemaaining = 1 if(daysRemaaining1==0) else daysRemaaining1
+    #                     t = daysRemaaining / 365
+    #                     # if(data['Token']==40688):
+    #                     #
+    #                     #     print(40688,exp,self.todate,daysRemaaining,t)
+    #                     #     # print(40688,data['LTP'], fPrice, strikeP, t, self.r, optionType)
+    #
+    #                     imp_v = iv(data['LTP'], fPrice, strikeP, t, self.r, optionType)
+    #
+    #
+    #                 except TypeError:
+    #
+    #                     print('jgh', prevData)
+    #                     imp_v = 0.01
+    #                 except BelowIntrinsicException:
+    #                     imp_v = 0.01
+    #                 except:
+    #                     imp_v = 0.01
+    #                     pass
+    #
+    #                 imp_v1=round(imp_v*100,2)
+    #
+    #                 dict1 = {'ID':'IV','Token':data['Token'],"Exch":data['Exch'],"iv":imp_v1}
+    #                 self.sgDataIV_LTP.emit(dict1)
+    #
+    #                 # self.sender.sendData(dict1)
+    #
+    #
+    #                 delt = delta(optionType, fPrice, strikeP, t, self.r, imp_v)
+    #                 delt = round(delt , 4)
+    #
+    #                 gm = gamma(optionType, fPrice, strikeP, t, self.r, imp_v)
+    #                 gm = round(gm , 4)
+    #
+    #                 # rh = rho(optionType, fPrice, strikeP, t, self.r, imp_v)
+    #
+    #                 tht = theta(optionType, fPrice, strikeP, t, self.r, imp_v)
+    #                 tht = round(tht, 4)
+    #
+    #                 vg = vega(optionType, fPrice, strikeP, t, self.r, imp_v)
+    #                 vg = round(vg, 4)
+    #                 dict2 = {'ID':'Greeks','Token':data['Token'],'Exch':data['Exch'],'Delta':delt,'Gamma':gm,'Theta':tht,
+    #                          'Vega':vg}
+    #                 self.sgDataGreeks.emit(dict2)
+    #                 # self.sender.sendData(dict2)
     #
     #
     #
     #
-    def calculateIv(self,data):
-
-        if (data['Exch'] == 2):
-            if(data['ID']==7202):
-                prevData = self.fo_contract[data['Token'] - 35000]
-                if(prevData[7]!=' ' and prevData[6]!= ''):
-                    try:
-                        futureToken = prevData[17]
-                        fPrice = self.fo_contract[futureToken-35000,19]
-                        exp = prevData[6]
-                        strikeP = prevData[12]
-                        optionType = prevData[8][0].lower()
-                        expiryDay = datetime.datetime.strptime(exp,'%Y%m%d')
-                        daysRemaaining1 =(expiryDay - self.todate).days
-                        daysRemaaining = 1 if(daysRemaaining1==0) else daysRemaaining1
-                        t = daysRemaaining / 365
-                        # if(data['Token']==40688):
-                        #
-                        #     print(40688,exp,self.todate,daysRemaaining,t)
-                        #     # print(40688,data['LTP'], fPrice, strikeP, t, self.r, optionType)
-
-                        imp_v = iv(data['LTP'], fPrice, strikeP, t, self.r, optionType)
-
-
-                    except TypeError:
-
-                        print('jgh', prevData)
-                        imp_v = 0.01
-                    except BelowIntrinsicException:
-                        imp_v = 0.01
-                    except:
-                        imp_v = 0.01
-                        pass
-
-                    imp_v1=round(imp_v*100,2)
-
-                    dict1 = {'ID':'IV','Token':data['Token'],"Exch":data['Exch'],"iv":imp_v1}
-                    self.sgDataIV_LTP.emit(dict1)
-
-                    # self.sender.sendData(dict1)
-
-
-                    delt = delta(optionType, fPrice, strikeP, t, self.r, imp_v)
-                    delt = round(delt , 4)
-
-                    gm = gamma(optionType, fPrice, strikeP, t, self.r, imp_v)
-                    gm = round(gm , 4)
-
-                    # rh = rho(optionType, fPrice, strikeP, t, self.r, imp_v)
-
-                    tht = theta(optionType, fPrice, strikeP, t, self.r, imp_v)
-                    tht = round(tht, 4)
-
-                    vg = vega(optionType, fPrice, strikeP, t, self.r, imp_v)
-                    vg = round(vg, 4)
-                    dict2 = {'ID':'Greeks','Token':data['Token'],'Exch':data['Exch'],'Delta':delt,'Gamma':gm,'Theta':tht,
-                             'Vega':vg}
-                    self.sgDataGreeks.emit(dict2)
-                    # self.sender.sendData(dict2)
-
-
-
-
-
-
-            elif (data['ID'] == 1501):
-                prevData = self.fo_contract[data['Token'] - 35000]
-                if (prevData[7] != ' ' and prevData[6] != ''):
-                    try:
-                        futureToken = prevData[17]
-
-                        fPrice = self.fo_contract[futureToken - 35000, 19]
-                        exp = prevData[6]
-                        strikeP = prevData[12]
-                        optionType = prevData[8][0].lower()
-
-                        expiryDay = datetime.datetime.strptime(exp,'%Y%m%d')
-                        daysRemaaining1 =(expiryDay - self.todate).days
-                        daysRemaaining = 1 if(daysRemaaining1==0) else daysRemaaining1
-                        t = daysRemaaining / 365
-
-                        imp_v= iv(data['LTP'], fPrice, strikeP, t, self.r, optionType)
-
-                        Bid_IV = iv(data['Bid'], fPrice, strikeP, t, self.r, optionType)
-                        Ask_IV = iv(data['Ask'], fPrice, strikeP, t, self.r, optionType)
-
-                        # print('7202', imp_v, delt, gm, tht, vg, data['LTP'], fPrice, strikeP, optionType)
-                    except AboveMaximumException:
-                        imp_v = 0.01
-                        Bid_IV = 0.01
-                        Ask_IV = 0.01
-
-                    except ZeroDivisionError:
-                        imp_v = 0.01
-                        Bid_IV=0.01
-                        Ask_IV=0.01
-                        print('ZeroDivisionError',data['LTP'], fPrice, strikeP, t, self.r, optionType,exp)
-
-                    except TypeError:
-                        imp_v = 0.01
-                        Bid_IV = 0.01
-                        Ask_IV = 0.01
-
-                        print('jgh', prevData)
-                    except BelowIntrinsicException:
-                        imp_v = 0.01
-                        Bid_IV = 0.01
-                        Ask_IV = 0.01
-                    except:
-                        imp_v = 0.01
-                        Bid_IV = 0.01
-                        Ask_IV = 0.01
-
-                    #
-                    imp_v1 = round(imp_v * 100, 2)
-
-                    dict1 = {'ID': 'IV', 'Token': data['Token'], "Exch": data['Exch'], "iv": imp_v1}
-                    self.sgDataIV_LTP.emit(dict1)
-
-                    # self.sender.sendData(dict1)
-
-                    dict1 = {'ID': 'Bid_Ask', 'Token': data['Token'], "Exch": data['Exch'], "Bid_iv": Bid_IV,"Ask_iv": Ask_IV}
-
-                    # self.sender.sendData(dict1)
-
-                    # dict1 = {'ID': 'Ask_IV', 'Token': data['Token'], "Exch": data['Exch'], "Ask_iv": Ask_IV}
-                    # self.sender.sendData(dict1)
-                    self.sgDataIV_BA.emit(dict1)
-
-                    delt = delta(optionType, fPrice, strikeP, t, self.r, imp_v)
-                    delt = round(delt, 4)
-
-                    # gm = gamma(optionType, fPrice, strikeP, t, self.r, imp_v)
-                    # gm = round(gm, 4)
-                    #
-                    # rh = rho(optionType, fPrice, strikeP, t, self.r, imp_v)
-                    #
-                    # tht = theta(optionType, fPrice, strikeP, t, self.r, imp_v)
-                    # tht = round(tht, 4)
-                    #
-                    # vg = vega(optionType, fPrice, strikeP, t, self.r, imp_v)
-                    # vg = round(vg , 4)
-                    # dict2 = {'ID': 'Greeks', 'Token': data['Token'], 'Exch': data['Exch'], 'Delta': delt, 'Gamma': gm,
-                    #          'Theta': tht,
-                    #          'Vega': vg}
-                    # self.sgDataGreeks.emit(dict2)
-                    #
-                    # # self.sender.sendData(dict2)
-                    #
-                    #     # self.fo_contract[data['Token'] - 35000, [24, 25, 26, 27, 28]] = [imp_v, delt, gm, tht, vg]
-                    #
+    #
+    #
+    #         elif (data['ID'] == 1501):
+    #             prevData = self.fo_contract[data['Token'] - 35000]
+    #             if (prevData[7] != ' ' and prevData[6] != ''):
+    #                 try:
+    #                     futureToken = prevData[17]
+    #
+    #                     fPrice = self.fo_contract[futureToken - 35000, 19]
+    #                     exp = prevData[6]
+    #                     strikeP = prevData[12]
+    #                     optionType = prevData[8][0].lower()
+    #
+    #                     expiryDay = datetime.datetime.strptime(exp,'%Y%m%d')
+    #                     daysRemaaining1 =(expiryDay - self.todate).days
+    #                     daysRemaaining = 1 if(daysRemaaining1==0) else daysRemaaining1
+    #                     t = daysRemaaining / 365
+    #
+    #                     imp_v= iv(data['LTP'], fPrice, strikeP, t, self.r, optionType)
+    #
+    #                     Bid_IV = iv(data['Bid'], fPrice, strikeP, t, self.r, optionType)
+    #                     Ask_IV = iv(data['Ask'], fPrice, strikeP, t, self.r, optionType)
+    #
+    #                     # print('7202', imp_v, delt, gm, tht, vg, data['LTP'], fPrice, strikeP, optionType)
+    #                 except AboveMaximumException:
+    #                     imp_v = 0.01
+    #                     Bid_IV = 0.01
+    #                     Ask_IV = 0.01
+    #
+    #                 except ZeroDivisionError:
+    #                     imp_v = 0.01
+    #                     Bid_IV=0.01
+    #                     Ask_IV=0.01
+    #                     print('ZeroDivisionError',data['LTP'], fPrice, strikeP, t, self.r, optionType,exp)
+    #
+    #                 except TypeError:
+    #                     imp_v = 0.01
+    #                     Bid_IV = 0.01
+    #                     Ask_IV = 0.01
+    #
+    #                     print('jgh', prevData)
+    #                 except BelowIntrinsicException:
+    #                     imp_v = 0.01
+    #                     Bid_IV = 0.01
+    #                     Ask_IV = 0.01
+    #                 except:
+    #                     imp_v = 0.01
+    #                     Bid_IV = 0.01
+    #                     Ask_IV = 0.01
+    #
+    #                 #
+    #                 imp_v1 = round(imp_v * 100, 2)
+    #
+    #                 dict1 = {'ID': 'IV', 'Token': data['Token'], "Exch": data['Exch'], "iv": imp_v1}
+    #                 self.sgDataIV_LTP.emit(dict1)
+    #
+    #                 # self.sender.sendData(dict1)
+    #
+    #                 dict1 = {'ID': 'Bid_Ask', 'Token': data['Token'], "Exch": data['Exch'], "Bid_iv": Bid_IV,"Ask_iv": Ask_IV}
+    #
+    #                 # self.sender.sendData(dict1)
+    #
+    #                 # dict1 = {'ID': 'Ask_IV', 'Token': data['Token'], "Exch": data['Exch'], "Ask_iv": Ask_IV}
+    #                 # self.sender.sendData(dict1)
+    #                 self.sgDataIV_BA.emit(dict1)
+    #
+    #                 delt = delta(optionType, fPrice, strikeP, t, self.r, imp_v)
+    #                 delt = round(delt, 4)
+    #
+    #                 # gm = gamma(optionType, fPrice, strikeP, t, self.r, imp_v)
+    #                 # gm = round(gm, 4)
+    #                 #
+    #                 # rh = rho(optionType, fPrice, strikeP, t, self.r, imp_v)
+    #                 #
+    #                 # tht = theta(optionType, fPrice, strikeP, t, self.r, imp_v)
+    #                 # tht = round(tht, 4)
+    #                 #
+    #                 # vg = vega(optionType, fPrice, strikeP, t, self.r, imp_v)
+    #                 # vg = round(vg , 4)
+    #                 # dict2 = {'ID': 'Greeks', 'Token': data['Token'], 'Exch': data['Exch'], 'Delta': delt, 'Gamma': gm,
+    #                 #          'Theta': tht,
+    #                 #          'Vega': vg}
+    #                 # self.sgDataGreeks.emit(dict2)
+    #                 #
+    #                 # # self.sender.sendData(dict2)
+    #                 #
+    #                 #     # self.fo_contract[data['Token'] - 35000, [24, 25, 26, 27, 28]] = [imp_v, delt, gm, tht, vg]
+    #                 #
 
 
 

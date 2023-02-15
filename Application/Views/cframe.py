@@ -8,6 +8,7 @@ from PyQt5 import uic
 from Themes.dt2 import dt1
 from PyQt5.QtWidgets import *
 import qdarkstyle
+from Application.Utils.configReader import read_API_config
 
 class Ui_cframe(QMainWindow):
     ################################# Intialization Here ##################################################
@@ -17,9 +18,17 @@ class Ui_cframe(QMainWindow):
         #########################################################
         ########################################################
         #########################################################
+
+        read_API_config(self)
+
         loc1 = os.getcwd().split('Application')
-        ui_login = os.path.join(loc1[0], 'Resources', 'UI', 'cframe.ui')
-        uic.loadUi(ui_login, self)
+        if(self.UserType=='branch'):
+            ui_login = os.path.join(loc1[0], 'Resources', 'UI', 'cframeBranch.ui')
+            uic.loadUi(ui_login, self)
+        else:
+            ui_login = os.path.join(loc1[0], 'Resources', 'UI', 'cframe.ui')
+            uic.loadUi(ui_login, self)
+
         dark = qdarkstyle.load_stylesheet_pyqt5()
 
 

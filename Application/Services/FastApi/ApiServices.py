@@ -30,11 +30,12 @@ def login(main):
         login_url = main.FastApiURL + '/login'
 
         # login_url = main.FastApiURL + f'/dlogin?username={User}&password={password}'
-        print("login_url:", login_url)
-        print("payload : ", payload)
+        # print("login_url:", login_url)
+        # print("payload : ", payload)
         login_access = requests.post(login_url, json=payload)
         logging.info(login_access.text)
-        print(login_access.text)
+
+        # print(login_access.text)
 
         print("status code",login_access.status_code)
         if login_access.status_code == 200:
@@ -50,41 +51,19 @@ def login(main):
             Type_id = data['Type_id']
             writeAPIdetails(token, usertype,Type_id)
 
-            th1=threading.Thread(target=updatePOTW_DB,args=(main,token))
-            th1.start()
 
-            main.SioClient.startSocket(token)
-            main.login.hide()
-            main.show()
-
-            # updatePOTW_DB(main,token)
-
-            # getPositionPOTW(main,token)
-            # # getTWSWM(main,token)
-            #
-            #
-
-            # main.timergetPOTW.start()
+            versionCheck(main,token)
 
 
 
 
 
 
-
-
-            # else:
-            #     pass
-            #     # main.login.pbLogin.setEnable(True)
 
 
 
         else:
             print(traceback.print_exc())
-           # main.login.pbLogin.setEnabled(True)
-           #  logging.info(str(login_access.text).replace('\n', '\t\t\t\t'))
-        # main.login.hide()
-        # main.show()
 
 
 
@@ -93,50 +72,88 @@ def login(main):
         print(traceback.print_exc())
 
 
-def getPositionPOTW(main,token):
-    get_API_config(main)
-    #####GetPosition API#############################
+def versionCheck(main,token):
+    payload = {
+        "version": "1.1.0"
 
-    DB_url = main.FastApiURL + '/dbpotw'
-    DBheaders = {
-        'Content-Type': 'application/json',
-        'authToken': main.token
     }
-    req = requests.request("POST", DB_url, headers=DBheaders)
-    data = req.json()
-    # print(type(data))
+    login_url = main.FastApiURL + '/versioncheck'
+
+    # login_url = main.FastApiURL + f'/dlogin?username={User}&password={password}'
+    # print("login_url:", login_url)
+    # print("payload : ", payload)
+    login_access = requests.post(login_url, json=payload)
+    # print(login_access.text)
+    # logging.info(login_access.text)
+    if login_access.status_code == 200:
+        data = login_access.json()
+        print(data)
+
+
+        th1 = threading.Thread(target=updatePOTW_DB, args=(main, token))
+        th1.start()
+
+        th2 = threading.Thread(target=getTWSWM, args=(main, token))
+        th2.start()
+
+        th3 = threading.Thread(target=getTWM, args=(main, token))
+        th3.start()
+
+        main.SioClient.startSocket(token)
+        main.login.hide()
+        main.createUserObject()
+        main.show()
 
 
 
-    st = time.time()
-    # a = eval(data)
-    # print(data['data'])
-    # data23=list(itertools.chain(*data['data']))
-    # print(data23)
 
-    df = pd.DataFrame(data['data']).to_numpy()
+# def getPositionPOTW(main,token):
+#     get_API_config(main)
+#     #####GetPosition API#############################
+#
+#     DB_url = main.FastApiURL + '/dbpotw'
+#     DBheaders = {
+#         'Content-Type': 'application/json',
+#         'authToken': main.token
+#     }
+#     req = requests.request("POST", DB_url, headers=DBheaders)
+#     data = req.json()
+#     # print(type(data))
+#
+#
+#
+#     st = time.time()
+#     # a = eval(data)
+#     # print(data['data'])
+#     # data23=list(itertools.chain(*data['data']))
+#     # print(data23)
+#
+#     df = pd.DataFrame(data['data']).to_numpy()
+#
+#     # df[:,12]=np.arange(df.shape[0])
+#     # print(df,df.shape)
+#     et = time.time()
+#     main.sgopenPosPOTW.emit(df)
+#     # print(df[:,13])
+#
+#
+#     # print(df.shape)
+#     print('timennn', et - st)
+#
+#     # Position=data['data']
+#     # print('position = ',Position)
+#     # print('data',Position[0])
+#     # print(Position)
+#
+#     # for pos in data['data'][0]:
+#     #     print(pos)
+#
+#         # main.sgopenPosPOTW.emit(pos)
+#
+#     # data_db=requests.get()
 
-    # df[:,12]=np.arange(df.shape[0])
-    # print(df,df.shape)
-    et = time.time()
-    main.sgopenPosPOTW.emit(df)
-    # print(df[:,13])
 
 
-    # print(df.shape)
-    print('timennn', et - st)
-
-    # Position=data['data']
-    # print('position = ',Position)
-    # print('data',Position[0])
-    # print(Position)
-
-    # for pos in data['data'][0]:
-    #     print(pos)
-
-        # main.sgopenPosPOTW.emit(pos)
-
-    # data_db=requests.get()
 
 
 def getTWSWM(main,token):
@@ -151,19 +168,27 @@ def getTWSWM(main,token):
 
     st = time.time()
     # a = eval(data)
-    print(data['data'])
+    # print(data['data'])
     # data23 = list(itertools.chain(*data['data']))
     # print(data23)
+    for pos in data['data']:
+        p=list(pos.values())
 
-    df = pd.DataFrame(data['data']).to_numpy()
+        main.sgDB_TWSWM.emit(p)
+
+    print('TWSWMdone')
+
+
+
+    # df = pd.DataFrame(data['data']).to_numpy()
     # df[:, 12] = np.arange(df.shape[0])
     # print(df,df.shape)
     et = time.time()
-    main.sgDB_TWSWM.emit(df)
+
     # print(df[:,13])
 
     # print(df.shape)
-    print('timennn', et - st)
+    # print('timennn', et - st)
 
 def getTWM(main,token):
     TWM_url = main.FastApiURL + '/dbtwm'
@@ -181,15 +206,13 @@ def getTWM(main,token):
     # data23 = list(itertools.chain(*data['data']))
     # print(data23)
 
-    df = pd.DataFrame(data['data']).to_numpy()
-    # df[:, 12] = np.arange(df.shape[0])
-    # print(df,df.shape)
-    et = time.time()
-    main.sgDB_TWM.emit(df)
-    # print(df[:,13])
+    for pos in data['data']:
+        p = list(pos.values())
 
-    # print(df.shape)
-    print('timennn', et - st)
+        main.sgDB_TWM.emit(p)
+
+    print('TWMdone')
+    # print('timennn', et - st)
 
 
 def updatePOTW_DB(main,token):
@@ -211,7 +234,7 @@ def updatePOTW_DB(main,token):
 
         main.sgopenPosPOTW.emit(p)
 
-    print('done')
+    print('TWMdone')
 
 
 

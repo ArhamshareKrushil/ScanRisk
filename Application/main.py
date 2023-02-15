@@ -19,8 +19,9 @@ from Application.Views.BWM.BWM import BranchSummary
 from Application.Views.BWSWM.BWSWM import BranchScriptSummary
 
 from Application.Utils.support import getLogPath
+from Application.Utils.getMasters import shareContract
 from Application.Utils.all_slots import createSlots_main
-from Application.Utils.configReader import readConfig_All
+from Application.Utils.configReader import read_API_config
 # from Application.Utils.updation import updatePOTM,updateLTP_POCW,updatePOTW,updateLTP_POTW,updateCMPOTWpos,updateLTP_CMPOTW,updateLTP_CMPOCW
 
 
@@ -111,7 +112,7 @@ class Ui_Main(QMainWindow):
         self.createTimers()
         self.connectAllslots()
 
-        self.defaultWindowState()
+
         # self.csvtojson()
 
         # loadTmaster(self)
@@ -130,7 +131,12 @@ class Ui_Main(QMainWindow):
         self.timerBWM = QTimer()
         self.timerBWM.setInterval(5000)
         self.timerBWM.timeout.connect(lambda: updateBWM(self))
-        self.timerBWM.start()
+
+        self.timerGlobalM = QTimer()
+        self.timerGlobalM.setInterval(5000)
+        self.timerGlobalM.timeout.connect(lambda: updateGlobalMargin(self))
+
+
 
         # self.timergetPOTW = QTimer()
         # self.timergetPOTW.setInterval(300000)
@@ -141,6 +147,91 @@ class Ui_Main(QMainWindow):
 
 
 
+    def createUserObject(self):
+        read_API_config(self)
+
+        if(self.UserType=='branch'):
+            self.cFrame = Ui_cframe()
+            self.mainFrame.layout().addWidget(self.cFrame, 0, 0)
+
+            self.TWM = TerminalSummary()
+            self.TWSWM = TScriptSummary()
+
+            # self.CWM = ClientSummary()
+            # self.CWSWM = CScriptSummary()
+
+            self.POTW = PositionDetailsTW()
+            # self.POCW = PositionDetailsCW()
+            #
+            self.GlobalM=GlobalMargin()
+
+            self.BWM = BranchSummary()
+            # self.BWSWM=BranchScriptSummary()
+            #
+            # self.CMPOTW=UI_CMPOTW()
+            # self.CMPOCW=UI_CMPOCW()
+            # self.CASH=Ui_CASH()
+            # self.CMTWM=UI_CMTWM()
+            # self.CMCWM=UI_CMCWM()
+            #
+            #
+            self.cFrame.DTWM.setWidget(self.TWM)
+            self.cFrame.DTWSWM.setWidget(self.TWSWM)
+            #
+            # self.cFrame.DCWM.setWidget(self.CWM)
+            # self.cFrame.DCWSWM.setWidget(self.CWSWM)
+            #
+            self.cFrame.DPOTW.setWidget(self.POTW)
+            # self.cFrame.DPOCW.setWidget(self.POCW)
+            #
+            self.cFrame.DGlobal.setWidget(self.GlobalM)
+            #
+            self.cFrame.DBWM.setWidget(self.BWM)
+            # self.cFrame.DBWSWM.setWidget(self.BWSWM)
+
+        else:
+            self.cFrame = Ui_cframe()
+            self.mainFrame.layout().addWidget(self.cFrame, 0, 0)
+
+            self.TWM = TerminalSummary()
+            self.TWSWM = TScriptSummary()
+
+            self.CWM = ClientSummary()
+            self.CWSWM = CScriptSummary()
+
+            self.POTW = PositionDetailsTW()
+            self.POCW = PositionDetailsCW()
+
+            self.GlobalM=GlobalMargin()
+
+            self.BWM = BranchSummary()
+            self.BWSWM=BranchScriptSummary()
+            #
+            # self.CMPOTW=UI_CMPOTW()
+            # self.CMPOCW=UI_CMPOCW()
+            # self.CASH=Ui_CASH()
+            # self.CMTWM=UI_CMTWM()
+            # self.CMCWM=UI_CMCWM()
+            #
+            #
+            self.cFrame.DTWM.setWidget(self.TWM)
+            self.cFrame.DTWSWM.setWidget(self.TWSWM)
+            #
+            self.cFrame.DCWM.setWidget(self.CWM)
+            self.cFrame.DCWSWM.setWidget(self.CWSWM)
+            #
+            self.cFrame.DPOTW.setWidget(self.POTW)
+            self.cFrame.DPOCW.setWidget(self.POCW)
+
+            self.cFrame.DGlobal.setWidget(self.GlobalM)
+            #
+            self.cFrame.DBWM.setWidget(self.BWM)
+            self.cFrame.DBWSWM.setWidget(self.BWSWM)
+
+        self.defaultWindowState()
+        # shareContract(self)
+        self.timerBWM.start()
+        self.timerGlobalM.start()
 
 
 
@@ -150,50 +241,22 @@ class Ui_Main(QMainWindow):
         self.login=Ui_LogIn()
 
         self.SioClient=SioClient()
+
         self.thread1 = QThread()
         self.SioClient.moveToThread(self.thread1)
         self.thread1.start()
 
 
+        self.Reciever = Receiver(35099)
+        self.Reciever.join_grp()
 
-        self.cFrame = Ui_cframe()
-        self.mainFrame.layout().addWidget(self.cFrame,0,0)
+        self.t1 = QThread()
+        self.Reciever.moveToThread(self.t1)
+        self.t1.start()
 
 
-        self.TWM = TerminalSummary()
-        self.TWSWM = TScriptSummary()
 
-        # self.CWM = ClientSummary()
-        # self.CWSWM = CScriptSummary()
 
-        self.POTW = PositionDetailsTW()
-        # self.POCW = PositionDetailsCW()
-        #
-        # self.GlobalM=GlobalMargin()
-
-        self.BWM=BranchSummary()
-        # self.BWSWM=BranchScriptSummary()
-        #
-        # self.CMPOTW=UI_CMPOTW()
-        # self.CMPOCW=UI_CMPOCW()
-        # self.CASH=Ui_CASH()
-        # self.CMTWM=UI_CMTWM()
-        # self.CMCWM=UI_CMCWM()
-        #
-        #
-        self.cFrame.DTWM.setWidget(self.TWM)
-        self.cFrame.DTWSWM.setWidget(self.TWSWM)
-        #
-        # self.cFrame.DCWM.setWidget(self.CWM)
-        # self.cFrame.DCWSWM.setWidget(self.CWSWM)
-        #
-        self.cFrame.DPOTW.setWidget(self.POTW)
-        # self.cFrame.DPOCW.setWidget(self.POCW)
-        #
-        # self.cFrame.DGlobal.setWidget(self.GlobalM)
-        #
-        self.cFrame.DBWM.setWidget(self.BWM)
-        # self.cFrame.DBWSWM.setWidget(self.BWSWM)
 
 
 
@@ -231,17 +294,17 @@ class Ui_Main(QMainWindow):
         ######################## MAIN ###############################
 
         self.sgopenPosPOTW.connect(self.on_POTWOpenPosition)
-        self.sgDB_TWSWM.connect(self.on_DB_TWSWM)
-        self.sgDB_TWM.connect(self.on_DB_TWM)
+        self.sgDB_TWSWM.connect(self.updateTWSWM)
+        self.sgDB_TWM.connect(self.updateTWM)
 
-    def CloseWindow(self):
-        pass
+        ####################### UDP Receiver FO #####################
+
+        self.Reciever.sgData7202.connect(self.update7202)
+
+
 
     @pyqtSlot(list)
     def updatePOTW(self,data):
-
-        # print(data)
-        # if(data['id']=='POTW'):
         updatePOTW(self,data)
 
     def on_DB_TWSWM(self,data):
@@ -266,16 +329,12 @@ class Ui_Main(QMainWindow):
         # print(data)
         updatePOTWopenPosition(self,data)
 
-
-        # elif(data['id']=='POCW'):
-        #     updatePOCW(self,data)
-
-
-
+    @QtCore.pyqtSlot(dict)
+    def update7202(self, data):
+        # updateLTP_POCW(self, data)
+        updateLTP_POTW(self, data)
 
 
-
-        # updateLTP_POTW(self,data,7202)
     def WindowRightclickedMenu(self,position):
         # print('rightclicked')
 
@@ -369,10 +428,7 @@ class Ui_Main(QMainWindow):
 
 
 
-    # @QtCore.pyqtSlot(dict)
-    # def update7202(self,data):
-    #     updateLTP_POCW(self, data)
-    #     updateLTP_POTW(self, data)
+
     #
     # @QtCore.pyqtSlot(dict)
     # def updateCM7202(self,data):
@@ -389,139 +445,7 @@ class Ui_Main(QMainWindow):
             self.showNormal()
             self.maxwin = False
 
-    # def CMPOTWhide(self):
-    #     # self.timerCMTerminalMRG.stop()
-    #     self.CMPOTW.hide()
-    #
-    #
-    #
-    # @QtCore.pyqtSlot(dict)
-    # def update7202POTW(self,data):
-    #     updateLTP_POTW(self, data)
-    #     # updateLTP_POTW(self, data)
-    #
-    #     # th39=threading.Thread(target=updateLTP_POTW,args=(self,data))
-    #     # th39.start()
-    #
-    # @QtCore.pyqtSlot(object)
-    # def updateCMPOTWpos(self,data):
-    #     updateCMPOTWpos(self,data)
-    #
-    # def update7208(self,data):
-    #     pass
-    #     # updateLTP_POCW(self, data)
-    #     # updateLTP_POTW(self, data)
-    #
-    # @QtCore.pyqtSlot(object)
-    # def updateCWM(self,data):
-    #     # th1 = threading.Thread(target=updateCWM, args=(self, data))
-    #     # th1.start()
-    #     updateCWM(self,data)
-    #
-    # def updateCMTWM(self,data):
-    #     # th1 = threading.Thread(target=updateCWM, args=(self, data))
-    #     # th1.start()
-    #     updateCMTWM(self,data)
-    #
-    # def updateCMCWM(self,data):
-    #     # th1 = threading.Thread(target=updateCWM, args=(self, data))
-    #     # th1.start()
-    #     updateCMCWM(self,data)
-    #
-    # @QtCore.pyqtSlot(object)
-    # def updateCWSWM(self,data):
-    #     # th5 = threading.Thread(target=updateCWSWM, args=(self, data))
-    #     # th5.start()
-    #     updateCWSWM(self,data)
-    #
-    # @QtCore.pyqtSlot(object)
-    # def updateTWM(self,data):
-    #     # th1 = threading.Thread(target=updateCWM, args=(self, data))
-    #     # th1.start()
-    #     updateTWM(self,data)
-    #
-    # @QtCore.pyqtSlot(object)
-    # def CWMPhysicalDelM(self,data):
-    #     # th1 = threading.Thread(target=updateCWM, args=(self, data))
-    #     # th1.start()
-    #     CWMPhysicalDelM(self,data)
-    #
-    #
-    #
-    # @QtCore.pyqtSlot(object)
-    # def updateTWSWM(self,data):
-    #     # th5 = threading.Thread(target=updateCWSWM, args=(self, data))
-    #     # th5.start()
-    #     updateTWSWM(self,data)
-    #
-    #
-    # def updateTWM_CASH_MTM(self):
-    #
-    #     # th5 = threading.Thread(target=updateCWSWM, args=(self, data))
-    #     # th5.start()
-    #     updateTWM_CASH_MTM(self)
-    #
-    # @QtCore.pyqtSlot(object)
-    # def updatePOTM(self,data):
-    #     updatePOTM(self,data)
-    #
-    # @QtCore.pyqtSlot(object)
-    # def updatePOTW(self,data):
-    #     updatePOTW(self,data)
-    #     # self.DCreader.timer.start()
-    #
-    # @QtCore.pyqtSlot(object)
-    # def sendDCtrade(self,data):
-    #     sendtrade(self,data)
-    #
-    # @QtCore.pyqtSlot(object)
-    # def sendCMDCtrade(self, data):
-    #     sendCMtrade(self, data)
-    #
-    # @QtCore.pyqtSlot(object)
-    # def sendNotistrade(self,data):
-    #     sendNotistrade(self,data)
-    #
-    # def sendCMNotistrade(self,data):
-    #     sendCMNotistrade(self,data)
-    #
-    #
-    #
-    #
-    #
-    # def BODshow(self):
-    #     self.BOD.show()
-    #
-    # def TerminalMastershow(self):
-    #     # loadTerminalMastertable(self)
-    #     self.TM.show()
-    #
-    # def ClientMastershow(self):
-    #     # loadClientMastertable(self)
-    #     self.CM.show()
-    #
-    # def feedshow(self):
-    #     self.feed.show()
-    #
-    # def coActionshow(self):
-    #     self.coAction.show()
-    #
-    # def CASHshow(self):
-    #     self.CASH.show()
-    #
-    # def CMPOTWshow(self):
-    #     # if(self.BOD.isCMOpenPosupdated==True):
-    #     #     self.timerCMTerminalMRG.start()
-    #     self.CMPOTW.show()
-    #
-    # def CMPOCWshow(self):
-    #     self.CMPOCW.show()
-    #
-    # def CMTWMshow(self):
-    #     self.CMTWM.show()
-    #
-    # def CMCWMshow(self):
-    #     self.CMCWM.show()
+
 
     def movWin(self, x, y):
         self.move(self.pos().x() + x, self.pos().y() + y)

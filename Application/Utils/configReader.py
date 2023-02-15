@@ -274,3 +274,12 @@ def get_API_config(self):
     self.token=jConfig['FastApiToken']['Token']
 
     f1.close()
+
+def read_API_config(self):
+    f1 = open(config_location)
+    jConfig = json.load(f1)
+    self.FastApiURL = jConfig['FastApiURL']
+    self.token = jConfig['FastApiToken']['Token']
+    self.UserType=jConfig['FastApiToken']['Type']
+
+    f1.close()

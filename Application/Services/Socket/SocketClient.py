@@ -32,15 +32,16 @@ class SioClient(QMainWindow):
 
 
     def connect(self):
-        self.sio.connect('http://192.168.113.60:8000')
+        self.sio.connect('http://192.168.113.60:8080')
+        self.sio.wait()
 
 
     def emmiters(self):
         self.sio.on('connect', self.on_connect)
-        # self.sio.on('hello', self.on_data)
+        self.sio.on('hello', self.on_data)
         self.sio.on('potwData', self.on_position)
         # self.sio.on('potwData', self.UP_on_position)
-        self.sio.on('twm', self.on_TWM)
+        self.sio.on('twmData', self.on_TWM)
         self.sio.on('twswmData', self.on_TWSWM)
         self.sio.on('disconnect', self.on_disconnect)
 
@@ -55,6 +56,7 @@ class SioClient(QMainWindow):
 
     def on_disconnect(self):
         print('Socket disconnected successfully.....!')
+        # self.sio.sleep(0.001)
         self.connect()
 
     def on_data(self,data):

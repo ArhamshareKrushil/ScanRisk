@@ -24,14 +24,14 @@
     },
     "DefaultClient": "A1946",
     "userID": "A1946",
-    "UDP_FO": 28442,
-    "UDP_CASH": 34074,
+    "UDP_FO": 35099,
+    "UDP_CASH": 34044,
     "FastApiURL": "http://192.168.113.60:5000",
     "FastApiToken": {
-        "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzYxMTQzMjUsImlhdCI6MTY3NjAyNzkyNSwiYnJhbmNoX2lkIjoibWFpbl9tYXN0ZXIifQ.5uPqCCjZZ6Us5zlL-QJKFhl-kK63x0Qd4Rod024MT4s",
+        "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzY1NTE3OTAsImlhdCI6MTY3NjQ2NTM5MCwiYnJhbmNoX2lkIjoibWFpbl9tYXN0ZXIifQ.3E8JpQhZ8NlpK3ZAy49AVDJv9GeDZQ8ZDc9VfxPMQv0",
         "Type": "master",
         "Type_id": "main_master",
-        "login_date": "23-02-10",
-        "login_time": "16:48:44"
+        "login_date": "23-02-15",
+        "login_time": "18:19:48"
     }
 }

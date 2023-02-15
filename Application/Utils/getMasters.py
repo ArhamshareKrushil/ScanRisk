@@ -906,9 +906,9 @@ def shareContract(main):
         main.eq_contract1 = main.eq_contract[np.where(main.eq_contract[:,1] !='x')]
         main.cd_contract1 = main.cd_contract[np.where(main.cd_contract[:,1] !='x')]
 
-        main.BOD.fo_contract = main.fo_contract
-        main.BOD.eq_contract = main.eq_contract
-        main.BOD.cd_contract = main.cd_contract
+        # main.BOD.fo_contract = main.fo_contract
+        # main.BOD.eq_contract = main.eq_contract
+        # main.BOD.cd_contract = main.cd_contract
 
         main.Reciever.fo_contract = main.fo_contract
         #

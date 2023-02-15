@@ -88,9 +88,11 @@ def updatePOTW(main,data):
         ind1 = main.POTW.model.index(0, 1)
         main.POTW.model.dataChanged.emit(ind, ind1)
 
+        main.Reciever.subscribedlist('POTW', 'NSEFO', data[2])
+
     print('ppp', main.POTW.lastSerialNo)
 
-        # main.Reciever.subscribedlist('POTW', 'NSEFO', token)
+
 
     # main.isPOTWupdated = True
 
@@ -173,6 +175,8 @@ def updatePOTWopenPosition(main,data):
         ind = main.POTW.model.index(0, 0)
         ind1 = main.POTW.model.index(0, 1)
         main.POTW.model.dataChanged.emit(ind, ind1)
+
+        main.Reciever.subscribedlist('POTW', 'NSEFO', data[2])
 
     # print('ppp', main.POTW.lastSerialNo)
 
@@ -321,24 +325,6 @@ def updateTWM(main, data):
 
 
 
-def TWMdoubleClicked(main):
-    UserID = main.TWM.tableView.selectedIndexes()[0].data()
-
-    main.cFrame.DPOTW.show()
-    main.cFrame.DPOTW.raise_()
-
-    main.POTW.smodel.setClientCode(UserID)
-    main.POTW.smodel.setFilterFixedString(UserID)
-
-    main.POTW.le_text.setText(UserID)
-
-    main.TWSWM.smodel.setClientCode(UserID)
-    main.TWSWM.smodel.setFilterFixedString(UserID)
-
-
-
-
-
 def updateBWM(main):
     if(main.TWM.model.lastSerialNo !=0):
 
@@ -387,6 +373,106 @@ def updateBWM(main):
                 ind = main.BWM.model.index(0, 0)
                 ind1 = main.BWM.model.index(0, 1)
                 main.BWM.model.dataChanged.emit(ind, ind1)
+
+
+
+@QtCore.pyqtSlot(dict)
+def updateLTP_POTW(main,data):
+    try:
+        if (main.POTW.model.lastSerialNo !=0):
+            # print("pt")
+            # x = (np.unique(main.POTW.table[:main.POTW.lastSerialNo, 2]))
+
+
+            # if (data['Token'] in x ):
+             #   print("2")
+            fltr = np.asarray([data['Token']])
+            x = main.POTW.table[np.in1d(main.POTW.table[:, 2], fltr), 12]
+            # print(x)
+
+            for i in x:
+                netValue = main.POTW.table[i, 16]
+                qty = main.POTW.table[i, 15]
+                ins=main.POTW.table[i, 3]
+
+                mtm = (qty * data['LTP']) + netValue
+
+                if(ins in ['FUTSTK' ,'FUTIDX']):
+                    editableList = [10, 11,21]
+                else:
+                    editableList = [10, 11, 22]
+
+
+                main.POTW.table[i, editableList] = [data['LTP'],  mtm,mtm]
+
+                for j in editableList:
+                    ind = main.POTW.model.index(i, j)
+                    # ind1 = main.marketW.model.index(i,1)
+                    main.POTW.model.dataChanged.emit(ind, ind)
+
+
+    except:
+
+        print(traceback.print_exc())
+
+
+def updateGlobalMargin(main):
+
+    EXPOM=main.TWM.table[:, 1].sum()
+    SPANM=main.TWM.table[:, 2].sum()
+    NET_MRG=main.TWM.table[:,13].sum()
+    # TotalM=main.TWM.table[:, 3].sum()
+    FUT_MTM=main.TWM.table[:, 4].sum()
+    OPT_MTM=main.TWM.table[:, 5].sum()
+    FNO_MTM=FUT_MTM+OPT_MTM
+    PRM_MRG=main.TWM.table[:, 12].sum()
+
+
+    if(main.GlobalM.lastSerialNo !=0):
+
+        editList = [0, 1,2, 3, 4,5,6]
+        main.GlobalM.table[editList,1] = [SPANM,EXPOM,NET_MRG,FUT_MTM,OPT_MTM,FNO_MTM,PRM_MRG]
+
+        # print(main.GlobalM.table)
+        # print(main.GlobalM.table)
+
+        for i in editList:
+            ind = main.GlobalM.model.index(i, 1)
+            main.GlobalM.model.dataChanged.emit(ind, ind)
+    else:
+
+        # main.GlobalM.table[main.GlobalM.lastSerialNo] = [SPANM,EXPOM,TotalM,FUT_MTM,OPT_MTM,FNO_MTM]
+
+        main.GlobalM.table[:7,0]=['SPANM','EXPOM','TotalM','FUT_MTM','OPT_MTM','FNO_MTM','PRM_MRG']
+
+        main.GlobalM.table[:7,1] = [SPANM, EXPOM, NET_MRG, FUT_MTM, OPT_MTM, FNO_MTM,PRM_MRG]
+
+        for i in range(7):
+            main.GlobalM.lastSerialNo += 1
+            main.GlobalM.model.lastSerialNo += 1
+            main.GlobalM.model.insertRows()
+            main.GlobalM.model.rowCount()
+            ind = main.GlobalM.model.index(0, 0)
+            ind1 = main.GlobalM.model.index(0, 1)
+            main.GlobalM.model.dataChanged.emit(ind, ind1)
+
+    # main.GlobalM.lbllimit.setText(str(perc))
+
+
+
+def TWMdoubleClicked(main):
+    UserID = main.TWM.tableView.selectedIndexes()[0].data()
+
+    main.cFrame.DPOTW.show()
+    main.cFrame.DPOTW.raise_()
+
+    main.POTW.smodel.setClientCode(UserID)
+    main.POTW.smodel.setFilterFixedString(UserID)
+
+    main.POTW.le_text.setText(UserID)
+
+    main.TWSWM.smodel.setClientCode(UserID)
+    main.TWSWM.smodel.setFilterFixedString(UserID)
 
 
 

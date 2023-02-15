@@ -376,7 +376,7 @@ def tables_details_GlobalM(GlobalM):
 
 
         GlobalM.visibleColumns = len(GlobalM.heads)
-        GlobalM.table = np.zeros((8, 2), dtype=object)
+        GlobalM.table = np.zeros((7, 2), dtype=object)
         GlobalM.model = modelGWM.ModelTS(GlobalM.table, GlobalM.heads)
         GlobalM.smodel = QSortFilterProxyModel()
         GlobalM.smodel.setSourceModel(GlobalM.model)
