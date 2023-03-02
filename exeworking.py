@@ -7,7 +7,7 @@ lisFinal = []
 
 cwd = os.getcwd()
 
-cwd= ('D:\scanRisk')
+cwd= ('D:\scanRiskDesktop-Branch-V1.0.0')
 a=os.listdir(cwd)
 
 # print(a)
@@ -71,48 +71,48 @@ for i in a :
                                                             elif (os.path.isdir(newPath7)):
                                                                 pass
                                                             else:
-                                                                xx2 = newPath7.replace('D:\scanRisk\\', '')
+                                                                xx2 = newPath7.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', '')
                                                                 if (xx2[-3:] == '.py'):
                                                                     lisFinal.append(
-                                                                        newPath7.replace('D:\scanRisk\\', ''))
+                                                                        newPath7.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', ''))
 
 
                                                     else:
-                                                        xx2 = newPath6.replace('D:\scanRisk\\', '')
+                                                        xx2 = newPath6.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', '')
                                                         if (xx2[-3:] == '.py'):
-                                                            lisFinal.append(newPath6.replace('D:\scanRisk\\', ''))
+                                                            lisFinal.append(newPath6.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', ''))
 
 
                                             else:
-                                                xx2 = newPath5.replace('D:\scanRisk\\', '')
+                                                xx2 = newPath5.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', '')
                                                 if (xx2[-3:] == '.py'):
-                                                    lisFinal.append(newPath5.replace('D:\scanRisk\\', ''))
+                                                    lisFinal.append(newPath5.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', ''))
 
 
                                     else:
-                                        xx2 = newPath4.replace('D:\scanRisk\\', '')
+                                        xx2 = newPath4.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', '')
                                         if (xx2[-3:] == '.py'):
-                                            lisFinal.append(newPath4.replace('D:\scanRisk\\', ''))
+                                            lisFinal.append(newPath4.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', ''))
                             else:
-                                xx2 = newPath3.replace('D:\scanRisk\\', '')
+                                xx2 = newPath3.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', '')
                                 if (xx2[-3:] == '.py'):
-                                    lisFinal.append(newPath3.replace('D:\scanRisk\\', ''))
+                                    lisFinal.append(newPath3.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', ''))
 
                     else:
-                        xx1 = newPath2.replace('D:\scanRisk\\', '')
+                        xx1 = newPath2.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', '')
                         if (xx1[-3:] == '.py'):
-                            lisFinal.append(newPath2.replace('D:\scanRisk\\', ''))
+                            lisFinal.append(newPath2.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', ''))
 
             else:
                 print('else 2', newPath1)
-                xx = newPath1.replace('D:\scanRisk\\', '')
+                xx = newPath1.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', '')
                 # print(xx[-3:])
                 if (xx[-3:] == '.py'):
-                    lisFinal.append(newPath1.replace('D:\scanRisk\\', ''))
+                    lisFinal.append(newPath1.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', ''))
 
 
     else:
-        xx = i.replace('D:\scanRisk\\', '')
+        xx = i.replace('D:\scanRiskDesktop-Branch-V1.0.0\\', '')
         # print(xx[-3:])
         if (xx[-3:] == '.py'):
             # print('tej',xx)

@@ -50,9 +50,9 @@ class Ui_LogIn(QMainWindow):
         osType = platform.system()
 
         if (osType == 'Darwin'):
-            flags = Qt.WindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+            flags = Qt.WindowFlags(Qt.FramelessWindowHint )
         else:
-            flags = Qt.WindowFlags(Qt.SubWindow | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+            flags = Qt.WindowFlags(Qt.FramelessWindowHint )
         self.setWindowFlags(flags)
 
         # self.title = tBar('BOD')
@@ -70,7 +70,7 @@ class Ui_LogIn(QMainWindow):
 
     def createShortcuts(self):
         self.quitSc = QShortcut(QKeySequence('Esc'), self)
-        self.quitSc.activated.connect(self.hide)
+        self.quitSc.activated.connect(self.showMinimized)
 
     def createSlots(self):
         pass

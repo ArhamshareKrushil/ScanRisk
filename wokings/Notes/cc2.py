@@ -1,30 +1,32 @@
-import socketio
+from PyQt5 import QtGui, QtCore
+from PyQt5.QtWidgets import *
+import sys
 
-sio = socketio.Client()
 
-@sio.event
-def connect():
-    print("connection established")
+class Second(QMainWindow):
+    def __init__(self, parent=None):
+        super(Second, self).__init__(parent)
 
-@sio.event
-def disconnect():
-    print("disconnected from server")
 
-@sio.event
-def data(message):
-    print("received data: ", message)
+class First(QMainWindow):
+    def __init__(self, parent=None):
+        super(First, self).__init__(parent)
+        self.pushButton = QPushButton("click me")
 
-@sio.event
-def data1(message):
-    print("data 1 111111 1 111111 received data: ", message)
+        self.setCentralWidget(self.pushButton)
 
-@sio.event
-def data2(message):
-    print("data 2 222 22222222222222222222222 222 received data: ", message)
+        self.pushButton.clicked.connect(self.on_pushButton_clicked)
+        self.dialog = Second(self)
 
-@sio.event
-def data3(message):
-    print("data 3333 33333 3333333333333333333333333333333333333333333 received data: ", message)
+    def on_pushButton_clicked(self):
+        self.dialog.show()
 
-sio.connect('http://192.168.102.155:5555')
-sio.wait()
+
+
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    main = First()
+    main.show()
+    sys.exit(app.exec_())

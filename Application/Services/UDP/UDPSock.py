@@ -57,7 +57,7 @@ class Receiver(QtCore.QObject):
         # self.sgData7208.connect(self.updateValues)
 
     def join_grp(self):
-        print('fo_receiver join',self.port)
+        # print('fo_receiver join',self.port)
         self._socket.joinMulticastGroup(QHostAddress('233.1.2.5'))
 
     def leave_grp(self):

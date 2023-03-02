@@ -90,7 +90,7 @@ def updatePOTW(main,data):
 
         main.Reciever.subscribedlist('POTW', 'NSEFO', data[2])
 
-    print('ppp', main.POTW.lastSerialNo)
+    # print('ppp', main.POTW.lastSerialNo)
 
 
 
@@ -421,7 +421,7 @@ def updateGlobalMargin(main):
     EXPOM=main.TWM.table[:, 1].sum()
     SPANM=main.TWM.table[:, 2].sum()
     NET_MRG=main.TWM.table[:,13].sum()
-    # TotalM=main.TWM.table[:, 3].sum()
+    # NET_MRG=main.TWM.table[:, 3].sum()
     FUT_MTM=main.TWM.table[:, 4].sum()
     OPT_MTM=main.TWM.table[:, 5].sum()
     FNO_MTM=FUT_MTM+OPT_MTM
@@ -457,6 +457,72 @@ def updateGlobalMargin(main):
             main.GlobalM.model.dataChanged.emit(ind, ind1)
 
     # main.GlobalM.lbllimit.setText(str(perc))
+
+
+def updateMTM(main):
+    if main.POTW.lastSerialNo!=0:
+
+
+        df3 = dt.Frame(main.POTW.table[:main.POTW.model.lastSerialNo,
+                       [0,4,11,21,22]],
+                       names=['UserID', 'Symbol', 'MTM','FUT_MTM','OPT_MTM'])
+
+        df3[2:] = dt.float64
+
+        x = df3[:, dt.sum(dt.f[2:]), dt.by('UserID', 'Symbol')]
+
+        x1=x[:, dt.sum(dt.f[2:]), dt.by('UserID')]
+
+
+
+
+        for i in x.to_numpy():
+            rowarray = np.where((main.TWSWM.table[:main.TWSWM.model.lastSerialNo, 0] == i[0])& (main.TWSWM.table[:main.TWSWM.model.lastSerialNo, 1] == i[1]))[0]
+            # print(fltrarr)
+
+            # if (fltrarr.size != 0):
+            #         isRecordExist = True
+
+            if (rowarray.size != 0):
+                # print('exist')
+
+                # rowNo = np.where(main.BWM.table[:, 0] == data[0])[0][0]
+                rowNo = rowarray[0]
+
+                # print('rowNo',rowNo)
+
+                editList = [5, 6, 7]
+                main.TWSWM.table[rowNo, editList] = [i[3], i[4], i[2]]
+
+                for i in editList:
+                    ind = main.TWSWM.model.index(rowNo, i)
+                    main.TWSWM.model.dataChanged.emit(ind, ind)
+
+        for i in x1.to_numpy():
+            rowarray = np.where(main.TWM.table[:main.TWM.model.lastSerialNo, 0] == i[0])[0]
+            # print(fltrarr)
+
+            # if (fltrarr.size != 0):
+            #         isRecordExist = True
+
+            if (rowarray.size != 0):
+                # print('exist')
+
+                # rowNo = np.where(main.BWM.table[:, 0] == data[0])[0][0]
+                rowNo = rowarray[0]
+
+                # print('rowNo',rowNo)
+
+                editList = [4,5, 8]
+                main.TWM.table[rowNo, editList] = [i[2], i[3], i[1]]
+
+                for i in editList:
+                    ind = main.TWM.model.index(rowNo, i)
+                    main.TWM.model.dataChanged.emit(ind, ind)
+
+
+
+
 
 
 

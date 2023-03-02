@@ -1,6 +1,7 @@
+import os
 import itertools
 import threading
-
+import shutil
 import numpy as np
 import json
 import requests
@@ -9,6 +10,9 @@ import traceback
 import logging
 from Application.Utils.configReader import get_API_config,writeAPIdetails
 import time
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 import pandas as pd
 
 
@@ -37,7 +41,7 @@ def login(main):
 
         # print(login_access.text)
 
-        print("status code",login_access.status_code)
+
         if login_access.status_code == 200:
             data = login_access.json()
             # print('hjhjkjh',data)
@@ -51,8 +55,41 @@ def login(main):
             Type_id = data['Type_id']
             writeAPIdetails(token, usertype,Type_id)
 
+            main.createUserObject()
 
-            versionCheck(main,token)
+            main.SioClient.startSocket(token)
+
+            th1 = threading.Thread(target=updatePOTW_DB, args=(main, token))
+            th1.start()
+
+            th2 = threading.Thread(target=getTWSWM, args=(main, token))
+            th2.start()
+
+            th3 = threading.Thread(target=getTWM, args=(main, token))
+            th3.start()
+
+
+            main.login.close()
+
+            main.show()
+
+
+            # versionCheck(main,token)
+
+        elif login_access.status_code == 401:
+            print('kkkk')
+            main.messageBox = QMessageBox()
+            main.messageBox.setIcon(QMessageBox.Critical)
+            main.messageBox.setWindowTitle('Error')
+            main.messageBox.setWindowFlags(Qt.WindowStaysOnTopHint)
+            main.messageBox.setText('UserName or Password is Invalid!')
+            main.messageBox.exec()
+
+            # main.mb = QMessageBox()
+            # main.mb.setWindowFlags(Qt.WindowStaysOnTopHint)
+            # main.mb.setText('Invalid user Or password')
+            # main.mb.exec()
+
 
 
 
@@ -72,39 +109,74 @@ def login(main):
         print(traceback.print_exc())
 
 
-def versionCheck(main,token):
-    payload = {
-        "version": "1.1.0"
+def versionCheck(main):
+    try:
+        get_API_config(main)
+        payload = {
+            "version": "1.0.0"
 
-    }
-    login_url = main.FastApiURL + '/versioncheck'
+        }
+        login_url = main.FastApiURL + '/scanrisk-version'
 
-    # login_url = main.FastApiURL + f'/dlogin?username={User}&password={password}'
-    # print("login_url:", login_url)
-    # print("payload : ", payload)
-    login_access = requests.post(login_url, json=payload)
-    # print(login_access.text)
-    # logging.info(login_access.text)
-    if login_access.status_code == 200:
-        data = login_access.json()
-        print(data)
+        # login_url = main.FastApiURL + f'/dlogin?username={User}&password={password}'
+        # print("login_url:", login_url)
+        # print("payload : ", payload)
+        login_access = requests.post(login_url, json=payload)
+        # print(login_access.text)
+        # logging.info(login_access.text)
+        print("status..... code", login_access.status_code)
+        if login_access.status_code == 200:
+            # data = login_access.json()
 
-
-        th1 = threading.Thread(target=updatePOTW_DB, args=(main, token))
-        th1.start()
-
-        th2 = threading.Thread(target=getTWSWM, args=(main, token))
-        th2.start()
-
-        th3 = threading.Thread(target=getTWM, args=(main, token))
-        th3.start()
-
-        main.SioClient.startSocket(token)
-        main.login.hide()
-        main.createUserObject()
-        main.show()
+            main.login.show()
+            # print(data)
 
 
+
+        # elif login_access.status_code == 401:
+        else:
+            main.messageBox = QMessageBox()
+            # main.messageBox.setWindowIcon(QIcon('../Resources/icons/alert-circle.svg'))
+            main.messageBox.setIcon(QMessageBox.Critical)
+            main.messageBox.setWindowFlags(Qt.WindowStaysOnTopHint)
+            main.messageBox.setText('Please Update your Version!')
+            main.messageBox.setWindowTitle('Update Verion')
+            main.messageBox.addButton(QPushButton('Yes'), QMessageBox.YesRole)
+            main.messageBox.addButton(QPushButton('No'), QMessageBox.RejectRole)
+            main.messageBox.buttonClicked.connect(main.DownloadVersionClicked)
+            main.messageBox.exec()
+    except:
+        # print(traceback.print_exc())
+        main.messageBox = QMessageBox()
+        main.messageBox.setIcon(QMessageBox.Critical)
+        main.messageBox.setWindowTitle('Error')
+        main.messageBox.setWindowFlags(Qt.WindowStaysOnTopHint)
+        main.messageBox.setText('Server Error..!! ')
+        main.messageBox.show()
+
+
+
+
+
+def DownloadVersionClicked(main,button):
+    if (button.text() == 'Yes'):
+        get_API_config(main)
+
+        login_url = main.FastApiURL + '/download'
+
+        response = requests.post(login_url, stream=True)
+
+        loc1 = os.getcwd().split('Application')
+        defaultDir = os.path.join(loc1[0])
+
+        save = QFileDialog.getSaveFileName(main, 'Download file', defaultDir,"ZIP (*.zip)")[0]
+        with open(save, "wb") as f:
+            for chunk in response.iter_content(chunk_size=512):
+                if chunk:
+                    f.write(chunk)
+
+    else:
+        pass
 
 
 # def getPositionPOTW(main,token):
@@ -176,7 +248,7 @@ def getTWSWM(main,token):
 
         main.sgDB_TWSWM.emit(p)
 
-    print('TWSWMdone')
+    # print('TWSWMdone')
 
 
 

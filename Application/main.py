@@ -1,4 +1,5 @@
-
+import psutil
+import putils
 import threading
 from  py_vollib.black_scholes import black_scholes
 from PyQt5 import uic
@@ -19,7 +20,7 @@ from Application.Views.BWM.BWM import BranchSummary
 from Application.Views.BWSWM.BWSWM import BranchScriptSummary
 
 from Application.Utils.support import getLogPath
-from Application.Utils.getMasters import shareContract
+
 from Application.Utils.all_slots import createSlots_main
 from Application.Utils.configReader import read_API_config
 # from Application.Utils.updation import updatePOTM,updateLTP_POCW,updatePOTW,updateLTP_POTW,updateCMPOTWpos,updateLTP_CMPOTW,updateLTP_CMPOCW
@@ -37,14 +38,10 @@ from Application.Views.CASH.CASH import Ui_CASH
 from Application.Views.CMTWM.CMTWM import UI_CMTWM
 from Application.Views.CMCWM.CMCWM import UI_CMCWM
 
-from Application.Utils.VAR.getVarFile import latest_var
+
 
 
 from Application.Utils.support import *
-from Application.Services.DCReader.FOReader import DCReader
-from Application.Services.NotisReader.FOReader import FONotisReader
-from Application.Services.NotisReader.CMReader import CMNotisReader
-from Application.Services.DCReader.CMReader import CMDCReader
 
 from Application.Services.UDP.UDPSock import Receiver
 from Resources.icons import icons_rc
@@ -58,10 +55,9 @@ import os
 import platform
 import json
 from Application.Services.Socket.SocketClient import SioClient
-from Application.Utils.SPAN import SPAN1,terminalSPAN
-from Application.Utils.VAR import terminalVAR,clientVAR
-from Application.Utils.PhysicalDel import PhysicalDel
-from Application.Services.FastApi.ApiServices import updatePOTW_DB
+from Application.Services.FastApi.ApiServices import versionCheck,DownloadVersionClicked
+
+
 
 class Ui_Main(QMainWindow):
     sgopenPosPOTW=pyqtSignal(object)
@@ -80,9 +76,9 @@ class Ui_Main(QMainWindow):
         #########################################################
         loc1 = os.getcwd().split('Application')
         ui_login = os.path.join(loc1[0], 'Resources', 'UI', 'Main.ui')
-        uic.loadUi(ui_login, self)
+        uic.loadUi(ui_login,self)
 
-        dark =qdarkstyle.load_stylesheet_pyqt5()
+
         self.setStyleSheet(dt1)
 
 
@@ -94,11 +90,10 @@ class Ui_Main(QMainWindow):
         todate = datetime.datetime.today().strftime('%Y%m%d')
         self.todate = datetime.datetime.strptime(todate, '%Y%m%d')
 
-
         if (osType == 'Darwin'):
-            flags = Qt.WindowFlags(Qt.FramelessWindowHint )
+            flags = Qt.WindowFlags(Qt.FramelessWindowHint)
         else:
-            flags = Qt.WindowFlags(Qt.SubWindow | Qt.FramelessWindowHint )
+            flags = Qt.WindowFlags(Qt.FramelessWindowHint)
         self.setWindowFlags(flags)
         self.title = tBar('ScanRisk')
         self.headerFrame.layout().addWidget(self.title, 0, 1)
@@ -110,15 +105,8 @@ class Ui_Main(QMainWindow):
         # event mapping
         createSlots_main(self)
         self.createTimers()
-        self.connectAllslots()
 
-
-        # self.csvtojson()
-
-        # loadTmaster(self)
-        # loadClientMaster(self)
-        # QSizeGrip(self.frame_5)
-        # latest_var(self)
+        versionCheck(self)
 
 
 
@@ -126,6 +114,11 @@ class Ui_Main(QMainWindow):
 
 
 
+
+
+
+    def DownloadVersionClicked(self,i):
+        DownloadVersionClicked(self,i)
 
     def createTimers(self):
         self.timerBWM = QTimer()
@@ -135,6 +128,13 @@ class Ui_Main(QMainWindow):
         self.timerGlobalM = QTimer()
         self.timerGlobalM.setInterval(5000)
         self.timerGlobalM.timeout.connect(lambda: updateGlobalMargin(self))
+
+        self.timerMTM = QTimer()
+        self.timerMTM.setInterval(5000)
+        self.timerMTM.timeout.connect(lambda: updateMTM(self))
+
+
+
 
 
 
@@ -165,7 +165,7 @@ class Ui_Main(QMainWindow):
             #
             self.GlobalM=GlobalMargin()
 
-            self.BWM = BranchSummary()
+            # self.BWM = BranchSummary()
             # self.BWSWM=BranchScriptSummary()
             #
             # self.CMPOTW=UI_CMPOTW()
@@ -186,7 +186,7 @@ class Ui_Main(QMainWindow):
             #
             self.cFrame.DGlobal.setWidget(self.GlobalM)
             #
-            self.cFrame.DBWM.setWidget(self.BWM)
+            # self.cFrame.DBWM.setWidget(self.BWM)
             # self.cFrame.DBWSWM.setWidget(self.BWSWM)
 
         else:
@@ -229,9 +229,11 @@ class Ui_Main(QMainWindow):
             self.cFrame.DBWSWM.setWidget(self.BWSWM)
 
         self.defaultWindowState()
+        self.connectAllslots()
         # shareContract(self)
-        self.timerBWM.start()
+        # self.timerBWM.start()
         self.timerGlobalM.start()
+        self.timerMTM.start()
 
 
 
@@ -273,8 +275,7 @@ class Ui_Main(QMainWindow):
 
     def connectAllslots(self):
 
-
-
+        self.TWM.tableView.doubleClicked.connect(lambda: TWMdoubleClicked(self))
         ################################################################
 
         self.headerFrame.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -301,7 +302,14 @@ class Ui_Main(QMainWindow):
 
         self.Reciever.sgData7202.connect(self.update7202)
 
-
+    def end_task(process_name='SCAN-RISK.exe'):
+        for proc in psutil.process_iter():
+            try:
+                if proc.name() == process_name:
+                    proc.kill()
+                    print(f"{process_name} has been terminated.")
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                pass
 
     @pyqtSlot(list)
     def updatePOTW(self,data):
@@ -456,8 +464,10 @@ class Ui_Main(QMainWindow):
 if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)
+    app.setQuitOnLastWindowClosed(False)
     # print('hellofhfhfh')
     form = Ui_Main()
-    form.login.show()
+    #
+    # form.login.show()
     # form.show()
     sys.exit(app.exec_())

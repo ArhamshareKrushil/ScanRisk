@@ -2,8 +2,8 @@
 
 import traceback
 from Application.Utils.supMethods import proceed2login
-from Application.Utils.getSpanFile import latest_span,process_span
-from Application.Utils.VAR.getVarFile import latest_var,process_var
+
+
 
 
 def createSlots_main(main, tray=None):

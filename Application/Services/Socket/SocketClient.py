@@ -1,3 +1,5 @@
+import traceback
+
 import socketio
 import sys
 
@@ -7,6 +9,7 @@ from Application.Utils.configReader import *
 # from PyQt5.QtCore import pyqtSignal
 
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 from threading import Thread
 
 
@@ -32,8 +35,18 @@ class SioClient(QMainWindow):
 
 
     def connect(self):
-        self.sio.connect('http://192.168.113.60:8080')
-        self.sio.wait()
+        try:
+            self.sio.connect('http://180.211.116.155:3536')
+            # self.sio.wait()
+
+        except:
+            print(traceback.print_exc(),'trajfkjdkfd')
+            # self.messageBox = QMessageBox()
+            # # self.messageBox.setIcon(QMessageBox.Critical)
+            # # self.messageBox.setWindowTitle('Error')
+            # # self.messageBox.setWindowFlags(Qt.WindowStaysOnTopHint)
+            # self.messageBox.setText('Server Error..!! ')
+            # self.messageBox.show()
 
 
     def emmiters(self):
@@ -68,7 +81,7 @@ class SioClient(QMainWindow):
     def on_position(self,data):
         self.IN += 1
 
-        # print(self.IN,'POTW',data)
+        print('POTW',data)
         self.sgOnPosition.emit(data)
 
     def UP_on_position(self,data):

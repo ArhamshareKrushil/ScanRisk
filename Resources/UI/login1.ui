@@ -114,7 +114,7 @@ color:white
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>admin</string>
+       <string>algo</string>
       </property>
       <property name="placeholderText">
        <string>UserName</string>
@@ -142,7 +142,7 @@ color:white
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>admin123</string>
+       <string>12345678</string>
       </property>
       <property name="placeholderText">
        <string>Password</string>
@@ -194,31 +194,6 @@ color:white
       <property name="text">
        <string>Sign Up</string>
       </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>110</y>
-        <width>111</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>Master</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Branch</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Client</string>
-       </property>
-      </item>
      </widget>
     </widget>
    </item>
