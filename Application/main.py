@@ -249,7 +249,7 @@ class Ui_Main(QMainWindow):
         self.thread1.start()
 
 
-        self.Reciever = Receiver(35099)
+        self.Reciever = Receiver(28442)
         self.Reciever.join_grp()
 
         self.t1 = QThread()
