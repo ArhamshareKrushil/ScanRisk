@@ -285,11 +285,17 @@ class Ui_Main(QMainWindow):
         self.bt_close.clicked.connect(self.close)
         self.bt_max.clicked.connect(self.showmaxORnormal)
 
-        ################### Socket Client ##########################
+        ################### Socket Client FO##########################
 
         self.SioClient.sgOnPosition.connect(self.updatePOTW)
         self.SioClient.sgOnTWSWM.connect(self.updateTWSWM)
         self.SioClient.sgOnTWM.connect(self.updateTWM)
+
+        ##################Socket Client CM ###########################
+        self.SioClient.sgOnCMPosition.connect(self.updateCMPOTW)
+        self.SioClient.sgOnCMTWM.connect(self.updateCMTWM)
+
+
 
 
         ######################## MAIN ###############################
@@ -314,6 +320,14 @@ class Ui_Main(QMainWindow):
     @pyqtSlot(list)
     def updatePOTW(self,data):
         updatePOTW(self,data)
+
+    @pyqtSlot(list)
+    def updateCMPOTW(self, data):
+        updateCMPOTW(self, data)
+
+    @pyqtSlot(list)
+    def updateCMTWM(self, data):
+        updateCMTWM(self, data)
 
     def on_DB_TWSWM(self,data):
 

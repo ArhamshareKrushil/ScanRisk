@@ -15,9 +15,14 @@ from threading import Thread
 
 
 class SioClient(QMainWindow):
+
     sgOnPosition=pyqtSignal(list)
-    sgOnTWSWM =pyqtSignal(list)
     sgOnTWM =pyqtSignal(list)
+    sgOnTWSWM =pyqtSignal(list)
+
+
+    sgOnCMPosition=pyqtSignal(list)
+    sgOnCMTWM =pyqtSignal(list)
 
     def __init__(self):
         super(SioClient, self).__init__()
@@ -56,6 +61,12 @@ class SioClient(QMainWindow):
         # self.sio.on('potwData', self.UP_on_position)
         self.sio.on('twmData', self.on_TWM)
         self.sio.on('twswmData', self.on_TWSWM)
+
+        #########CASH#########################
+        self.sio.on('cmpotwdata',self.on_CMposition)
+        self.sio.on('cmtwmdata',self.on_CMTWM)
+
+
         self.sio.on('disconnect', self.on_disconnect)
 
 
@@ -78,24 +89,32 @@ class SioClient(QMainWindow):
 
         # print('Socket disconnected successfully!')
 
+    def on_CMposition(self,data):
+        # self.IN += 1
+
+        # print('POTW',data)
+        self.sgOnCMPosition.emit(data)
+
+    def on_CMTWM(self,data):
+        # self.IN += 1
+
+        # print('POTW',data)
+        self.sgOnCMTWM.emit(data)
+
     def on_position(self,data):
         self.IN += 1
 
-        print('POTW',data)
+        # print('POTW',data)
         self.sgOnPosition.emit(data)
 
-    def UP_on_position(self,data):
-        self.UP+=1
 
-        print(self.UP,'POTW',data)
-        # self.sgOnPosition.emit(data)
 
     def on_TWM(self,data):
-        print('TWM', data)
+        # print('TWM', data)
         self.sgOnTWM.emit(data)
 
     def on_TWSWM(self,data):
-        print('TWSWM', data)
+        # print('TWSWM', data)
         self.sgOnTWSWM.emit(data)
 
     def on_margin(self,data):
