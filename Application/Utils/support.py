@@ -255,7 +255,7 @@ def updateTWSWM(main, data):
 
 
 
-        main.TWSWM.table[main.TWSWM.model.lastSerialNo] = [data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7],data[8],data[9]]
+        main.TWSWM.table[main.TWSWM.model.lastSerialNo,[0,1,2,3,4,8,9]] = [data[0],data[1],data[2],data[3],data[4],data[8],data[9]]
 
         main.TWSWM.lastSerialNo += 1
         main.TWSWM.model.lastSerialNo += 1
@@ -311,7 +311,7 @@ def updateTWM(main, data):
 
     else:
 
-        main.TWM.table[main.TWM.model.lastSerialNo] =data
+        main.TWM.table[main.TWM.model.lastSerialNo,[0,1,2,3,6,7,9,10,12,13,14]] =[data[0],data[1], data[2],data[3], data[6],data[7],data[9],data[10],data[12],data[13],data[14]]
 
         main.TWM.lastSerialNo += 1
         main.TWM.model.lastSerialNo += 1
