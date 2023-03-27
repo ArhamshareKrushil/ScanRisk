@@ -24,6 +24,7 @@ import Application.Services.UDP. Parse_NSECM.CM7208.parse7208 as CMparse7208
 import Application.Services.UDP. Parse_NSECM.CM7214.parse7214 as CMparse7214
 import Application.Services.UDP. Parse_NSECM.CM7216.parse7216 as CMparse7216
 import Application.Services.UDP. Parse_NSECM.CM7201.parse7201 as CMparse7201
+import Application.Services.UDP. Parse_NSECM.CM7203.parse7203 as CMparse7203
 from Application.Utils.configReader import readConfig_All
 
 from Application.Utils.configReader import get_udp_port
@@ -40,22 +41,27 @@ def parseFeeds(self, packet, port):
 
         # Uncompressed Packets
         if (Compressed_PcktLen == 0):
-            pass
 
 
 
-            # Compressed_Packet = packet[start_Point + 2:]
-            #
-            # Msg_Code = struct.unpack('!h', Compressed_Packet[18:20])
+
+
+            Compressed_Packet = packet[start_Point + 2:]
+
+            Msg_Code = struct.unpack('!h', Compressed_Packet[18:20])
             #
             # if (Msg_Code[0] not in self.listMsgCode):
             #     self.listMsgCode.append(Msg_Code[0])
             #     print(Msg_Code[0], self.listMsgCode)
             #
-            # if (port == self.port_fo):
+            if (port == self.port_fo):
+                pass
+                # print('ddd',Msg_Code)
 
-            #     if (Msg_Code[0] == 6501):
-            #         Fparse6501.getOutput(self, Compressed_Packet)
+
+
+                # if (Msg_Code[0] == 6501):
+                #     Fparse6501.getOutput(self, Compressed_Packet)
             #     elif (Msg_Code[0] == 7340):
             #         Fparse7340.getOutput(self, Compressed_Packet)
             #     elif (Msg_Code[0] == 7305):
@@ -68,9 +74,17 @@ def parseFeeds(self, packet, port):
             #         Fparse6511.getOutput(self, Compressed_Packet)
             #
             #
-            # elif (port == self.port_cash):
-            #     if (Msg_Code[0] == 7207):
-            #         CMparse7207.getOutput(self, Compressed_Packet)
+            elif (port == self.port_cash):
+                # print('ddd',Msg_Code)
+                if (Msg_Code[0] == 7203):
+                    print('cash')
+                    CMparse7203.getOutput(self, Compressed_Packet)
+                # elif (Msg_Code[0] == 7208):
+                #    # print("inside 7202")
+                #     CMparse7208.getOutput(self, Compressed_Packet)
+                elif (Msg_Code[0] == 7207):
+                    # print('cash')
+                    CMparse7207.getOutput(self, Compressed_Packet)
             #     elif (Msg_Code[0] == 7216):
             #         CMparse7216.getOutput(self, Compressed_Packet)
             #     elif (Msg_Code[0] == 6582):

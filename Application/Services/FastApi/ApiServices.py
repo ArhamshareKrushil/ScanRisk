@@ -2,6 +2,8 @@ import os
 import itertools
 import threading
 import shutil
+import zipfile
+
 import numpy as np
 import json
 import requests
@@ -14,6 +16,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 import pandas as pd
+from Application.Utils.getMaster import getMaster
 
 
 def login(main):
@@ -55,9 +58,18 @@ def login(main):
             Type_id = data['Type_id']
             writeAPIdetails(token, usertype,Type_id)
 
+            if main.login.cbCmaster.isChecked():
+                update_contract_FOletest(main,token)
+            else:
+                update_contract_FOold(main)
+
             main.createUserObject()
 
-            main.SioClient.startSocket(token)
+
+            main.SioClient.startSocket(token,main.socketIP)
+
+            # th56=threading.Thread(target=update_contract_FO,args=(main,token))
+            # th56.start()
 
             th1 = threading.Thread(target=updatePOTW_DB, args=(main, token))
             th1.start()
@@ -67,6 +79,12 @@ def login(main):
 
             th3 = threading.Thread(target=getTWM, args=(main, token))
             th3.start()
+
+            th4 = threading.Thread(target=getCMPOTW, args=(main, token))
+            th4.start()
+
+            th5 = threading.Thread(target=getCMTWM, args=(main, token))
+            th5.start()
 
 
             main.login.close()
@@ -92,13 +110,6 @@ def login(main):
 
 
 
-
-
-
-
-
-
-
         else:
             print(traceback.print_exc())
 
@@ -113,7 +124,7 @@ def versionCheck(main):
     try:
         get_API_config(main)
         payload = {
-            "version": "1.0.0"
+            "version": "2.0.0"
 
         }
         login_url = main.FastApiURL + '/scanrisk-version'
@@ -262,6 +273,49 @@ def getTWSWM(main,token):
     # print(df.shape)
     # print('timennn', et - st)
 
+
+def getCMPOTW(main,token):
+    CMPOTW_url = main.FastApiURL + '/dbCMpotw'
+    DBheaders = {
+        'Content-Type': 'application/json',
+        'authToken': token
+    }
+    req = requests.request("POST", CMPOTW_url, headers=DBheaders)
+    data = req.json()
+    # print(type(data))
+
+    st = time.time()
+    # a = eval(data)
+    # print(data['data'])
+    # data23 = list(itertools.chain(*data['data']))
+    # print(data23)
+    for pos in data['data']:
+        p = list(pos.values())
+
+        main.sgDB_CMPOTW.emit(p)
+
+def getCMTWM(main,token):
+    CMTWM_url = main.FastApiURL + '/dbCMtwm'
+    DBheaders = {
+        'Content-Type': 'application/json',
+        'authToken': token
+    }
+    req = requests.request("POST", CMTWM_url, headers=DBheaders)
+    data = req.json()
+    # print(type(data))
+
+    st = time.time()
+    # a = eval(data)
+    # print(data['data'])
+    # data23 = list(itertools.chain(*data['data']))
+    # print(data23)
+    for pos in data['data']:
+        p = list(pos.values())
+
+        main.sgDB_CMTWM.emit(p)
+
+
+
 def getTWM(main,token):
     TWM_url = main.FastApiURL + '/dbtwm'
     DBheaders = {
@@ -287,6 +341,97 @@ def getTWM(main,token):
     # print('timennn', et - st)
 
 
+def update_contract_FOletest(main,token):
+    try:
+        st=time.time()
+        DB_url = main.FastApiURL + '/dbcontractFO'
+        # DBheaders = {
+        #     'Content-Type': 'application/json',
+        #     'authToken': token
+        # }
+        response = requests.post(DB_url, stream=True)
+
+        loc1 = os.getcwd().split('Application')
+        save = os.path.join(loc1[0],'Downloads','contract_fo.csv')
+        # d = os.path.join(loc1[0],'Downloads')
+
+
+        # save = QFileDialog.getSaveFileName(main, 'Download file', defaultDir, "CSV (*.csv)")[0]
+        with open(save, "wb") as f:
+            for chunk in response.iter_content(chunk_size=512):
+                if chunk:
+                    f.write(chunk)
+
+
+
+
+        # main.fo_contract=np.loadtxt(save, skiprows=1, delimiter=',')
+        fo_contract=pd.read_csv(save,low_memory=False,header=None,skiprows=1)
+
+
+        main.fo_contract = fo_contract.to_numpy()
+
+        et = time.time()
+        print('time', et - st)
+
+        # req = requests.request("POST", DB_url, headers=DBheaders)
+        # data = req.json()
+        # # print(type(data['data']))
+        # a=eval(data['data'])
+        #
+        # # print('aaaaaaaaaaaa',a,type(a))
+        #
+        # main.fo_contract = pd.DataFrame(a).values
+        #
+        # et=time.time()
+        # # data23 = list(itertools.chain(*data['data']))
+        #
+        # # print('thearray',len(a))
+        # print('time',et-st)
+        # print('thearray',main.fo_contract.shape)
+
+        # data = {'Exchange', 'Segment', 'Token' 'symbol' 'Stock_name',
+        #         'instrument_type' 'exp' 'strike_price' 'option_type',
+        #         'asset_token', 'tick_size', 'lot_size', 'strike1',
+        #         'Multiplier', 'FreezeQty', 'pbHigh', 'pbLow',
+        #         'futureToken', 'close', 'ltp', 'bid', 'ask', 'oi',
+        #         'prev_day_oi', 'iv', 'delta', 'gamma', 'theta', 'vega',
+        #         'theoritical_price', 'PPR', 'moneyness', 'Volume', 'amt',
+        #         'Avg1MVol', 'ATP', 'strike_diff', 'expiry_type', 'cpToken',
+        #         'days2Exp', 'moneyness2', '3_last', '2_last', 'last'}
+
+        # data23 = list(itertools.chain(*data['data']))
+
+
+
+
+        # data23 = list(itertools.chain(*data['data']))
+        # print(data23)
+        # print(type(data23))
+
+        # st = time.time()
+        #
+        # for pos in data['data']:
+        #     p = list(pos.values())
+        #
+        #     main.sgopenPosPOTW.emit(p)
+        #
+        # print('POTWdone')
+    except:
+        print(traceback.print_exc())
+
+
+def update_contract_FOold(main):
+    loc1 = os.getcwd().split('Application')
+    save = os.path.join(loc1[0], 'Downloads', 'contract_fo.csv')
+    fo_contract = pd.read_csv(save, low_memory=False, header=None, skiprows=1)
+
+
+    main.fo_contract = fo_contract.to_numpy()
+
+
+
+
 def updatePOTW_DB(main,token):
 
     DB_url = main.FastApiURL + '/dbpotw'
@@ -296,17 +441,43 @@ def updatePOTW_DB(main,token):
     }
     req = requests.request("POST", DB_url, headers=DBheaders)
     data = req.json()
-    # print(type(data))
+
+    DBLTP_url = main.FastApiURL + '/dbLTP'
+    DBheaders = {
+        'Content-Type': 'application/json'
+    }
+    req = requests.request("POST", DBLTP_url, headers=DBheaders)
+    dataLTP = req.json()
+
+    # print(type(dataLTP),dataLTP)
 
     st = time.time()
 
 
     for pos in data['data']:
         p=list(pos.values())
+        d=dataLTP.get(str(p[2]))
+        if d:
+            # print('tt')
+            p[10]=d['LTP']
+
+            # (qty * data['LTP']) + netValue
+            p[11]=(p[15]*d['LTP'])+p[16]
+
+            p[24]=d['IV']
+            p[25]=d['Delta'] *p[15]
+            p[26]=d['Theta']*p[15]
+            p[27]=d['Gama']*p[15]
+            p[28]=d['Vega']*p[15]
+
+            if (p[3] in ['FUTIDX','FUTSTK']):
+                p[21]=p[11]
+            else:
+                p[22]=p[11]
 
         main.sgopenPosPOTW.emit(p)
 
-    print('TWMdone')
+    print('POTWdone')
 
 
 

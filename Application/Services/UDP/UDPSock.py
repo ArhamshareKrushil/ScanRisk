@@ -15,7 +15,7 @@ from py_vollib.black_scholes.greeks.analytical import gamma
 from py_vollib.black_scholes.greeks.analytical import rho
 from py_vollib.black_scholes.greeks.analytical import theta
 from py_vollib.black_scholes.greeks.analytical import vega
-# from py_vollib.helpers.exceptions import PriceIsBelowIntrinsic
+from py_vollib.helpers.exceptions import PriceIsBelowIntrinsic
 from py_lets_be_rational.exceptions import BelowIntrinsicException,AboveMaximumException
 
 
@@ -23,6 +23,9 @@ from py_lets_be_rational.exceptions import BelowIntrinsicException,AboveMaximumE
 import datetime
 class Receiver(QtCore.QObject):
     sgData7202 = pyqtSignal(dict)
+    sgCMData7203 = pyqtSignal(dict)
+    sgCMData7208 = pyqtSignal(dict)
+    sgCMData7207 = pyqtSignal(dict)
     sgCMData7202 = pyqtSignal(dict)
     sgData7208 = pyqtSignal( dict)
     sgDataIV_LTP = pyqtSignal( dict)
@@ -35,7 +38,7 @@ class Receiver(QtCore.QObject):
 
         self.getSetting()
 
-        self.r=0.001
+        self.r=0.1
         self._socket = QtNetwork.QUdpSocket(self)
         self._socket.bind(QHostAddress.AnyIPv4, self.port,QUdpSocket.ShareAddress|QUdpSocket.ReuseAddressHint)
         self._socket.readyRead.connect(self.on_readyRead)

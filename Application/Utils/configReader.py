@@ -272,6 +272,7 @@ def get_API_config(self):
     jConfig = json.load(f1)
     self.FastApiURL = jConfig['FastApiURL']
     self.token=jConfig['FastApiToken']['Token']
+    self.socketIP = jConfig['socketIP']
 
     f1.close()
 

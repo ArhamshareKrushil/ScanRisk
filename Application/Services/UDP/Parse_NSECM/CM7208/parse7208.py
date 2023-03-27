@@ -13,6 +13,8 @@ def getOutput(self,Decoded_Packet):
 
 
         output = process.process(self, Decoded_Packet, Start_Pointof_Record)
-        print(output)
+        # print(output)
+
+        self.sgCMData7208.emit(output)
 
         Start_Pointof_Record = End_Pointof_Record

@@ -13,7 +13,7 @@ a=os.listdir(cwd)
 # print(a)
 
 for i in a :
-    if (i == '__pycache__'):
+    if (i == '.git' or i == '.idea' or i == '.pytest_cache' or i == '.gitignore'):
         pass
 
     elif(os.path.isdir(i)):

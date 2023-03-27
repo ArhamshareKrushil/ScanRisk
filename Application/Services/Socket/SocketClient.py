@@ -11,6 +11,7 @@ from Application.Utils.configReader import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from threading import Thread
+from Application.Utils.configReader import read_API_config
 
 
 
@@ -34,14 +35,16 @@ class SioClient(QMainWindow):
 
         # self.connect()
 
-    def startSocket(self,token):
+    def startSocket(self,token,socketIP):
         self.token=token
+        self.socketIP=socketIP
         Thread(target=self.connect).start()
 
 
     def connect(self):
         try:
-            self.sio.connect('http://180.211.116.155:3536')
+            # self.sio.connect('http://192.168.113.52:3332')
+            self.sio.connect(self.socketIP)
             # self.sio.wait()
 
         except:
@@ -63,8 +66,8 @@ class SioClient(QMainWindow):
         self.sio.on('twswmData', self.on_TWSWM)
 
         #########CASH#########################
-        self.sio.on('cmpotwdata',self.on_CMposition)
-        self.sio.on('cmtwmdata',self.on_CMTWM)
+        self.sio.on('CMpotwData',self.on_CMposition)
+        self.sio.on('CMtwmdata',self.on_CMTWM)
 
 
         self.sio.on('disconnect', self.on_disconnect)
@@ -92,13 +95,13 @@ class SioClient(QMainWindow):
     def on_CMposition(self,data):
         # self.IN += 1
 
-        # print('POTW',data)
+        # print('CMPOTW',data)
         self.sgOnCMPosition.emit(data)
 
     def on_CMTWM(self,data):
         # self.IN += 1
 
-        # print('POTW',data)
+        # print('CMTWM',data)
         self.sgOnCMTWM.emit(data)
 
     def on_position(self,data):

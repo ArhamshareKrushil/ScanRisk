@@ -25,7 +25,7 @@ class BranchScriptSummary(QMainWindow):
         ########################################################
         #########################################################
         loc1 = os.getcwd().split('Application')
-        ui_login = os.path.join(loc1[0], 'Resources', 'UI', 'tableBWM.ui')
+        ui_login = os.path.join(loc1[0], 'Resources', 'UI', 'tableBWSWM.ui')
         uic.loadUi(ui_login, self)
         # dark = qdarkstyle.load_stylesheet_pyqt5()
         self.lastSerialNo = 0
@@ -51,9 +51,19 @@ class BranchScriptSummary(QMainWindow):
 
 
     def createSlots(self):
+        self.pbClearfilter.clicked.connect(self.ClearFilter)
+
+        self.le_text_2.textChanged.connect(self.Text2Filter)
         self.tableView.horizontalHeader().setContextMenuPolicy(Qt.CustomContextMenu)
         self.tableView.horizontalHeader().customContextMenuRequested.connect(self.headerRightClickMenu)
 
+    def Text2Filter(self, text):
+        self.smodel.setFilterKeyColumn(1)
+        self.smodel.setFilterFixedString(text)
+
+    def ClearFilter(self):
+        self.smodel.setFilterFixedString('')
+        self.smodel.setFilterKeyColumn(1)
     def saveAsDefaultColumnProfile(self):
         try:
             loc1 = os.getcwd().split('Application')

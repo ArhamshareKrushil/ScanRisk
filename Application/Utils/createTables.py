@@ -3,28 +3,117 @@ import traceback
 import numpy as np
 
 from PyQt5.QtCore import QSortFilterProxyModel,Qt
-from Application.Views.Models import modelPOCW,modelBWM,modelCWM, modelCWSWM,modelGWM,modelTWM,modelTWSWM,modelPOTW,modelSortfilter,modelCMPOCW,modelCMPOTW,modelCMTWM,modelCMCWM,modelBWSWM
+from Application.Views.Models import modelPOCW,modelBWM,modelCWM, modelCWSWM,modelGWM,modelTWM,modelTWSWM,modelPOTW,modelSortfilter,modelCMPOCW,modelCMPOTW,modelCMTWM,modelCMCWM,modelBWSWM,modelDeposit,modelLimit
 from Application.Views.proxyModels import modelSortfilterCWSWM,modelSortfilterPOCW,modelSortfilterTWSWM,modelSortfilterPOTW
 from Application.Views.Models import modelTmaster
 
 
 
 
+def tables_details_Deposit(Deposit):
+    try:
+        Deposit.heads = ['UserID','Deposit']
 
+        #############################################################################################################
+
+
+        Deposit.visibleColumns = len(Deposit.heads)
+        Deposit.table = np.zeros((20000, 2), dtype=object)
+        Deposit.model = modelDeposit.ModelTS(Deposit.table, Deposit.heads)
+        Deposit.smodel = QSortFilterProxyModel()
+        Deposit.smodel.setSourceModel(Deposit.model)
+        Deposit.tableView.setModel(Deposit.smodel)
+
+        Deposit.smodel.setDynamicSortFilter(False)
+        Deposit.smodel.setFilterKeyColumn(0)
+        Deposit.smodel.setFilterCaseSensitivity(False)
+        #############################################
+        Deposit.tableView.horizontalHeader().setSectionsMovable(True)
+        Deposit.tableView.verticalHeader().setSectionsMovable(True)
+        Deposit.tableView.verticalHeader().setFixedWidth(30)
+        Deposit.tableView.setContextMenuPolicy(Qt.CustomContextMenu)
+        Deposit.tableView.setDragDropMode(Deposit.tableView.InternalMove)
+        Deposit.tableView.setDragDropOverwriteMode(False)
+
+        # Deposit.saveDefaultColumnProfile()
+        # Deposit.lastSavedColumnProfile()
+        # Deposit.updateDefaultColumnProfile()
+
+        # Deposit.tableView.setColumnWidth(0, 0)
+        # Deposit.tableView.setColumnWidth(1, 0)
+        # Deposit.tableView.setColumnWidth(2, 0)
+        # Deposit.tableView.setColumnWidth(4, 85)
+        # Deposit.tableView.setColumnWidth(5, 75)
+        # Deposit.tableView.setColumnWidth(6, 40)
+
+        # Deposit.tableView.horizontalHeader().moveSection(28, 0)
+        # Deposit.tableView.horizontalHeader().setContextMenuPolicy(Qt.CustomContextMenu)
+        # Deposit.tableView.customContextMenuRequested.connect(lambda:tableRightClickMenu)
+        # Deposit.tableView.horizontalHeader().customContextMenuRequested.connect(Deposit.headerRightClickMenu)
+
+
+    except:
+        print(traceback.print_exc())
+def tables_details_Limit(Limit):
+    try:
+        Limit.heads = ['UserID','Limit']
+
+        #############################################################################################################
+
+
+        Limit.visibleColumns = len(Limit.heads)
+        Limit.table = np.zeros((20000, 2), dtype=object)
+        Limit.model = modelLimit.ModelTS(Limit.table, Limit.heads)
+        Limit.smodel = QSortFilterProxyModel()
+        Limit.smodel.setSourceModel(Limit.model)
+        Limit.tableView.setModel(Limit.smodel)
+
+        Limit.smodel.setDynamicSortFilter(False)
+        Limit.smodel.setFilterKeyColumn(0)
+        Limit.smodel.setFilterCaseSensitivity(False)
+        #############################################
+        Limit.tableView.horizontalHeader().setSectionsMovable(True)
+        Limit.tableView.verticalHeader().setSectionsMovable(True)
+        Limit.tableView.verticalHeader().setFixedWidth(30)
+        Limit.tableView.setContextMenuPolicy(Qt.CustomContextMenu)
+        Limit.tableView.setDragDropMode(Limit.tableView.InternalMove)
+        Limit.tableView.setDragDropOverwriteMode(False)
+
+        # Limit.saveDefaultColumnProfile()
+        # Limit.lastSavedColumnProfile()
+        # Limit.updateDefaultColumnProfile()
+
+        # Limit.tableView.setColumnWidth(0, 0)
+        # Limit.tableView.setColumnWidth(1, 0)
+        # Limit.tableView.setColumnWidth(2, 0)
+        # Limit.tableView.setColumnWidth(4, 85)
+        # Limit.tableView.setColumnWidth(5, 75)
+        # Limit.tableView.setColumnWidth(6, 40)
+
+        # Limit.tableView.horizontalHeader().moveSection(28, 0)
+        # Limit.tableView.horizontalHeader().setContextMenuPolicy(Qt.CustomContextMenu)
+        # Limit.tableView.customContextMenuRequested.connect(lambda:tableRightClickMenu)
+        # Limit.tableView.horizontalHeader().customContextMenuRequested.connect(Limit.headerRightClickMenu)
+
+
+    except:
+        print(traceback.print_exc())
 def tables_details_POTW(POTW):
     try:
         POTW.heads = ['UserID',
                           'Exchange','Token','instrument','symbol','expiry',
-                      'strike','c/p','dayQty','dayValue','LTP',
+                            'strike','c/p','dayQty','dayValue','LTP',
                           'MTM','SerialNO','OpenQty','OpenAmt','netQty',
                           'NetValue','PrevDExpo_Mrg','PrevDSpan_Mrg','Total_Margin','Net_Prem',
-                        'FUT_MTM','OPT_MTM','PRM_MRG']
+                            'FUT_MTM','OPT_MTM','PRM_MRG','IV','Delta',
+                            'Theta','Gama','Vega','UpSCNPrice','DownSCNPrice',
+                            'UpSCNMTM','DownSCNMTM','TOC']
 
         #############################################################################################################
 
 
         POTW.visibleColumns = len(POTW.heads)
-        POTW.table = np.zeros((20000, 24), dtype=object)
+        POTW.table = np.zeros((20000, 34), dtype=object)
         POTW.model = modelPOTW.ModelTS(POTW.table, POTW.heads)
         POTW.smodel = modelSortfilterPOTW.ProxyModel()
         POTW.smodel.setSourceModel(POTW.model)
@@ -70,13 +159,18 @@ def tables_details_POTW(POTW):
 def tables_details_TWM(TWM):
     try:
         TWM.heads = ['UserID',
-                     'EXPO_Margin','SPAN_Margin','Total_Margin','FUT_MTM', 'OPT_MTM','Branch','Name','FNO_MTM','Day_MRG','Sheet','CASH_MTM','PRM_MRG','NET_MRG','PeakMRG']
+                     'EXPO_Margin','SPAN_Margin','Total_Margin','FUT_MTM', 'OPT_MTM',
+                     'Branch','Name','FNO_MTM','Day_PRM','Sheet',
+                     'CASH_MTM','PRM_MRG','NET_MRG','PeakMRG','NetPrem',
+                     'Deposit','Limit_set','Net_EQbuy','PrevDayMRG','Risk_Percentage',
+                     'Access_MRG_Util','UpSCNMTM','DownSCNMTM','TOC','Cash_MRG',
+                     'Net_MTM']
 
         #############################################################################################################
 
 
         TWM.visibleColumns = len(TWM.heads)
-        TWM.table = np.zeros((20000, 15), dtype=object)
+        TWM.table = np.zeros((20000, 27), dtype=object)
         TWM.model = modelTWM.ModelTS(TWM.table, TWM.heads)
         TWM.smodel = QSortFilterProxyModel()
         TWM.smodel.setSourceModel(TWM.model)
@@ -119,13 +213,15 @@ def tables_details_TWSWM(TWSWM):
     try:
         TWSWM.heads = ['UserID',
                         'Symbol','EXPO_Margin','SPAN_Margin','Total_Margin','FUT_MTM',
-                       'OPT_MTM','FNO_MTM','PRM_MRG','Branch']
+                       'OPT_MTM','FNO_MTM','PRM_MRG','Branch','Delta',
+                      'Theta','Gama','Vega','UpSCNMTM','DownSCNMTM'
+                        'TOC']
 
         #############################################################################################################
 
 
         TWSWM.visibleColumns = len(TWSWM.heads)
-        TWSWM.table = np.zeros((10000, 10), dtype=object)
+        TWSWM.table = np.zeros((10000, 17), dtype=object)
         TWSWM.model = modelTWSWM.ModelTS(TWSWM.table, TWSWM.heads)
         TWSWM.smodel = modelSortfilterTWSWM.ProxyModel()
         TWSWM.smodel.setSourceModel(TWSWM.model)
@@ -167,13 +263,14 @@ def tables_details_BWSWM(BWSWM):
     try:
         BWSWM.heads = ['Branch',
                         'Symbol','EXPO_Margin','SPAN_Margin','Total_Margin','FUT_MTM',
-                       'OPT_MTM','FNO_MTM','PRM_MRG','Margin%']
+                       'OPT_MTM','FNO_MTM','PRM_MRG','Margin%','Delta',
+                      'Theta','Gama','Vega','UpSCNMTM','DownSCNMTM']
 
         #############################################################################################################
 
 
         BWSWM.visibleColumns = len(BWSWM.heads)
-        BWSWM.table = np.zeros((10000, 10), dtype=object)
+        BWSWM.table = np.zeros((10000, 16), dtype=object)
         BWSWM.model = modelBWSWM.ModelTS(BWSWM.table, BWSWM.heads)
         BWSWM.smodel = QSortFilterProxyModel()
         BWSWM.smodel.setSourceModel(BWSWM.model)
@@ -376,7 +473,7 @@ def tables_details_GlobalM(GlobalM):
 
 
         GlobalM.visibleColumns = len(GlobalM.heads)
-        GlobalM.table = np.zeros((7, 2), dtype=object)
+        GlobalM.table = np.zeros((9, 2), dtype=object)
         GlobalM.model = modelGWM.ModelTS(GlobalM.table, GlobalM.heads)
         GlobalM.smodel = QSortFilterProxyModel()
         GlobalM.smodel.setSourceModel(GlobalM.model)
@@ -565,13 +662,13 @@ def tables_details_CMPOTW(CMPOTW):
         CMPOTW.heads = ['UserID',
                           'Exchange','Token','Series','symbol','dayQty',
                       'dayValue','LTP','MTM','SerialNO','OpenQty',
-                      'OpenAmt','netQty','NetValue','MRG']
+                      'OpenAmt','netQty','NetValue','MRG','TOC']
 
         #############################################################################################################
 
 
         CMPOTW.visibleColumns = len(CMPOTW.heads)
-        CMPOTW.table = np.zeros((20000, 15), dtype=object)
+        CMPOTW.table = np.zeros((20000, 16), dtype=object)
         CMPOTW.model = modelCMPOTW.ModelTS(CMPOTW.table, CMPOTW.heads)
         CMPOTW.smodel = QSortFilterProxyModel()
         CMPOTW.smodel.setSourceModel(CMPOTW.model)
@@ -706,13 +803,13 @@ def tables_details_CMCWM(CMCWM):
 def tables_details_CMTWM(CMTWM):
     try:
         CMTWM.heads = ['UserID',
-                     'Branch','Name','MARGIN','MTM','Sheet']
+                     'Branch','Name','MARGIN','MTM','Sheet','NetQty','NetAmt']
 
         #############################################################################################################
 
 
         CMTWM.visibleColumns = len(CMTWM.heads)
-        CMTWM.table = np.zeros((20000, 6), dtype=object)
+        CMTWM.table = np.zeros((20000, 8), dtype=object)
         CMTWM.model = modelCMTWM.ModelTS(CMTWM.table, CMTWM.heads)
         CMTWM.smodel = QSortFilterProxyModel()
         CMTWM.smodel.setSourceModel(CMTWM.model)

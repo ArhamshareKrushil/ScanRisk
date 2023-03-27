@@ -18,6 +18,8 @@ from Application.Views.CWSWM.CWSWM import CScriptSummary
 from Application.Views.GlobalMargin.GlobalMargin import GlobalMargin
 from Application.Views.BWM.BWM import BranchSummary
 from Application.Views.BWSWM.BWSWM import BranchScriptSummary
+from Application.Views.Deposit.Deposit import UI_Deposit
+from Application.Views.Limit.Limit import UI_Limit
 
 from Application.Utils.support import getLogPath
 
@@ -60,9 +62,11 @@ from Application.Services.FastApi.ApiServices import versionCheck,DownloadVersio
 
 
 class Ui_Main(QMainWindow):
-    sgopenPosPOTW=pyqtSignal(object)
-    sgDB_TWSWM=pyqtSignal(object)
-    sgDB_TWM=pyqtSignal(object)
+    sgopenPosPOTW=pyqtSignal(list)
+    sgDB_TWSWM=pyqtSignal(list)
+    sgDB_TWM=pyqtSignal(list)
+    sgDB_CMPOTW=pyqtSignal(list)
+    sgDB_CMTWM=pyqtSignal(list)
 
 
     ################################# Intialization Here ##################################################
@@ -86,6 +90,7 @@ class Ui_Main(QMainWindow):
 
         self.maxwin=False
         self.menuhide=False
+        self.r = 0.1
 
         todate = datetime.datetime.today().strftime('%Y%m%d')
         self.todate = datetime.datetime.strptime(todate, '%Y%m%d')
@@ -102,6 +107,8 @@ class Ui_Main(QMainWindow):
 
 
         self.createObjects()
+        loadDeposit(self)
+        loadLimit(self)
         # event mapping
         createSlots_main(self)
         self.createTimers()
@@ -121,17 +128,31 @@ class Ui_Main(QMainWindow):
         DownloadVersionClicked(self,i)
 
     def createTimers(self):
-        self.timerBWM = QTimer()
-        self.timerBWM.setInterval(5000)
-        self.timerBWM.timeout.connect(lambda: updateBWM(self))
+        # self.timerBWM = QTimer()
+        # self.timerBWM.setInterval(5000)
+        # self.timerBWM.timeout.connect(lambda: updateBWM(self))
 
         self.timerGlobalM = QTimer()
-        self.timerGlobalM.setInterval(5000)
+        self.timerGlobalM.setInterval(6000)
+        self.timerGlobalM.timeout.connect(lambda: updateBWSWM(self))
         self.timerGlobalM.timeout.connect(lambda: updateGlobalMargin(self))
 
         self.timerMTM = QTimer()
-        self.timerMTM.setInterval(5000)
-        self.timerMTM.timeout.connect(lambda: updateMTM(self))
+        self.timerMTM.setInterval(2000)
+        self.timerMTM.timeout.connect(lambda: updateFOMTM(self))
+
+        self.timerCMMTM = QTimer()
+        self.timerCMMTM.setInterval(10000)
+        self.timerCMMTM.timeout.connect(lambda :update_CASH_MTM(self))
+
+        self.timerGreeks = QTimer()
+        self.timerGreeks.setInterval(20000)
+        self.timerGreeks.timeout.connect(lambda: update_Greeks_POTW(self))
+
+        self.timerSCN = QTimer()
+        self.timerSCN.setInterval(30000)
+        self.timerSCN.timeout.connect(lambda: updateSCNPrice(self))
+
 
 
 
@@ -166,12 +187,13 @@ class Ui_Main(QMainWindow):
             self.GlobalM=GlobalMargin()
 
             # self.BWM = BranchSummary()
-            # self.BWSWM=BranchScriptSummary()
+            self.BWSWM=BranchScriptSummary()
             #
-            # self.CMPOTW=UI_CMPOTW()
+            self.CASH=Ui_CASH()
+            self.CMPOTW=UI_CMPOTW()
+            self.CMTWM=UI_CMTWM()
+
             # self.CMPOCW=UI_CMPOCW()
-            # self.CASH=Ui_CASH()
-            # self.CMTWM=UI_CMTWM()
             # self.CMCWM=UI_CMCWM()
             #
             #
@@ -187,7 +209,7 @@ class Ui_Main(QMainWindow):
             self.cFrame.DGlobal.setWidget(self.GlobalM)
             #
             # self.cFrame.DBWM.setWidget(self.BWM)
-            # self.cFrame.DBWSWM.setWidget(self.BWSWM)
+            self.cFrame.DBWSWM.setWidget(self.BWSWM)
 
         else:
             self.cFrame = Ui_cframe()
@@ -207,10 +229,10 @@ class Ui_Main(QMainWindow):
             self.BWM = BranchSummary()
             self.BWSWM=BranchScriptSummary()
             #
-            # self.CMPOTW=UI_CMPOTW()
+            self.CMPOTW=UI_CMPOTW()
             # self.CMPOCW=UI_CMPOCW()
-            # self.CASH=Ui_CASH()
-            # self.CMTWM=UI_CMTWM()
+            self.CASH=Ui_CASH()
+            self.CMTWM=UI_CMTWM()
             # self.CMCWM=UI_CMCWM()
             #
             #
@@ -234,9 +256,22 @@ class Ui_Main(QMainWindow):
         # self.timerBWM.start()
         self.timerGlobalM.start()
         self.timerMTM.start()
+        self.timerCMMTM.start()
+        self.timerGreeks.start()
+        self.timerSCN.start()
 
 
 
+    def getSetting(self):
+        loc=os.getcwd().split('Application')[0]
+        # print(loc)
+        path=os.path.join(loc,'Resources','config_json.json')
+        # print(path)
+
+        f = open(path)
+        data1 = json.load(f)
+        self.port_fo = data1["UDP_FO"]
+        self.port_cash = data1["UDP_CASH"]
 
 
     def createObjects(self):
@@ -244,31 +279,28 @@ class Ui_Main(QMainWindow):
 
         self.SioClient=SioClient()
 
+        self.Deposit=UI_Deposit()
+        self.Limit=UI_Limit()
+
         self.thread1 = QThread()
         self.SioClient.moveToThread(self.thread1)
         self.thread1.start()
 
-
-        self.Reciever = Receiver(28442)
+        self.getSetting()
+        self.Reciever = Receiver(self.port_fo)
         self.Reciever.join_grp()
 
         self.t1 = QThread()
         self.Reciever.moveToThread(self.t1)
         self.t1.start()
 
+        self.RecieverCM = Receiver(self.port_cash)
+        # print(self.port_cash)
+        self.RecieverCM.join_grp()
 
-
-
-
-
-
-
-
-
-
-
-
-
+        self.th34 = QThread()
+        self.RecieverCM.moveToThread(self.th34)
+        self.th34.start()
 
 
 
@@ -285,7 +317,14 @@ class Ui_Main(QMainWindow):
         self.bt_close.clicked.connect(self.close)
         self.bt_max.clicked.connect(self.showmaxORnormal)
 
-        ################### Socket Client FO##########################
+        ##################### CASH #########################
+        self.pbCash.clicked.connect(self.CASHshow)
+
+        self.CASH.pbPOTW.clicked.connect(self.CMPOTWshow)
+        self.CASH.pbTWM.clicked.connect(self.CMTWMshow)
+
+
+        ################### Socket Client FO ##########################
 
         self.SioClient.sgOnPosition.connect(self.updatePOTW)
         self.SioClient.sgOnTWSWM.connect(self.updateTWSWM)
@@ -303,10 +342,21 @@ class Ui_Main(QMainWindow):
         self.sgopenPosPOTW.connect(self.on_POTWOpenPosition)
         self.sgDB_TWSWM.connect(self.updateTWSWM)
         self.sgDB_TWM.connect(self.updateTWM)
+        self.sgDB_CMPOTW.connect(self.updateCMPOTW)
+        self.sgDB_CMTWM.connect(self.updateCMTWM)
 
         ####################### UDP Receiver FO #####################
 
         self.Reciever.sgData7202.connect(self.update7202)
+        self.RecieverCM.sgCMData7202.connect(self.updateCM7202)
+        self.RecieverCM.sgCMData7207.connect(self.updateCM7207)
+
+
+        ###################Deposit############################
+        self.pbDeposit.clicked.connect(self.Deposit.show)
+        self.pbLimit.clicked.connect(self.Limit.show)
+
+
 
     def end_task(process_name='SCAN-RISK.exe'):
         for proc in psutil.process_iter():
@@ -316,6 +366,16 @@ class Ui_Main(QMainWindow):
                     print(f"{process_name} has been terminated.")
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                 pass
+            
+    def CASHshow(self):
+        self.CASH.show()
+
+    def CMPOTWshow(self):
+        self.CMPOTW.show()
+
+    def CMTWMshow(self):
+        self.CMTWM.show()
+
 
     @pyqtSlot(list)
     def updatePOTW(self,data):
@@ -339,6 +399,8 @@ class Ui_Main(QMainWindow):
     def updateTWM(self,data):
         updateTWM(self,data)
 
+
+
     def on_DB_TWM(self,data):
         # update_DB_TWM(self,data)
 
@@ -346,6 +408,7 @@ class Ui_Main(QMainWindow):
         # if(data['id']=='POTW'):
         update_DB_TWM(self,data)
 
+    @QtCore.pyqtSlot(list)
     def on_POTWOpenPosition(self,data):
 
         # print(data)
@@ -353,8 +416,32 @@ class Ui_Main(QMainWindow):
 
     @QtCore.pyqtSlot(dict)
     def update7202(self, data):
+        # print('data',data)
         # updateLTP_POCW(self, data)
         updateLTP_POTW(self, data)
+        update_contract_fo(self, data)
+
+    # @QtCore.pyqtSlot(dict)
+    def updateCM7207(self, data):
+        # pass
+        # print()
+        # print(data)
+        # updateLTP_POCW(self, data)
+        updateIndexes(self, data)
+        # update_contract_fo(self, data)
+
+    # def updateCM7203(self, data):
+    #     # print(data)
+    #     # updateLTP_POCW(self, data)
+    #     # updateIndexes(self, data)
+    #     # update_contract_fo(self, data)
+
+
+    def updateCM7202(self, data):
+        # print(data)
+        # updateLTP_POCW(self, data)
+        updateLTP_CMPOTW(self, data)
+        # update_contract_fo(self,data)
 
 
     def WindowRightclickedMenu(self,position):

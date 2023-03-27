@@ -439,57 +439,6 @@ QTableCornerButton::section {
 </string>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0" rowspan="2">
-        <widget class="Line" name="line_4">
-         <property name="maximumSize">
-          <size>
-           <width>20</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: transparent;</string>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1" rowspan="2">
-        <widget class="QLineEdit" name="le_text">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>200</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="placeholderText">
-          <string>UserID</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2" rowspan="2">
-        <widget class="Line" name="line_7">
-         <property name="maximumSize">
-          <size>
-           <width>25</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: transparent;</string>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="3" rowspan="2" colspan="2">
         <widget class="QLineEdit" name="le_text_2">
          <property name="sizePolicy">
@@ -509,29 +458,35 @@ QTableCornerButton::section {
          </property>
         </widget>
        </item>
-       <item row="0" column="6" rowspan="2">
-        <widget class="QPushButton" name="pbClearfilter">
+       <item row="0" column="0" rowspan="2">
+        <widget class="Line" name="line_4">
          <property name="maximumSize">
           <size>
-           <width>200</width>
+           <width>20</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="text">
-          <string>Clear Filter</string>
+         <property name="styleSheet">
+          <string notr="true">background-color: transparent;</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
-       <item row="0" column="8" rowspan="2">
-        <widget class="QPushButton" name="pbGetExcel">
+       <item row="1" column="4">
+        <widget class="Line" name="line_5">
          <property name="maximumSize">
           <size>
-           <width>200</width>
+           <width>10</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="text">
-          <string>Get Excel</string>
+         <property name="styleSheet">
+          <string notr="true">background-color: transparent;</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -551,8 +506,34 @@ QTableCornerButton::section {
          </property>
         </widget>
        </item>
-       <item row="1" column="4">
-        <widget class="Line" name="line_5">
+       <item row="0" column="8" rowspan="2">
+        <widget class="QPushButton" name="pbGetExcel">
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Get Excel</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="6" rowspan="2">
+        <widget class="QPushButton" name="pbClearfilter">
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Clear Filter</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="7">
+        <widget class="Line" name="line_8">
          <property name="maximumSize">
           <size>
            <width>10</width>
@@ -583,11 +564,11 @@ QTableCornerButton::section {
          </property>
         </widget>
        </item>
-       <item row="1" column="7">
-        <widget class="Line" name="line_8">
+       <item row="0" column="2" rowspan="2">
+        <widget class="Line" name="line_7">
          <property name="maximumSize">
           <size>
-           <width>10</width>
+           <width>25</width>
            <height>16777215</height>
           </size>
          </property>
@@ -596,6 +577,25 @@ QTableCornerButton::section {
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" rowspan="2">
+        <widget class="QLineEdit" name="le_text">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="placeholderText">
+          <string>UserID</string>
          </property>
         </widget>
        </item>
