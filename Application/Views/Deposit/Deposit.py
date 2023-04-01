@@ -20,7 +20,7 @@ loc = os.getcwd().split('Application')[0]
 
 
 class UI_Deposit(QMainWindow):
-    sgupdateTWMwithTmaster=pyqtSignal(dict)
+    sgupdateDepositPOTW=pyqtSignal(dict)
 
     ################################# Intialization Here ##################################################
     def __init__(self):
@@ -138,7 +138,7 @@ class UI_Deposit(QMainWindow):
     def Updaterow(self):
         st=time.time()
 
-        self.sgupdateTWMwithTmaster.emit(self.model.updatedrow)
+        self.sgupdateDepositPOTW.emit(self.model.updatedrow)
         path=os.path.join(loc,'Uploads','Deposit.csv')
 
         np.savetxt(path, self.table[:self.lastSerialNo], delimiter=",", header='UserID,Deposit', fmt='%s')

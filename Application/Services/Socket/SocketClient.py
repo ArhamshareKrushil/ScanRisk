@@ -80,6 +80,9 @@ class SioClient(QMainWindow):
 
         print('Socket connected successfully!')
 
+    def disconnectsocket(self):
+        self.sio.disconnect()
+
 
     def on_disconnect(self):
         print('Socket disconnected successfully.....!')

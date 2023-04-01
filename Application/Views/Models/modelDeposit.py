@@ -59,10 +59,10 @@ class ModelTS(QtCore.QAbstractTableModel):
                 pass
             else:
 
-                Tid=self._data[index.row()][0]
-                if Tid not in self.updatedrow:
-                    Uid=self._data[index.row()][1]
-                    self.updatedrow[Tid]=Uid
+                Uid=self._data[index.row()][0]
+                if Uid not in self.updatedrow:
+                    # deposit=self._data[index.row()][1]
+                    self.updatedrow[Uid]=float(value)
 
                 self._data[index.row()][index.column()] = str(value)
             return True

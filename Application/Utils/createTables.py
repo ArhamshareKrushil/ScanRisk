@@ -163,14 +163,14 @@ def tables_details_TWM(TWM):
                      'Branch','Name','FNO_MTM','Day_PRM','Sheet',
                      'CASH_MTM','PRM_MRG','NET_MRG','PeakMRG','NetPrem',
                      'Deposit','Limit_set','Net_EQbuy','PrevDayMRG','Risk_Percentage',
-                     'Access_MRG_Util','UpSCNMTM','DownSCNMTM','TOC','Cash_MRG',
-                     'Net_MTM']
+                     'Access_MRG_Util','UpSCNMTM','DownSCNMTM','FNO_TOC','Cash_MRG',
+                     'Net_MTM','Cash_TOC','NET_TOC']
 
         #############################################################################################################
 
 
         TWM.visibleColumns = len(TWM.heads)
-        TWM.table = np.zeros((20000, 27), dtype=object)
+        TWM.table = np.zeros((20000, 29), dtype=object)
         TWM.model = modelTWM.ModelTS(TWM.table, TWM.heads)
         TWM.smodel = QSortFilterProxyModel()
         TWM.smodel.setSourceModel(TWM.model)

@@ -46,6 +46,11 @@ class ModelTS(QtCore.QAbstractTableModel):
 
             if role == Qt.EditRole:
                 value = self._data[index.row(), index.column()]
+
+                # if isinstance(value, int) or isinstance(value, float):
+                #     # Align right, vertical middle.
+                #     return value
+
                 return str(value)
 
 
@@ -58,13 +63,14 @@ class ModelTS(QtCore.QAbstractTableModel):
             if value == self._data[index.row()][index.column()]:
                 pass
             else:
+                # print(self.updatedrow)
 
-                Tid=self._data[index.row()][0]
-                if Tid not in self.updatedrow:
-                    Uid=self._data[index.row()][1]
-                    self.updatedrow[Tid]=Uid
+                Uid=self._data[index.row()][0]
+                if Uid not in self.updatedrow:
+                    # Limit=self._data[index.row()][1]
+                    self.updatedrow[Uid]=value
 
-                self._data[index.row()][index.column()] = str(value)
+                self._data[index.row()][index.column()] = value
             return True
 
 

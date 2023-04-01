@@ -1,5 +1,5 @@
 import psutil
-import putils
+
 import threading
 from  py_vollib.black_scholes import black_scholes
 from PyQt5 import uic
@@ -142,7 +142,7 @@ class Ui_Main(QMainWindow):
         self.timerMTM.timeout.connect(lambda: updateFOMTM(self))
 
         self.timerCMMTM = QTimer()
-        self.timerCMMTM.setInterval(10000)
+        self.timerCMMTM.setInterval(5000)
         self.timerCMMTM.timeout.connect(lambda :update_CASH_MTM(self))
 
         self.timerGreeks = QTimer()
@@ -314,7 +314,7 @@ class Ui_Main(QMainWindow):
         self.headerFrame.customContextMenuRequested.connect(self.WindowRightclickedMenu)
         self.btnSttn.clicked.connect(self.menuhideshow)
         self.bt_min.clicked.connect(self.showMinimized)
-        self.bt_close.clicked.connect(self.close)
+        self.bt_close.clicked.connect(self.closeApp)
         self.bt_max.clicked.connect(self.showmaxORnormal)
 
         ##################### CASH #########################
@@ -354,10 +354,19 @@ class Ui_Main(QMainWindow):
 
         ###################Deposit############################
         self.pbDeposit.clicked.connect(self.Deposit.show)
+        self.Limit.sgupdateLimitPOTW.connect(self.updateLimitPOTW)
+        self.Deposit.sgupdateDepositPOTW.connect(self.updateDepositPOTW)
+
         self.pbLimit.clicked.connect(self.Limit.show)
 
+    def updateDepositPOTW(self,data):
+        updateDepositPOTW(self,data)
+    def updateLimitPOTW(self,data):
+        updateLimitPOTW(self,data)
 
-
+    def closeApp(self):
+        self.SioClient.sio.disconnect()
+        sys.exit()
     def end_task(process_name='SCAN-RISK.exe'):
         for proc in psutil.process_iter():
             try:

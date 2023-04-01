@@ -52,6 +52,93 @@ def getLogPath(xclass):
                         datefmt='%m/%d/%Y %I:%M:%S %p')
 
 
+def updateDepositPOTW(main,data):
+    if data:
+        for i in data:
+
+            Uid=i
+            # editable=d[0]
+            # print('type',type)
+
+
+
+
+            deposit=data[i]
+
+            if i in main.TWM.table[:main.TWM.lastSerialNo,0]:
+
+                # newBranch=main.CM.table[np.where(main.CM.table[:main.CM.model.lastSerialNo, 0] == i)][0][2]
+                # fltrarr = main.TWM.table[np.where(main.TWM.table[:main.TWM.lastSerialNo, 0] == i)]
+                # print('fltarr',fltrarr)
+
+                # main.TWM.table[np.where(main.TWM.table[:main.TWM.lastSerialNo, 0] == i),16]=Deposit
+
+                rowNo= np.where(main.TWM.table[:main.TWM.lastSerialNo, 0] == i)[0][0]
+                Data = main.TWM.table[rowNo, :]
+
+
+                NetPrem=Data[15]
+                FnoMTM=Data[4]
+                Ans = FnoMTM - NetPrem
+
+                if Ans < 0:
+
+
+                    if deposit > 0:
+                        RiskPer = abs(Ans) / deposit
+                    else:
+                        RiskPer = 0.0
+                else:
+                    RiskPer=0.0
+
+                editList = [16,20]
+                main.TWM.table[rowNo, editList] = [ deposit,RiskPer]
+
+                ind = main.TWM.model.index(0, 0)
+                ind1 = main.TWM.model.index(0, 1)
+                main.TWM.model.dataChanged.emit(ind, ind1)
+
+
+def updateLimitPOTW(main, data):
+    if data:
+        for i in data:
+
+            Uid = i
+            # editable=d[0]
+            # print('type',type)
+
+            LIMIT = data[i]
+
+            if i in main.TWM.table[:main.TWM.lastSerialNo, 0]:
+
+                # newBranch=main.CM.table[np.where(main.CM.table[:main.CM.model.lastSerialNo, 0] == i)][0][2]
+                # fltrarr = main.TWM.table[np.where(main.TWM.table[:main.TWM.lastSerialNo, 0] == i)]
+                # print('fltarr',fltrarr)
+
+                # main.TWM.table[np.where(main.TWM.table[:main.TWM.lastSerialNo, 0] == i),16]=Deposit
+
+                rowNo = np.where(main.TWM.table[:main.TWM.lastSerialNo, 0] == i)[0][0]
+                Data = main.TWM.table[rowNo, :]
+
+                NetMRG = Data[13]
+
+
+                if (NetMRG > LIMIT):
+                    try:
+                        AccessMRGuti = NetMRG / LIMIT * 100.0
+                    except:
+                        AccessMRGuti = 0.0
+                else:
+                    AccessMRGuti = 0.0
+
+                editList = [17, 21]
+                main.TWM.table[rowNo, editList] = [LIMIT, AccessMRGuti]
+
+                ind = main.TWM.model.index(0, 0)
+                ind1 = main.TWM.model.index(0, 1)
+                main.TWM.model.dataChanged.emit(ind, ind1)
+
+
 
 def loadDeposit(main):
     loc = os.getcwd().split('Application')[0]
@@ -336,15 +423,18 @@ def updateTWM(main, data):
                 AccessMRGuti = data[13] / LIMIT * 100.0
             except:
                 AccessMRGuti = 0.0
-
-            editList = [1, 2, 3, 9, 12, 13, 14, 15,21]
-            # print(data[13])
-            main.TWM.table[rowNo, editList] = [data[1], data[2], data[3], data[9], data[12],
-                                               NetMRG, data[14], data[15],AccessMRGuti]
         else:
+            AccessMRGuti = 0.0
 
-            editList = [1, 2,3,9,12,13,14,15]
-            main.TWM.table[rowNo, editList] = [data[1], data[2],data[3],data[9],data[12],NetMRG,data[14],data[15]]
+
+        editList = [1, 2, 3, 9, 12, 13, 14, 15,21]
+        # print(data[13])
+        main.TWM.table[rowNo, editList] = [data[1], data[2], data[3], data[9], data[12],
+                                           NetMRG, data[14], data[15],AccessMRGuti]
+        # else:
+        #
+        #     editList = [1, 2,3,9,12,13,14,15]
+        #     main.TWM.table[rowNo, editList] = [data[1], data[2],data[3],data[9],data[12],NetMRG,data[14],data[15]]
 
         for i in editList:
             ind = main.TWM.model.index(rowNo, i)
@@ -488,11 +578,11 @@ def updateLTP_CMPOTW(main,data):
 
 def update_CASH_MTM(main):
     # print('timer')
-    Tmtm=dt.Frame(main.CMPOTW.table[:main.CMPOTW.model.lastSerialNo,[0,8]],names=['Uid','MTM'])
+    Tmtm=dt.Frame(main.CMPOTW.table[:main.CMPOTW.model.lastSerialNo,[0,8,15]],names=['Uid','MTM','TOC'])
 
-    Tmtm[1] = dt.float64
+    Tmtm[1:] = dt.float64
 
-    x = Tmtm[:, dt.sum(dt.f[1]), dt.by('Uid')].to_numpy()
+    x = Tmtm[:, dt.sum(dt.f[1:]), dt.by('Uid')].to_numpy()
 
     for i in x:
 
@@ -505,12 +595,14 @@ def update_CASH_MTM(main):
 
                 data=main.TWM.table[rowNo,:]
                 fnomtm=data[8]
-                TOC=data[24]
-                netMTM=fnomtm+i[1]-TOC
+                FNOTOC=data[24]
+                NetTOC=FNOTOC + i[2]
+
+                netMTM=fnomtm+i[1]-NetTOC
 
 
-                editList = [11,26]
-                main.TWM.table[rowNo, editList] = [i[1],netMTM]
+                editList = [11,26,27,28]
+                main.TWM.table[rowNo, editList] = [i[1],netMTM,i[2],NetTOC]
 
                 for t in editList:
                     ind = main.TWM.model.index(rowNo, t)
@@ -637,10 +729,12 @@ def updateFOMTM(main):
 
                 NetPrem=data[15]
                 cashMTM=data[11]
-                TOC = data[24]
 
+                cashTOC = data[27]
 
-                NetMTM= i[1]+  cashMTM - TOC
+                NetTOC = cashTOC + i[10]
+
+                NetMTM= i[1]+  cashMTM - NetTOC
 
                 #FNOMTM -NETPRem
                 Ans=i[1] - NetPrem
@@ -652,12 +746,12 @@ def updateFOMTM(main):
                         RiskPer=abs(Ans)/deposit
                     else:
                         RiskPer=0.0
-
-                    editList=[4,5, 8,20,22,23,24,26]
-                    main.TWM.table[rowNo, editList] = [i[2], i[3], i[1],RiskPer,i[8],i[9],i[10],NetMTM]
                 else:
-                    editList = [4, 5, 8,22,23,24,26]
-                    main.TWM.table[rowNo, editList] = [i[2], i[3], i[1],i[8],i[9],i[10],NetMTM]
+                    RiskPer=0.0
+
+                editList=[4,5, 8,20,22,23,24,26,27,28]
+                main.TWM.table[rowNo, editList] = [i[2], i[3], i[1],RiskPer,i[8],i[9],i[10],NetMTM,cashTOC,NetTOC]
+
 
 
                 for t in editList:

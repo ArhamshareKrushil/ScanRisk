@@ -1,13 +1,13 @@
 {
-    "UDP_FO": 35099,
-    "UDP_CASH": 34044,
-    "FastApiURL": "http://192.168.103.10:3333",
+    "UDP_FO": 28442,
+    "UDP_CASH": 34074,
+    "FastApiURL": "http://192.168.103.11:3333",
     "FastApiToken": {
-        "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODAwMDY2ODMsImlhdCI6MTY3OTkyMDI4MywiYnJhbmNoX2lkIjoiSE8xIn0.AjTnGBPMTgXJi78xsq1gcqVKIYdQg7uDIn-uIi6fVX8",
+        "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODAzNDkxMjEsImlhdCI6MTY4MDI2MjcyMSwiYnJhbmNoX2lkIjoiTkgifQ.kRsPfKq-53pztfeqI2j5B6wz66_jmyIO_Y6-Gc-VEss",
         "Type": "branch",
-        "Type_id": "HO1",
-        "login_date": "23-03-27",
-        "login_time": "18:01:21"
+        "Type_id": "NH",
+        "login_date": "23-03-31",
+        "login_time": "17:08:39"
     },
-    "socketIP": "http://192.168.103.10:3332"
+    "socketIP": "http://192.168.103.11:3332"
 }
