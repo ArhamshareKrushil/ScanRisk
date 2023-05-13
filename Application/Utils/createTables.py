@@ -311,13 +311,18 @@ def tables_details_BWSWM(BWSWM):
 def tables_details_CWM(CWM):
     try:
         CWM.heads = ['ClientCode',
-                     'EXPO_Margin','SPAN_Margin','Total_Margin','FUT_MTM', 'OPT_MTM','FNO_MTM','Day_MRG','PRM_MRG','NET_MRG','PhisicalM']
+                     'EXPO_Margin','SPAN_Margin','Total_Margin','FUT_MTM', 'OPT_MTM',
+                      'FNO_MTM','Day_MRG','PRM_MRG','NET_MRG','PhisicalM',
+                      'NetPrem','PeakMRG','Ledger','Camount','Net_EQbuy',
+                     'CashMTM','PrevDayMRG','Risk_Percentage','Access_MRG_Util','UpSCNMTM',
+                     'DownSCNMTM','FNO_TOC','Cash_MRG','Net_MTM','Cash_TOC',
+                     'NET_TOC']
 
         #############################################################################################################
 
 
         CWM.visibleColumns = len(CWM.heads)
-        CWM.table = np.zeros((20000, 11), dtype=object)
+        CWM.table = np.zeros((20000, 27), dtype=object)
         CWM.model = modelCWM.ModelTS(CWM.table, CWM.heads)
         CWM.smodel = QSortFilterProxyModel()
         CWM.smodel.setSourceModel(CWM.model)
@@ -359,15 +364,17 @@ def tables_details_CWSWM(CWSWM):
     try:
         CWSWM.heads = ['ClientCode',
                         'Symbol','EXPO_Margin','SPAN_Margin','Total_Margin','FUT_MTM',
-                       'OPT_MTM','FNO_MTM','PRM_MRG']
+                       'OPT_MTM','FNO_MTM','PRM_MRG','NetPrem','Delta',
+                       'Theta','Gama','Vega','UpSCNMTM','DownSCNMTM',
+                       'TOC']
 
         #############################################################################################################
 
 
         CWSWM.visibleColumns = len(CWSWM.heads)
-        CWSWM.table = np.zeros((20000, 9), dtype=object)
+        CWSWM.table = np.zeros((20000, 17), dtype=object)
 
-        CWSWM.table_copy = np.zeros((20000, 7), dtype=object)
+        # CWSWM.table_copy = np.zeros((20000, 7), dtype=object)
 
         CWSWM.model = modelCWSWM.ModelTS(CWSWM.table, CWSWM.heads)
         CWSWM.smodel = modelSortfilterCWSWM.ProxyModel()
@@ -415,13 +422,16 @@ def tables_details_POCW(POCW):
                           'Exchange','Token','instrument','symbol','expiry',
                       'strike','c/p','dayQty','dayValue','LTP',
                           'MTM','SerialNO','OpenQty','OpenAmt','netQty',
-                          'NetValue','FUT_MTM','OPT_MTM','NET_PREM','Prem_Margin']
+                          'NetValue','FUT_MTM','OPT_MTM','NET_PREM','Prem_Margin',
+                     'IV', 'Delta','Theta', 'Gama', 'Vega',
+                    'UpSCNPrice', 'DownSCNPrice','UpSCNMTM', 'DownSCNMTM', 'TOC'
+        ]
 
         #############################################################################################################
 
 
         POCW.visibleColumns = len(POCW.heads)
-        POCW.table = np.zeros((20000, 21), dtype=object)
+        POCW.table = np.zeros((20000, 31), dtype=object)
 
         POCW.model = modelPOCW.ModelTS(POCW.table, POCW.heads)
         # POCW.smodel = QSortFilterProxyModel()
@@ -562,13 +572,13 @@ def tables_details_BWM(BWM):
 def tables_details_Tmaster(TM):
     try:
         TM.heads = ['TerminalID',
-                          'UserID','Name','Branch','GRP','active']
+                          'UserID']
 
         #############################################################################################################
 
 
         TM.visibleColumns = len(TM.heads)
-        TM.table = np.zeros((20000, 6), dtype=object)
+        TM.table = np.zeros((200000, 2), dtype=object)
 
         TM.model = modelTmaster.ModelTS(TM.table, TM.heads)
         # TM.smodel = QSortFilterProxyModel()
@@ -710,13 +720,13 @@ def tables_details_CMPOCW(CMPOCW):
         CMPOCW.heads = ['ClientID',
                           'Exchange','Token','Series','symbol','dayQty',
                       'dayValue','LTP','MTM','SerialNO','OpenQty',
-                      'OpenAmt','netQty','NetValue','MRG']
+                      'OpenAmt','netQty','NetValue','MRG','TOC']
 
         #############################################################################################################
 
 
         CMPOCW.visibleColumns = len(CMPOCW.heads)
-        CMPOCW.table = np.zeros((20000, 15), dtype=object)
+        CMPOCW.table = np.zeros((20000, 16), dtype=object)
         CMPOCW.model = modelCMPOCW.ModelTS(CMPOCW.table, CMPOCW.heads)
         CMPOCW.smodel = QSortFilterProxyModel()
         CMPOCW.smodel.setSourceModel(CMPOCW.model)
@@ -757,13 +767,13 @@ def tables_details_CMPOCW(CMPOCW):
 def tables_details_CMCWM(CMCWM):
     try:
         CMCWM.heads = ['ClientID',
-                        'MARGIN','MTM']
+                        'MARGIN','MTM','NetQty','NetAmt']
 
         #############################################################################################################
 
 
         CMCWM.visibleColumns = len(CMCWM.heads)
-        CMCWM.table = np.zeros((20000, 3), dtype=object)
+        CMCWM.table = np.zeros((20000, 5), dtype=object)
         CMCWM.model = modelCMCWM.ModelTS(CMCWM.table, CMCWM.heads)
         CMCWM.smodel = QSortFilterProxyModel()
         CMCWM.smodel.setSourceModel(CMCWM.model)

@@ -1,10 +1,10 @@
 import time
 import numpy as np
 import pandas as pd
-from Themes import dt1
+from Themes import dt3
 import platform
 from PyQt5 import uic
-from Themes.dt2 import dt1
+from Themes.dt3 import dt3
 from PyQt5.QtCore import Qt,pyqtSignal
 from PyQt5.QtWidgets import *
 import qdarkstyle
@@ -48,12 +48,12 @@ class UI_Limit(QMainWindow):
         self.title.sgPoss.connect(self.movWin)
 
         tables_details_Limit(self)
-        self.setStyleSheet(dt1)
+        self.setStyleSheet(dt3)
 
         self.createSlots()
 
         self.createShortcuts()
-        # QSizeGrip(self.frameGrip)
+        QSizeGrip(self.gripFolio)
 
 
     def createSlots(self):
@@ -138,7 +138,7 @@ class UI_Limit(QMainWindow):
     def Updaterow(self):
         st=time.time()
 
-        self.sgupdateLimitPOTW.emit(self.model.updatedrow)
+        self.sgupdateTWMwithTmaster.emit(self.model.updatedrow)
         path=os.path.join(loc,'Uploads','Deposit.csv')
 
         np.savetxt(path, self.table[:self.lastSerialNo], delimiter=",", header='UserID,Deposit', fmt='%s')
@@ -181,6 +181,6 @@ class UI_Limit(QMainWindow):
 if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)
-    form = UI_Tmaster()
+    form = UI_Limit()
     form.show()
     sys.exit(app.exec_())

@@ -29,11 +29,13 @@ class tBar(QFrame):
         font.setPointSize(13)
         font.setBold(True)
         font.setItalic(False)
+
+
         font.setWeight(75)
         self.lbName.setFont(font)
         self.lbName.setAlignment(Qt.AlignCenter)
         self.lbName.setObjectName("label")
-        self.setStyleSheet('QFrame {\n  background-color: #222222\n;\n\n  border-radius: 4px;\n  border: 0px solid transparent;\n\n  /* No frame */\n  /* HLine */\n  /* HLine */\n}\n\n.QFrame[frameShape="0"] {\n  border-radius: 4px;\n  border: 1px transparent #2d2d2d;\n}\n\n.QFrame[frameShape="4"] {\n  max-height: 2px;\n  border: none;\n  background-color: #2d2d2d;\n}\n\n.QFrame[frameShape="5"] {\n  max-width: 2px;\n  border: none;\n  background-color: #2d2d2d;\n}\n\n\n')
+        self.setStyleSheet('QFrame {\n color:#ffffff;\n;border-radius:0px\n; font: 70 12pt "Segoe UI Semibold";\n background-color: #2D4059;\n\n\n  border-radius: 0px;\n  border: 0px solid transparent;\n\n  /* No frame */\n  /* HLine */\n  /* HLine */\n}\n\n.QFrame[frameShape="0"] {\n  border-radius: 0px;\n  border: 1px transparent #2d2d2d;\n}\n\n.QFrame[frameShape="4"] {\n  max-height: 8px;\n  border: none;\n  background-color: #2d2d2d;\n}\n\n.QFrame[frameShape="5"] {\n  max-width: 3px;\n  border: none;\n  background-color: #2d2d2d;\n }\n\n\n')
         # self.titleFrame.layout.addWidget(self.lbName)
         self.horizontalLayout.addWidget(self.lbName)
     def mouseDoubleClickEvent(self,event):

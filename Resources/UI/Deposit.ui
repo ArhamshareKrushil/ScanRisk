@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>709</width>
-    <height>370</height>
+    <width>702</width>
+    <height>340</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,295 +33,7 @@
     <property name="spacing">
      <number>0</number>
     </property>
-    <item row="2" column="2">
-     <widget class="QFrame" name="mainFrame">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <item row="0" column="0">
-        <widget class="QTableView" name="tableView">
-         <property name="font">
-          <font>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QTreeView:branch:selected, QTreeView:branch:hover {
-  background: url(&quot;:/qss_icons/rc/transparent.png&quot;);
-}
-
-QTreeView:branch:has-siblings:!adjoins-item {
-  border-image: url(&quot;:/qss_icons/rc/branch_line.png&quot;) 0;
-}
-
-QTreeView:branch:has-siblings:adjoins-item {
-  border-image: url(&quot;:/qss_icons/rc/branch_more.png&quot;) 0;
-}
-
-QTreeView:branch:!has-children:!has-siblings:adjoins-item {
-  border-image: url(&quot;:/qss_icons/rc/branch_end.png&quot;) 0;
-}
-
-QTreeView:branch:has-children:!has-siblings:closed, QTreeView:branch:closed:has-children:has-siblings {
-  border-image: none;
-  image: url(&quot;:/qss_icons/rc/branch_closed.png&quot;);
-}
-
-QTreeView:branch:open:has-children:!has-siblings, QTreeView:branch:open:has-children:has-siblings {
-  border-image: none;
-  image: url(&quot;:/qss_icons/rc/branch_open.png&quot;);
-}
-
-QTreeView:branch:has-children:!has-siblings:closed:hover, QTreeView:branch:closed:has-children:has-siblings:hover {
-  image: url(&quot;:/qss_icons/rc/branch_closed_focus.png&quot;);
-}
-
-QTreeView:branch:open:has-children:!has-siblings:hover, QTreeView:branch:open:has-children:has-siblings:hover {
-  image: url(&quot;:/qss_icons/rc/branch_open_focus.png&quot;);
-}
-
-QTreeView::indicator:checked,
-QListView::indicator:checked {
-  image: url(&quot;:/qss_icons/rc/checkbox_checked.png&quot;);
-}
-
-QTreeView::indicator:checked:hover, QTreeView::indicator:checked:focus, QTreeView::indicator:checked:pressed,
-QListView::indicator:checked:hover,
-QListView::indicator:checked:focus,
-QListView::indicator:checked:pressed {
-  image: url(&quot;:/qss_icons/rc/checkbox_checked_focus.png&quot;);
-}
-
-QTreeView::indicator:unchecked,
-QListView::indicator:unchecked {
-  image: url(&quot;:/qss_icons/rc/checkbox_unchecked.png&quot;);
-}
-
-QTreeView::indicator:unchecked:hover, QTreeView::indicator:unchecked:focus, QTreeView::indicator:unchecked:pressed,
-QListView::indicator:unchecked:hover,
-QListView::indicator:unchecked:focus,
-QListView::indicator:unchecked:pressed {
-  image: url(&quot;:/qss_icons/rc/checkbox_unchecked_focus.png&quot;);
-}
-
-QTreeView::indicator:indeterminate,
-QListView::indicator:indeterminate {
-  image: url(&quot;:/qss_icons/rc/checkbox_indeterminate.png&quot;);
-}
-
-QTreeView::indicator:indeterminate:hover, QTreeView::indicator:indeterminate:focus, QTreeView::indicator:indeterminate:pressed,
-QListView::indicator:indeterminate:hover,
-QListView::indicator:indeterminate:focus,
-QListView::indicator:indeterminate:pressed {
-  image: url(&quot;:/qss_icons/rc/checkbox_indeterminate_focus.png&quot;);
-}
-
-QTreeView,
-QListView,
-QTableView,
-QColumnView {
-  background-color: #c7c7c7;
-  border: 1px solid #2d2d2d;
-  color: #000000;
-  gridline-color: #2d2d2d;
-  border-radius: 4px;
-}
-
-QTreeView:disabled,
-QListView:disabled,
-QTableView:disabled,
-QColumnView:disabled {
-  background-color: #c7c7c7;
-  color: #000000;
-}
-
-QTreeView:selected,
-QListView:selected,
-QTableView:selected,
-QColumnView:selected {
-  background-color: #c7c7c7;
-  color: #000000;
-}
-
-QTreeView:hover,
-QListView:hover,
-QTableView:hover,
-QColumnView:hover {
-  background-color: #c7c7c7;
-  border: 1px solid #148CD2;
-}
-
-QTreeView::item:pressed,
-QListView::item:pressed,
-QTableView::item:pressed,
-QColumnView::item:pressed {
-  background-color: #c7c7c7;
-}
-
-QTreeView::item:selected:hover,
-QListView::item:selected:hover,
-QTableView::item:selected:hover,
-QColumnView::item:selected:hover {
-  background: #c7c7c7;
-  color: #000000;
-}
-
-QTreeView::item:selected:active,
-QListView::item:selected:active,
-QTableView::item:selected:active,
-QColumnView::item:selected:active {
-background-color: palette(highlight);
- color: palette(highlightedText);
-}
-
-QTreeView::item:!selected:hover,
-QListView::item:!selected:hover,
-QTableView::item:!selected:hover,
-QColumnView::item:!selected:hover {
-  outline: 0;
-  color: #148CD2;
-  background-color: #2d2d2d;
-}
-
-QTableCornerButton::section {
-  background-color: #282828;
-  border: 1px transparent #2d2d2d;
-  border-radius: 0px;
-}
-</string>
-         </property>
-         <property name="selectionBehavior">
-          <enum>QAbstractItemView::SelectRows</enum>
-         </property>
-         <property name="showGrid">
-          <bool>true</bool>
-         </property>
-         <property name="sortingEnabled">
-          <bool>true</bool>
-         </property>
-         <attribute name="verticalHeaderDefaultSectionSize">
-          <number>23</number>
-         </attribute>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QFrame" name="StatusBar">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_7">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(80, 80, 80);
-  border-radius: 0
-px;</string>
-            </property>
-            <property name="text">
-             <string>log:</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QFrame" name="gripFolio">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>20</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(25,25,25);
-  border-radius: 0px;</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <property name="lineWidth">
-             <number>0</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="0" column="1" colspan="3">
+    <item row="0" column="0" colspan="3">
      <widget class="QWidget" name="indexBar" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
@@ -499,7 +211,7 @@ QTableCornerButton::section {
        <property name="verticalSpacing">
         <number>6</number>
        </property>
-       <item row="0" column="0" colspan="12">
+       <item row="0" column="0" colspan="14">
         <widget class="QFrame" name="headerFrame">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
@@ -514,9 +226,18 @@ QTableCornerButton::section {
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">/* (dot) .QFrame  fix #141, #126, #123 */
+          <string notr="true">/* QFrame -----------------------------------------------------------------
+
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qframe
+https://doc.qt.io/qt-5/qframe.html#-prop
+https://doc.qt.io/qt-5/qframe.html#details
+https://stackoverflow.com/questions/14581498/qt-stylesheet-for-hline-vline-color
+
+--------------------------------------------------------------------------- */
+/* (dot) .QFrame  fix #141, #126, #123 */
 .QFrame {
-background-color: #222222;
+  background-color: #2D4059;
+
   border-radius: 4px;
   border: 0px solid transparent;
 
@@ -542,6 +263,7 @@ background-color: #222222;
   background-color: #2d2d2d;
 }
 
+
 </string>
          </property>
          <property name="frameShape">
@@ -550,7 +272,7 @@ background-color: #222222;
          <property name="frameShadow">
           <enum>QFrame::Sunken</enum>
          </property>
-         <layout class="QGridLayout" name="gridLayout_6">
+         <layout class="QGridLayout" name="gridLayout_8">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -567,7 +289,7 @@ background-color: #222222;
            <number>0</number>
           </property>
           <item row="0" column="2" alignment="Qt::AlignRight|Qt::AlignTop">
-           <widget class="QFrame" name="btnframe_3">
+           <widget class="QFrame" name="btnframe_4">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -595,7 +317,7 @@ background-color: #222222;
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
              <property name="spacing">
               <number>0</number>
              </property>
@@ -611,34 +333,25 @@ background-color: #222222;
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item alignment="Qt::AlignTop">
+             <item>
               <widget class="QPushButton" name="bt_min_3">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
                <property name="minimumSize">
                 <size>
-                 <width>35</width>
-                 <height>25</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>35</width>
+                 <width>25</width>
                  <height>25</height>
                 </size>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
   background-color: transparent;
+border-radius: 10px;
+
   border: 1px solid transparent;
 
 }
 QPushButton:hover {
-  background-color: #148CD2;    
+border-radius: 10px;
+  background-color: #000000;    
 }
 </string>
                </property>
@@ -646,45 +359,36 @@ QPushButton:hover {
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="C:/Users/HP/Desktop/Autotrader-Reborn2.1/Resourses/icons/icons.qrc">
-                 <normaloff>:/icon1/minus.svg</normaloff>:/icon1/minus.svg</iconset>
+                <iconset resource="../icons/icons.qrc">
+                 <normaloff>:/newPrefix/icons/minus-circle.svg</normaloff>:/newPrefix/icons/minus-circle.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
-                 <width>15</width>
-                 <height>15</height>
+                 <width>20</width>
+                 <height>20</height>
                 </size>
                </property>
               </widget>
              </item>
-             <item alignment="Qt::AlignRight|Qt::AlignTop">
+             <item>
               <widget class="QPushButton" name="bt_close_3">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
                <property name="minimumSize">
                 <size>
-                 <width>35</width>
-                 <height>25</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>35</width>
+                 <width>0</width>
                  <height>25</height>
                 </size>
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
   background-color: transparent;
+border-radius: 10px;
+
   border: 1px solid transparent;
 
 }
 QPushButton:hover {
-  background-color: #148CD2;    
+border-radius: 10px;
+  background-color: #ff2626;    
 }
 </string>
                </property>
@@ -692,13 +396,13 @@ QPushButton:hover {
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="C:/Users/HP/Desktop/Autotrader-Reborn2.1/Resourses/icons/icons.qrc">
-                 <normaloff>:/icon1/x.svg</normaloff>:/icon1/x.svg</iconset>
+                <iconset resource="../icons/icons.qrc">
+                 <normaloff>:/newPrefix/icons/x-circle.svg</normaloff>:/newPrefix/icons/x-circle.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
-                 <width>15</width>
-                 <height>15</height>
+                 <width>20</width>
+                 <height>20</height>
                 </size>
                </property>
               </widget>
@@ -707,7 +411,7 @@ QPushButton:hover {
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QFrame" name="frame_4">
+           <widget class="QFrame" name="frame_6">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -737,134 +441,14 @@ QPushButton:hover {
          </layout>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QComboBox" name="cbHeads">
-         <item>
-          <property name="text">
-           <string>UserID</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Deposit</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="Line" name="line_12">
-         <property name="minimumSize">
-          <size>
-           <width>10</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>25</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: transparent;</string>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QLineEdit" name="le_text">
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>16777215</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="Line" name="line_10">
-         <property name="minimumSize">
-          <size>
-           <width>10</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color:transparent</string>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4">
-        <widget class="QPushButton" name="pbAdd">
-         <property name="text">
-          <string>ADD</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="5">
-        <widget class="Line" name="line_7">
-         <property name="minimumSize">
-          <size>
-           <width>10</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>25</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: transparent;</string>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="6">
+       <item row="2" column="8">
         <widget class="QPushButton" name="pbRemove">
          <property name="text">
           <string>REMOVE</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="7">
-        <widget class="Line" name="line_11">
-         <property name="minimumSize">
-          <size>
-           <width>10</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>25</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: transparent;</string>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="8">
-        <widget class="QPushButton" name="pbUpdate">
-         <property name="text">
-          <string>UPDATE</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="9">
+       <item row="2" column="11">
         <widget class="Line" name="line_13">
          <property name="minimumSize">
           <size>
@@ -886,7 +470,7 @@ QPushButton:hover {
          </property>
         </widget>
        </item>
-       <item row="1" column="10">
+       <item row="2" column="12">
         <widget class="QPushButton" name="pbGetExcel">
          <property name="maximumSize">
           <size>
@@ -899,7 +483,7 @@ QPushButton:hover {
          </property>
         </widget>
        </item>
-       <item row="1" column="11">
+       <item row="2" column="13">
         <widget class="Line" name="line_9">
          <property name="minimumSize">
           <size>
@@ -921,27 +505,322 @@ QPushButton:hover {
          </property>
         </widget>
        </item>
+       <item row="2" column="5">
+        <widget class="Line" name="line_10">
+         <property name="minimumSize">
+          <size>
+           <width>10</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:transparent</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QLineEdit" name="le_text">
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="7">
+        <widget class="Line" name="line_7">
+         <property name="minimumSize">
+          <size>
+           <width>10</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>25</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: transparent;</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="10">
+        <widget class="QPushButton" name="pbUpdate">
+         <property name="text">
+          <string>UPDATE</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="9">
+        <widget class="Line" name="line_11">
+         <property name="minimumSize">
+          <size>
+           <width>10</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>25</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: transparent;</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QComboBox" name="cbHeads">
+         <property name="styleSheet">
+          <string notr="true">QComboBox {
+  background-color: #2D4059;
+  color: #ffffff;
+    font: 63 10pt &quot;Segoe UI Semibold&quot;;
+
+  border: 1px solid #5a5f64;
+  border-radius: 4px;
+  selection-background-color: #1464A0;
+  padding-left: 4px;
+  padding-right: 10px;
+  /* 4 + 16*2 See scrollbar size */
+  /* Fixes #103, #111 */
+  min-height: 1.5em;
+  /* padding-top: 2px;     removed to fix #132 */
+  /* padding-bottom: 2px;  removed to fix #132 */
+  /* min-width: 75px;      removed to fix #109 */
+  /* Needed to remove indicator - fix #132 */
+}
+
+QComboBox QAbstractItemView {
+  border: 1px solid #2d2d2d;
+  border-radius: 0;
+  background-color: #2D4059;
+  selection-background-color: #1464A0;
+}
+
+QComboBox QAbstractItemView:hover {
+  background-color: #2D4059;
+  color: #F0F0F0;
+}
+
+QComboBox QAbstractItemView:selected {
+  background: #1464A0;
+  color: #2d2d2d;
+}
+
+QComboBox QAbstractItemView:alternate {
+  background: #282828;
+}
+
+QComboBox:disabled {
+  background-color: #282828;
+  color: #787878;
+}
+
+QComboBox:hover {
+  border: 1px solid #148CD2;
+}
+
+QComboBox:focus {
+  border: 1px solid #1464A0;
+}
+
+QComboBox:on {
+  selection-background-color: #1464A0;
+}
+
+QComboBox::indicator {
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  selection-background-color: transparent;
+  color: transparent;
+  selection-color: transparent;
+  /* Needed to remove indicator - fix #132 */
+}
+
+QComboBox::indicator:alternate {
+  background: #282828;
+}
+
+QComboBox::item:alternate {
+  background: #282828;
+}
+
+
+QComboBox::item:selected {
+  border: 0px solid transparent;
+}
+
+QComboBox::drop-down {
+  subcontrol-origin: padding;
+  subcontrol-position: top right;
+  width: 12px;
+  border-left: 1px solid #5a5f64;
+}
+
+QComboBox::down-arrow {
+  image: url(&quot;:/qss_icons/rc/arrow_down_disabled.png&quot;);
+  height: 8px;
+  width: 8px;
+}
+
+QComboBox::down-arrow:on, QComboBox::down-arrow:hover, QComboBox::down-arrow:focus {
+  image: url(&quot;:/qss_icons/rc/arrow_down.png&quot;);
+}</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>User ID</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Deposit</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="6">
+        <widget class="QPushButton" name="pbAdd">
+         <property name="text">
+          <string>ADD</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="Line" name="line_4">
+         <property name="styleSheet">
+          <string notr="true">background-color: transparent;</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="Line" name="line_12">
+         <property name="minimumSize">
+          <size>
+           <width>10</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>25</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: transparent;</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="Line" name="line_6">
+         <property name="styleSheet">
+          <string notr="true">background-color:transparent;</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>
-    <item row="3" column="1">
+    <item row="2" column="1">
+     <widget class="QFrame" name="mainFrame">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="Line" name="line">
+         <property name="styleSheet">
+          <string notr="true">background-color: transparent;</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QTableView" name="tableView">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="showGrid">
+          <bool>true</bool>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+         <attribute name="verticalHeaderDefaultSectionSize">
+          <number>23</number>
+         </attribute>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="3" column="0">
      <widget class="Line" name="line_18">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="Line" name="line">
-      <property name="styleSheet">
-       <string notr="true">background-color: transparent;</string>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="3">
+    <item row="2" column="2">
      <widget class="Line" name="line_3">
       <property name="styleSheet">
        <string notr="true">background-color: transparent;</string>
@@ -951,14 +830,7 @@ QPushButton:hover {
       </property>
      </widget>
     </item>
-    <item row="0" column="4" rowspan="3">
-     <widget class="Line" name="line_17">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
+    <item row="1" column="1">
      <widget class="Line" name="line_2">
       <property name="styleSheet">
        <string notr="true">background-color: transparent;</string>
@@ -968,11 +840,109 @@ QPushButton:hover {
       </property>
      </widget>
     </item>
+    <item row="3" column="1" colspan="2">
+     <widget class="QFrame" name="StatusBar">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_7">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:#27496D;
+  border-radius: 0
+px;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QFrame" name="gripDP">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:#27496D;
+  border-radius: 0px;</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="lineWidth">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>
  <resources>
-  <include location="C:/Users/HP/Desktop/Autotrader-Reborn2.1/Resourses/icons/icons.qrc"/>
+  <include location="../icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

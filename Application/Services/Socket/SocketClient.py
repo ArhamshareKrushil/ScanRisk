@@ -15,19 +15,24 @@ from Application.Utils.configReader import read_API_config
 
 
 
-class SioClient(QMainWindow):
+class SioClient(QObject):
 
     sgOnPosition=pyqtSignal(list)
     sgOnTWM =pyqtSignal(list)
+    sgOnCWM =pyqtSignal(list)
     sgOnTWSWM =pyqtSignal(list)
+    sgOnCWSWM =pyqtSignal(list)
+    sgOnPOCW =pyqtSignal(list)
 
 
     sgOnCMPosition=pyqtSignal(list)
+    sgOnCMPOCW=pyqtSignal(list)
     sgOnCMTWM =pyqtSignal(list)
+    sgOnCMCWM =pyqtSignal(list)
 
     def __init__(self):
         super(SioClient, self).__init__()
-        self.sio = socketio.Client()
+        self.sio = socketio.Client(self)
         self.emmiters()
         self.IN=0
         self.UP=0
@@ -38,7 +43,8 @@ class SioClient(QMainWindow):
     def startSocket(self,token,socketIP):
         self.token=token
         self.socketIP=socketIP
-        Thread(target=self.connect).start()
+        # Thread(target=self.connect).start()
+        self.connect()
 
 
     def connect(self):
@@ -65,9 +71,17 @@ class SioClient(QMainWindow):
         self.sio.on('twmData', self.on_TWM)
         self.sio.on('twswmData', self.on_TWSWM)
 
+        self.sio.on('pocwData', self.on_POCW)
+        self.sio.on('cwmData', self.on_CWM)
+        self.sio.on('cwswmData', self.on_CWSWM)
+
         #########CASH#########################
         self.sio.on('CMpotwData',self.on_CMposition)
         self.sio.on('CMtwmdata',self.on_CMTWM)
+
+        self.sio.on('CMpocwData', self.on_CMPOCWposition)
+        self.sio.on('CMcwmData', self.on_CMCWM)
+
 
 
         self.sio.on('disconnect', self.on_disconnect)
@@ -87,7 +101,7 @@ class SioClient(QMainWindow):
     def on_disconnect(self):
         print('Socket disconnected successfully.....!')
         # self.sio.sleep(0.001)
-        self.connect()
+        # self.connect()
 
     def on_data(self,data):
         # pass
@@ -100,12 +114,22 @@ class SioClient(QMainWindow):
 
         # print('CMPOTW',data)
         self.sgOnCMPosition.emit(data)
+    def on_CMPOCWposition(self,data):
+        # self.IN += 1
+
+        # print('CMPOCW',data)
+        self.sgOnCMPOCW.emit(data)
 
     def on_CMTWM(self,data):
         # self.IN += 1
 
         # print('CMTWM',data)
         self.sgOnCMTWM.emit(data)
+    def on_CMCWM(self,data):
+        # self.IN += 1
+
+        # print('CMTWM',data)
+        self.sgOnCMCWM.emit(data)
 
     def on_position(self,data):
         self.IN += 1
@@ -118,6 +142,16 @@ class SioClient(QMainWindow):
     def on_TWM(self,data):
         # print('TWM', data)
         self.sgOnTWM.emit(data)
+
+    def on_POCW(self,data):
+        # print('pocw',data)
+        self.sgOnPOCW.emit(data)
+    def on_CWM(self,data):
+        # print('cwm',data)
+        self.sgOnCWM.emit(data)
+    def on_CWSWM(self,data):
+        # print('CWSWM', data)
+        self.sgOnCWSWM.emit(data)
 
     def on_TWSWM(self,data):
         # print('TWSWM', data)

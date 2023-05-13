@@ -13,6 +13,9 @@ class ModelTS(QtCore.QAbstractTableModel):
     def __init__(self, data,heads,isReset=False):
         super(ModelTS, self).__init__()
         self._data = data
+        # self.dta1 = []
+
+        # self.color = []
         # self._data1 = data
         self.heads=heads
         if(isReset):
@@ -43,6 +46,31 @@ class ModelTS(QtCore.QAbstractTableModel):
                 if index.column() in [9, 11, 14, 16, 20, 21, 22, 23,24,25,26,27,28,29,30,31,32]:
                     # Align right, vertical middle.
                     return Qt.AlignVCenter + Qt.AlignRight
+
+
+            # if role == Qt.BackgroundColorRole:
+            #     # print(role)
+            #     value = self._data[index.row(), index.column()]
+            #     if(index.column() in [7,8,9,10]):
+            #         # print("there is meeeeeeeeeeee")
+            #         print("dataaaaaaaaaaa",self.dta1)
+            #         if(len(self.dta1) != 0):
+            #             # print(value,type(value), self.dta1[index.row()], type(self.dta1[index.row()]))
+            #
+            #
+            #             if(value > self.dta1[index.row()][index.column()-7]):
+            #                 self.color[index.row()][index.column()-7] = '#4FB7E0'
+            #                 return QtGui.QColor('#4FB7E0')
+            #
+            #             elif (value < self.dta1[index.row()][index.column()-7]):
+            #                 self.color[index.row()][index.column()-7] = '#c2364b'
+            #
+            #                 return QtGui.QColor('#c2364b')
+            #             else:
+            #                 return QtGui.QColor(self.color[index.row()][index.column()-7])
+            #
+            #     # if(index.column() in [13,15]):
+            #     #     return QtGui.QColor(48, 57, 63)
 
 
 

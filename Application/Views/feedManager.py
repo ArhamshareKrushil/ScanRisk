@@ -2,10 +2,10 @@ import  numpy as np
 import csv
 import os
 import traceback
-from Themes import dt1
+from Themes import dt3
 import platform
 from PyQt5 import uic
-from Themes.dt2 import dt1
+from Themes.dt3 import dt3
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import qdarkstyle
@@ -28,7 +28,7 @@ class Ui_feedmanager(QMainWindow):
 
         dark = qdarkstyle.load_stylesheet_pyqt5()
 
-        self.setStyleSheet(dt1)
+        self.setStyleSheet(dt3)
 
         osType = platform.system()
 

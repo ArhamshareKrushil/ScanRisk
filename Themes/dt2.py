@@ -65,10 +65,10 @@ See Qt documentation:
 
 --------------------------------------------------------------------------- */
 QWidget {
-  background-color: #363636;
+  background-color: #969696;
   border: 0px solid #2d2d2d;
   padding: 0px;
-  color: #F0F0F0;
+  color: #ffffff;
   selection-background-color: #1464A0;
   selection-color: #F0F0F0;
 }

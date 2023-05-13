@@ -1,10 +1,10 @@
 import time
 import numpy as np
 import pandas as pd
-from Themes import dt1
+from Themes import dt3
 import platform
 from PyQt5 import uic
-from Themes.dt2 import dt1
+from Themes.dt3 import dt3
 from PyQt5.QtCore import Qt,pyqtSignal
 from PyQt5.QtWidgets import *
 import qdarkstyle
@@ -48,12 +48,12 @@ class UI_Tmaster(QMainWindow):
         self.title.sgPoss.connect(self.movWin)
 
         tables_details_Tmaster(self)
-        self.setStyleSheet(dt1)
+        self.setStyleSheet(dt3)
 
         self.createSlots()
 
         self.createShortcuts()
-        # QSizeGrip(self.frameGrip)
+        QSizeGrip(self.frameGrip)
 
 
     def createSlots(self):

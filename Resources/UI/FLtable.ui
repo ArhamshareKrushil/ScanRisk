@@ -30,6 +30,75 @@
     <property name="spacing">
      <number>0</number>
     </property>
+    <item row="2" column="0">
+     <widget class="QFrame" name="frame">
+      <property name="styleSheet">
+       <string notr="true">background-color:#27496D;
+  border-radius: 0
+px;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QFrame" name="frameGrip">
+      <property name="minimumSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:#27496D;
+  border-radius: 0
+px;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <widget class="QTableView" name="tableView">
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="tabKeyNavigation">
+       <bool>false</bool>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <attribute name="verticalHeaderDefaultSectionSize">
+       <number>21</number>
+      </attribute>
+      <attribute name="verticalHeaderMinimumSectionSize">
+       <number>21</number>
+      </attribute>
+     </widget>
+    </item>
     <item row="0" column="0" colspan="2">
      <widget class="QFrame" name="headerFrame">
       <property name="sizePolicy">
@@ -55,8 +124,7 @@ https://stackoverflow.com/questions/14581498/qt-stylesheet-for-hline-vline-color
 --------------------------------------------------------------------------- */
 /* (dot) .QFrame  fix #141, #126, #123 */
 .QFrame {
-  background-color: #222222
-;
+  background-color: #2D4059;
 
   border-radius: 4px;
   border: 0px solid transparent;
@@ -87,12 +155,12 @@ https://stackoverflow.com/questions/14581498/qt-stylesheet-for-hline-vline-color
 </string>
       </property>
       <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
+       <enum>QFrame::Box</enum>
       </property>
       <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
+       <enum>QFrame::Sunken</enum>
       </property>
-      <layout class="QGridLayout" name="gridLayout_2">
+      <layout class="QGridLayout" name="gridLayout_8">
        <property name="leftMargin">
         <number>0</number>
        </property>
@@ -108,36 +176,8 @@ https://stackoverflow.com/questions/14581498/qt-stylesheet-for-hline-vline-color
        <property name="spacing">
         <number>0</number>
        </property>
-       <item row="0" column="0">
-        <widget class="QFrame" name="frame_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1" alignment="Qt::AlignRight|Qt::AlignTop">
-        <widget class="QFrame" name="btnframe">
+       <item row="0" column="2" alignment="Qt::AlignRight|Qt::AlignTop">
+        <widget class="QFrame" name="btnframe_4">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -165,7 +205,7 @@ https://stackoverflow.com/questions/14581498/qt-stylesheet-for-hline-vline-color
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
           <property name="spacing">
            <number>0</number>
           </property>
@@ -181,34 +221,25 @@ https://stackoverflow.com/questions/14581498/qt-stylesheet-for-hline-vline-color
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item alignment="Qt::AlignTop">
-           <widget class="QPushButton" name="bt_min">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
+          <item>
+           <widget class="QPushButton" name="bt_min_3">
             <property name="minimumSize">
              <size>
-              <width>35</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>35</width>
+              <width>25</width>
               <height>25</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
   background-color: transparent;
+border-radius: 10px;
+
   border: 1px solid transparent;
 
 }
 QPushButton:hover {
-  background-color: #148CD2;    
+border-radius: 10px;
+  background-color: #000000;    
 }
 </string>
             </property>
@@ -216,45 +247,36 @@ QPushButton:hover {
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="C:/Users/HP/Desktop/Autotrader-Reborn2.1/Resourses/icons/icons.qrc">
-              <normaloff>:/icon1/minus.svg</normaloff>:/icon1/minus.svg</iconset>
+             <iconset resource="../icons/icons.qrc">
+              <normaloff>:/newPrefix/icons/minus-circle.svg</normaloff>:/newPrefix/icons/minus-circle.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>15</width>
-              <height>15</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
            </widget>
           </item>
-          <item alignment="Qt::AlignRight|Qt::AlignTop">
-           <widget class="QPushButton" name="bt_close">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
+          <item>
+           <widget class="QPushButton" name="bt_close_3">
             <property name="minimumSize">
              <size>
-              <width>35</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>35</width>
+              <width>0</width>
               <height>25</height>
              </size>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
   background-color: transparent;
+border-radius: 10px;
+
   border: 1px solid transparent;
 
 }
 QPushButton:hover {
-  background-color: #148CD2;    
+border-radius: 10px;
+  background-color: #ff2626;    
 }
 </string>
             </property>
@@ -262,13 +284,13 @@ QPushButton:hover {
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="C:/Users/HP/Desktop/Autotrader-Reborn2.1/Resourses/icons/icons.qrc">
-              <normaloff>:/icon1/x.svg</normaloff>:/icon1/x.svg</iconset>
+             <iconset resource="../icons/icons.qrc">
+              <normaloff>:/newPrefix/icons/x-circle.svg</normaloff>:/newPrefix/icons/x-circle.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>15</width>
-              <height>15</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
            </widget>
@@ -276,72 +298,35 @@ QPushButton:hover {
          </layout>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="QFrame" name="frame_5">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+        </widget>
+       </item>
       </layout>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QFrame" name="frame">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(80, 80, 80);
-  border-radius: 0
-px;</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="2">
-     <widget class="QTableView" name="tableView">
-      <property name="font">
-       <font>
-        <pointsize>8</pointsize>
-       </font>
-      </property>
-      <property name="tabKeyNavigation">
-       <bool>false</bool>
-      </property>
-      <property name="selectionBehavior">
-       <enum>QAbstractItemView::SelectRows</enum>
-      </property>
-      <property name="sortingEnabled">
-       <bool>true</bool>
-      </property>
-      <attribute name="verticalHeaderMinimumSectionSize">
-       <number>21</number>
-      </attribute>
-      <attribute name="verticalHeaderDefaultSectionSize">
-       <number>21</number>
-      </attribute>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QFrame" name="frameGrip">
-      <property name="minimumSize">
-       <size>
-        <width>20</width>
-        <height>20</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>20</width>
-        <height>20</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(25,25,25);
-  border-radius: 0px;</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
      </widget>
     </item>
    </layout>
@@ -353,7 +338,8 @@ px;</string>
   </action>
  </widget>
  <resources>
-  <include location="C:/Users/HP/Desktop/Autotrader-Reborn2.1/Resourses/icons/icons.qrc"/>
+  <include location="../../../Users/HP/Desktop/Autotrader-Reborn2.1/Resourses/icons/icons.qrc"/>
+  <include location="../icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

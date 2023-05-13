@@ -6,13 +6,15 @@ import traceback
 import datetime
 
 import pandas as pd
+from PyQt5.QtGui import QKeySequence
+
 from Application.Views.titlebar import tBar
 
-from Themes import dt1
+from Themes import dt3
 import platform
 from PyQt5 import uic
 from PyQt5.QtCore import *
-from Themes.dt2 import dt1
+from Themes.dt3 import dt3
 from PyQt5.QtWidgets import *
 import qdarkstyle
 
@@ -48,7 +50,7 @@ class Ui_CASH(QMainWindow):
         self.rc=0
 
 
-        self.setStyleSheet(dt1)
+        self.setStyleSheet(dt3)
 
         osType = platform.system()
 
@@ -67,6 +69,7 @@ class Ui_CASH(QMainWindow):
 
         self.createTimers()
         self.createSlots()
+        self.createShortcuts()
 
     def movWin(self, x, y):
         self.move(self.pos().x() + x, self.pos().y() + y)
@@ -86,6 +89,10 @@ class Ui_CASH(QMainWindow):
 
     def createTimers(self):
         pass
+
+    def createShortcuts(self):
+        self.quitSc = QShortcut(QKeySequence('Esc'), self)
+        self.quitSc.activated.connect(self.hide)
 
 
 

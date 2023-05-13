@@ -114,7 +114,7 @@ QTreeView,
 QListView,
 QTableView,
 QColumnView {
-  background-color: #c7c7c7;
+  background-color: #FFFFFF;
   border: 1px solid #2d2d2d;
   color: #000000;
   gridline-color: #2d2d2d;
@@ -125,7 +125,7 @@ QTreeView:disabled,
 QListView:disabled,
 QTableView:disabled,
 QColumnView:disabled {
-  background-color: #c7c7c7;
+  background-color: #FFFFFF;
   color: #000000;
 }
 
@@ -133,7 +133,7 @@ QTreeView:selected,
 QListView:selected,
 QTableView:selected,
 QColumnView:selected {
-  background-color: #c7c7c7;
+  background-color: #FFFFFF;
   color: #000000;
 }
 
@@ -141,7 +141,7 @@ QTreeView:hover,
 QListView:hover,
 QTableView:hover,
 QColumnView:hover {
-  background-color: #c7c7c7;
+  background-color: #FFFFFF;
   border: 1px solid #148CD2;
 }
 
@@ -149,14 +149,14 @@ QTreeView::item:pressed,
 QListView::item:pressed,
 QTableView::item:pressed,
 QColumnView::item:pressed {
-  background-color: #c7c7c7;
+  background-color: #FFFFFF;
 }
 
 QTreeView::item:selected:hover,
 QListView::item:selected:hover,
 QTableView::item:selected:hover,
 QColumnView::item:selected:hover {
-  background: #c7c7c7;
+  background: #FFFFFF;
   color: #000000;
 }
 
@@ -213,7 +213,7 @@ QTableCornerButton::section {
   </action>
  </widget>
  <resources>
-  <include location="C:/Users/HP/Desktop/Autotrader-Reborn2.1/Resourses/icons/icons.qrc"/>
+  <include location="../../../Users/HP/Desktop/Autotrader-Reborn2.1/Resourses/icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

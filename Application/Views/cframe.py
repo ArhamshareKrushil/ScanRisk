@@ -2,10 +2,10 @@ import  numpy as np
 import csv
 import os
 import traceback
-from Themes import dt1
+from Themes import dt3
 import platform
 from PyQt5 import uic
-from Themes.dt2 import dt1
+from Themes.dt3 import dt3
 from PyQt5.QtWidgets import *
 import qdarkstyle
 from Application.Utils.configReader import read_API_config

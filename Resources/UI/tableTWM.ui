@@ -74,149 +74,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">QTreeView:branch:selected, QTreeView:branch:hover {
-  background: url(&quot;:/qss_icons/rc/transparent.png&quot;);
-}
-
-QTreeView:branch:has-siblings:!adjoins-item {
-  border-image: url(&quot;:/qss_icons/rc/branch_line.png&quot;) 0;
-}
-
-QTreeView:branch:has-siblings:adjoins-item {
-  border-image: url(&quot;:/qss_icons/rc/branch_more.png&quot;) 0;
-}
-
-QTreeView:branch:!has-children:!has-siblings:adjoins-item {
-  border-image: url(&quot;:/qss_icons/rc/branch_end.png&quot;) 0;
-}
-
-QTreeView:branch:has-children:!has-siblings:closed, QTreeView:branch:closed:has-children:has-siblings {
-  border-image: none;
-  image: url(&quot;:/qss_icons/rc/branch_closed.png&quot;);
-}
-
-QTreeView:branch:open:has-children:!has-siblings, QTreeView:branch:open:has-children:has-siblings {
-  border-image: none;
-  image: url(&quot;:/qss_icons/rc/branch_open.png&quot;);
-}
-
-QTreeView:branch:has-children:!has-siblings:closed:hover, QTreeView:branch:closed:has-children:has-siblings:hover {
-  image: url(&quot;:/qss_icons/rc/branch_closed_focus.png&quot;);
-}
-
-QTreeView:branch:open:has-children:!has-siblings:hover, QTreeView:branch:open:has-children:has-siblings:hover {
-  image: url(&quot;:/qss_icons/rc/branch_open_focus.png&quot;);
-}
-
-QTreeView::indicator:checked,
-QListView::indicator:checked {
-  image: url(&quot;:/qss_icons/rc/checkbox_checked.png&quot;);
-}
-
-QTreeView::indicator:checked:hover, QTreeView::indicator:checked:focus, QTreeView::indicator:checked:pressed,
-QListView::indicator:checked:hover,
-QListView::indicator:checked:focus,
-QListView::indicator:checked:pressed {
-  image: url(&quot;:/qss_icons/rc/checkbox_checked_focus.png&quot;);
-}
-
-QTreeView::indicator:unchecked,
-QListView::indicator:unchecked {
-  image: url(&quot;:/qss_icons/rc/checkbox_unchecked.png&quot;);
-}
-
-QTreeView::indicator:unchecked:hover, QTreeView::indicator:unchecked:focus, QTreeView::indicator:unchecked:pressed,
-QListView::indicator:unchecked:hover,
-QListView::indicator:unchecked:focus,
-QListView::indicator:unchecked:pressed {
-  image: url(&quot;:/qss_icons/rc/checkbox_unchecked_focus.png&quot;);
-}
-
-QTreeView::indicator:indeterminate,
-QListView::indicator:indeterminate {
-  image: url(&quot;:/qss_icons/rc/checkbox_indeterminate.png&quot;);
-}
-
-QTreeView::indicator:indeterminate:hover, QTreeView::indicator:indeterminate:focus, QTreeView::indicator:indeterminate:pressed,
-QListView::indicator:indeterminate:hover,
-QListView::indicator:indeterminate:focus,
-QListView::indicator:indeterminate:pressed {
-  image: url(&quot;:/qss_icons/rc/checkbox_indeterminate_focus.png&quot;);
-}
-
-QTreeView,
-QListView,
-QTableView,
-QColumnView {
-  background-color: #c7c7c7;
-  border: 1px solid #2d2d2d;
-  color: #000000;
-  gridline-color: #2d2d2d;
-  border-radius: 4px;
-}
-
-QTreeView:disabled,
-QListView:disabled,
-QTableView:disabled,
-QColumnView:disabled {
-  background-color: #c7c7c7;
-  color: #000000;
-}
-
-QTreeView:selected,
-QListView:selected,
-QTableView:selected,
-QColumnView:selected {
-  background-color: #c7c7c7;
-  color: #000000;
-}
-
-QTreeView:hover,
-QListView:hover,
-QTableView:hover,
-QColumnView:hover {
-  background-color: #c7c7c7;
-  border: 1px solid #148CD2;
-}
-
-QTreeView::item:pressed,
-QListView::item:pressed,
-QTableView::item:pressed,
-QColumnView::item:pressed {
-  background-color: #c7c7c7;
-}
-
-QTreeView::item:selected:hover,
-QListView::item:selected:hover,
-QTableView::item:selected:hover,
-QColumnView::item:selected:hover {
-  background: #c7c7c7;
-  color: #000000;
-}
-
-QTreeView::item:selected:active,
-QListView::item:selected:active,
-QTableView::item:selected:active,
-QColumnView::item:selected:active {
-background-color: palette(highlight);
- color: palette(highlightedText);
-}
-
-QTreeView::item:!selected:hover,
-QListView::item:!selected:hover,
-QTableView::item:!selected:hover,
-QColumnView::item:!selected:hover {
-  outline: 0;
-  color: #148CD2;
-  background-color: #2d2d2d;
-}
-
-QTableCornerButton::section {
-  background-color: #282828;
-  border: 1px transparent #2d2d2d;
-  border-radius: 0px;
-}
-</string>
+          <string notr="true"/>
          </property>
          <property name="selectionBehavior">
           <enum>QAbstractItemView::SelectRows</enum>
@@ -235,50 +93,6 @@ QTableCornerButton::section {
       </layout>
      </widget>
     </item>
-    <item row="1" column="2">
-     <widget class="Line" name="line_2">
-      <property name="styleSheet">
-       <string notr="true">background-color: transparent;</string>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="Line" name="line_18">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="4" rowspan="3">
-     <widget class="Line" name="line_17">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="3">
-     <widget class="Line" name="line_3">
-      <property name="styleSheet">
-       <string notr="true">background-color: transparent;</string>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="Line" name="line">
-      <property name="styleSheet">
-       <string notr="true">background-color: transparent;</string>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="1" colspan="3">
      <widget class="QWidget" name="indexBar" native="true">
       <property name="sizePolicy">
@@ -294,167 +108,9 @@ QTableCornerButton::section {
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">QTreeView:branch:selected, QTreeView:branch:hover {
-  background: url(&quot;:/qss_icons/rc/transparent.png&quot;);
-}
-
-QTreeView:branch:has-siblings:!adjoins-item {
-  border-image: url(&quot;:/qss_icons/rc/branch_line.png&quot;) 0;
-}
-
-QTreeView:branch:has-siblings:adjoins-item {
-  border-image: url(&quot;:/qss_icons/rc/branch_more.png&quot;) 0;
-}
-
-QTreeView:branch:!has-children:!has-siblings:adjoins-item {
-  border-image: url(&quot;:/qss_icons/rc/branch_end.png&quot;) 0;
-}
-
-QTreeView:branch:has-children:!has-siblings:closed, QTreeView:branch:closed:has-children:has-siblings {
-  border-image: none;
-  image: url(&quot;:/qss_icons/rc/branch_closed.png&quot;);
-}
-
-QTreeView:branch:open:has-children:!has-siblings, QTreeView:branch:open:has-children:has-siblings {
-  border-image: none;
-  image: url(&quot;:/qss_icons/rc/branch_open.png&quot;);
-}
-
-QTreeView:branch:has-children:!has-siblings:closed:hover, QTreeView:branch:closed:has-children:has-siblings:hover {
-  image: url(&quot;:/qss_icons/rc/branch_closed_focus.png&quot;);
-}
-
-QTreeView:branch:open:has-children:!has-siblings:hover, QTreeView:branch:open:has-children:has-siblings:hover {
-  image: url(&quot;:/qss_icons/rc/branch_open_focus.png&quot;);
-}
-
-QTreeView::indicator:checked,
-QListView::indicator:checked {
-  image: url(&quot;:/qss_icons/rc/checkbox_checked.png&quot;);
-}
-
-QTreeView::indicator:checked:hover, QTreeView::indicator:checked:focus, QTreeView::indicator:checked:pressed,
-QListView::indicator:checked:hover,
-QListView::indicator:checked:focus,
-QListView::indicator:checked:pressed {
-  image: url(&quot;:/qss_icons/rc/checkbox_checked_focus.png&quot;);
-}
-
-QTreeView::indicator:unchecked,
-QListView::indicator:unchecked {
-  image: url(&quot;:/qss_icons/rc/checkbox_unchecked.png&quot;);
-}
-
-QTreeView::indicator:unchecked:hover, QTreeView::indicator:unchecked:focus, QTreeView::indicator:unchecked:pressed,
-QListView::indicator:unchecked:hover,
-QListView::indicator:unchecked:focus,
-QListView::indicator:unchecked:pressed {
-  image: url(&quot;:/qss_icons/rc/checkbox_unchecked_focus.png&quot;);
-}
-
-QTreeView::indicator:indeterminate,
-QListView::indicator:indeterminate {
-  image: url(&quot;:/qss_icons/rc/checkbox_indeterminate.png&quot;);
-}
-
-QTreeView::indicator:indeterminate:hover, QTreeView::indicator:indeterminate:focus, QTreeView::indicator:indeterminate:pressed,
-QListView::indicator:indeterminate:hover,
-QListView::indicator:indeterminate:focus,
-QListView::indicator:indeterminate:pressed {
-  image: url(&quot;:/qss_icons/rc/checkbox_indeterminate_focus.png&quot;);
-}
-
-QTreeView,
-QListView,
-QTableView,
-QColumnView {
-  background-color: #ffffff;
-  border: 1px solid #2d2d2d;
-  color: #F0F0F0;
-  gridline-color: #2d2d2d;
-  border-radius: 4px;
-}
-
-QTreeView:disabled,
-QListView:disabled,
-QTableView:disabled,
-QColumnView:disabled {
-  background-color: #1e1e1e;
-  color: #787878;
-}
-
-QTreeView:selected,
-QListView:selected,
-QTableView:selected,
-QColumnView:selected {
-  background-color: #ffffff;
-  color: #2d2d2d;
-}
-
-QTreeView:hover,
-QListView:hover,
-QTableView:hover,
-QColumnView:hover {
-  background-color: #ffffff;
-  border: 1px solid #148CD2;
-}
-
-QTreeView::item:pressed,
-QListView::item:pressed,
-QTableView::item:pressed,
-QColumnView::item:pressed {
-  background-color: #ffffff;
-}
-
-QTreeView::item:selected:hover,
-QListView::item:selected:hover,
-QTableView::item:selected:hover,
-QColumnView::item:selected:hover {
-  background: #ffffff;
-  color: #282828;
-}
-
-QTreeView::item:selected:active,
-QListView::item:selected:active,
-QTableView::item:selected:active,
-QColumnView::item:selected:active {
-background-color: palette(highlight);
- color: palette(highlightedText);
-}
-
-QTreeView::item:!selected:hover,
-QListView::item:!selected:hover,
-QTableView::item:!selected:hover,
-QColumnView::item:!selected:hover {
-  outline: 0;
-  color: #148CD2;
-  background-color: #2d2d2d;
-}
-
-QTableCornerButton::section {
-  background-color: #282828;
-  border: 1px transparent #2d2d2d;
-  border-radius: 0px;
-}
-</string>
+       <string notr="true"/>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="3" rowspan="2">
-        <widget class="Line" name="line_7">
-         <property name="maximumSize">
-          <size>
-           <width>25</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: transparent;</string>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="2" rowspan="2">
         <widget class="QLineEdit" name="le_text">
          <property name="sizePolicy">
@@ -468,6 +124,35 @@ QTableCornerButton::section {
            <width>200</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="placeholderText">
+          <string>Symbol</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" rowspan="2">
+        <widget class="QComboBox" name="cbHeads">
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3" rowspan="2">
+        <widget class="Line" name="line_7">
+         <property name="maximumSize">
+          <size>
+           <width>25</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: transparent;</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -487,13 +172,22 @@ QTableCornerButton::section {
          </property>
         </widget>
        </item>
-       <item row="0" column="0" rowspan="2">
-        <widget class="QComboBox" name="cbHeads">
+       <item row="0" column="8" rowspan="2">
+        <widget class="QPushButton" name="pbGetExcel">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>200</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="text">
+          <string>Get Excel</string>
          </property>
         </widget>
        </item>
@@ -545,19 +239,6 @@ QTableCornerButton::section {
          </property>
         </widget>
        </item>
-       <item row="0" column="8" rowspan="2">
-        <widget class="QPushButton" name="pbGetExcel">
-         <property name="maximumSize">
-          <size>
-           <width>200</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Get Excel</string>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="7">
         <widget class="Line" name="line_8">
          <property name="maximumSize">
@@ -576,6 +257,12 @@ QTableCornerButton::section {
        </item>
        <item row="0" column="6" rowspan="2">
         <widget class="QPushButton" name="pbClearfilter">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>200</width>
@@ -590,11 +277,55 @@ QTableCornerButton::section {
       </layout>
      </widget>
     </item>
+    <item row="2" column="3">
+     <widget class="Line" name="line_3">
+      <property name="styleSheet">
+       <string notr="true">background-color: transparent;</string>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="Line" name="line_2">
+      <property name="styleSheet">
+       <string notr="true">background-color: transparent;</string>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="Line" name="line_18">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="Line" name="line">
+      <property name="styleSheet">
+       <string notr="true">background-color: transparent;</string>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="4" rowspan="3">
+     <widget class="Line" name="line_17">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>
  <resources>
-  <include location="C:/Users/HP/Desktop/Autotrader-Reborn2.1/Resourses/icons/icons.qrc"/>
+  <include location="../icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

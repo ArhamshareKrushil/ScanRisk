@@ -24,7 +24,7 @@ from Application.Views.Limit.Limit import UI_Limit
 from Application.Utils.support import getLogPath
 
 from Application.Utils.all_slots import createSlots_main
-from Application.Utils.configReader import read_API_config
+from Application.Utils.configReader import read_API_config,get_udp_port
 # from Application.Utils.updation import updatePOTM,updateLTP_POCW,updatePOTW,updateLTP_POTW,updateCMPOTWpos,updateLTP_CMPOTW,updateLTP_CMPOCW
 
 
@@ -48,7 +48,7 @@ from Application.Utils.support import *
 from Application.Services.UDP.UDPSock import Receiver
 from Resources.icons import icons_rc
 
-from Themes.dt2 import dt1
+from Themes.dt3 import dt3
 import qdarkstyle
 
 import traceback
@@ -63,10 +63,15 @@ from Application.Services.FastApi.ApiServices import versionCheck,DownloadVersio
 
 class Ui_Main(QMainWindow):
     sgopenPosPOTW=pyqtSignal(list)
+    sgDB_POCW=pyqtSignal(list)
     sgDB_TWSWM=pyqtSignal(list)
+    sgDB_CWSWM=pyqtSignal(list)
     sgDB_TWM=pyqtSignal(list)
+    sgDB_CWM=pyqtSignal(list)
     sgDB_CMPOTW=pyqtSignal(list)
+    sgDB_CMPOCW=pyqtSignal(list)
     sgDB_CMTWM=pyqtSignal(list)
+    sgDB_CMCWM=pyqtSignal(list)
 
 
     ################################# Intialization Here ##################################################
@@ -83,14 +88,26 @@ class Ui_Main(QMainWindow):
         uic.loadUi(ui_login,self)
 
 
-        self.setStyleSheet(dt1)
+        self.setStyleSheet(dt3)
 
 
         osType = platform.system()
 
         self.maxwin=False
         self.menuhide=False
+        self.barhide = False
         self.r = 0.1
+
+        self.tokenDict={}
+        self.twswmDict={}
+        self.twmDict={}
+        self.cwswmDict = {}
+        self.cwmDict = {}
+
+        self.CMtokenDict = {}
+        self.cmtwmDict = {}
+        self.cmcwmDict = {}
+
 
         todate = datetime.datetime.today().strftime('%Y%m%d')
         self.todate = datetime.datetime.strptime(todate, '%Y%m%d')
@@ -99,6 +116,8 @@ class Ui_Main(QMainWindow):
             flags = Qt.WindowFlags(Qt.FramelessWindowHint)
         else:
             flags = Qt.WindowFlags(Qt.FramelessWindowHint)
+
+
         self.setWindowFlags(flags)
         self.title = tBar('ScanRisk')
         self.headerFrame.layout().addWidget(self.title, 0, 1)
@@ -112,6 +131,12 @@ class Ui_Main(QMainWindow):
         # event mapping
         createSlots_main(self)
         self.createTimers()
+        # if outputVariable in locals():
+        # if self.pocw in locals():
+        #     print('exist')
+        # else:
+        #     print('notexist')
+
 
         versionCheck(self)
 
@@ -133,17 +158,17 @@ class Ui_Main(QMainWindow):
         # self.timerBWM.timeout.connect(lambda: updateBWM(self))
 
         self.timerGlobalM = QTimer()
-        self.timerGlobalM.setInterval(6000)
+        self.timerGlobalM.setInterval(40000)
         self.timerGlobalM.timeout.connect(lambda: updateBWSWM(self))
         self.timerGlobalM.timeout.connect(lambda: updateGlobalMargin(self))
 
         self.timerMTM = QTimer()
-        self.timerMTM.setInterval(2000)
-        self.timerMTM.timeout.connect(lambda: updateFOMTM(self))
+        self.timerMTM.setInterval(10000)
+        self.timerMTM.timeout.connect(lambda: updateFOMTMPOTW(self))
 
         self.timerCMMTM = QTimer()
-        self.timerCMMTM.setInterval(5000)
-        self.timerCMMTM.timeout.connect(lambda :update_CASH_MTM(self))
+        self.timerCMMTM.setInterval(15000)
+        self.timerCMMTM.timeout.connect(lambda :update_CASH_MTMPOTW(self))
 
         self.timerGreeks = QTimer()
         self.timerGreeks.setInterval(20000)
@@ -151,7 +176,11 @@ class Ui_Main(QMainWindow):
 
         self.timerSCN = QTimer()
         self.timerSCN.setInterval(30000)
-        self.timerSCN.timeout.connect(lambda: updateSCNPrice(self))
+        self.timerSCN.timeout.connect(lambda: updateSCNPricePOTW(self))
+
+        self.timerBWM = QTimer()
+        self.timerBWM.setInterval(30000)
+        self.timerBWM.timeout.connect(lambda: updateBWM(self))
 
 
 
@@ -211,6 +240,15 @@ class Ui_Main(QMainWindow):
             # self.cFrame.DBWM.setWidget(self.BWM)
             self.cFrame.DBWSWM.setWidget(self.BWSWM)
 
+            self.defaultWindowState()
+            self.connectAllslots()
+
+            self.timerGlobalM.start()
+            self.timerMTM.start()
+            self.timerCMMTM.start()
+            self.timerGreeks.start()
+            self.timerSCN.start()
+
         else:
             self.cFrame = Ui_cframe()
             self.mainFrame.layout().addWidget(self.cFrame, 0, 0)
@@ -230,10 +268,11 @@ class Ui_Main(QMainWindow):
             self.BWSWM=BranchScriptSummary()
             #
             self.CMPOTW=UI_CMPOTW()
-            # self.CMPOCW=UI_CMPOCW()
             self.CASH=Ui_CASH()
             self.CMTWM=UI_CMTWM()
-            # self.CMCWM=UI_CMCWM()
+
+            self.CMPOCW=UI_CMPOCW()
+            self.CMCWM=UI_CMCWM()
             #
             #
             self.cFrame.DTWM.setWidget(self.TWM)
@@ -250,28 +289,61 @@ class Ui_Main(QMainWindow):
             self.cFrame.DBWM.setWidget(self.BWM)
             self.cFrame.DBWSWM.setWidget(self.BWSWM)
 
-        self.defaultWindowState()
-        self.connectAllslots()
+            self.Reciever.sgData7202.connect(self.update7202POCW)
+            self.RecieverCM.sgCMData7202.connect(self.updateCM7202POCW)
+
+            self.CASH.pbPOCW.clicked.connect(self.CMPOCWshow)
+            self.CASH.pbCWM.clicked.connect(self.CMCWMshow)
+
+            self.pbSCN.clicked.connect(lambda:updateSCNPricePOCW(self))
+            self.pbSCN.clicked.connect(lambda:updateSCNPricePOTW(self))
+
+            self.pbGreeks.clicked.connect(lambda: update_Greeks_POCW(self))
+            self.pbGreeks.clicked.connect(lambda: update_Greeks_POTW(self))
+
+            self.BWM.tableView.doubleClicked.connect(lambda: BWMdoubleClicked(self))
+
+            self.CWM.tableView.doubleClicked.connect(lambda: CWMdoubleClicked(self))
+
+            self.CMCWM.tableView.doubleClicked.connect(lambda: CMCWMdoubleClicked(self))
+
+            self.CMTWM.tableView.doubleClicked.connect(lambda: CMTWMdoubleClicked(self))
+
+            self.CMPOCW.tableView.doubleClicked.connect(lambda: CMPOCWdoubleClicked(self))
+
+            self.POCW.tableView.doubleClicked.connect(lambda: POCWdoubleClicked(self))
+
+            self.timerMTM.timeout.connect(lambda :updateFOMTMPOCW(self))
+            self.timerCMMTM.timeout.connect(lambda :update_CASH_MTMPOCW(self))
+
+            # self.timerGreeks.timeout.connect(lambda :update_Greeks_POCW(self))
+            # self.timerSCN.timeout.connect(lambda :updateSCNPricePOCW(self))
+
+            self.timerGlobalM.disconnect()
+            self.timerGlobalM.timeout.connect(lambda: updateGlobalMarginMainUser(self))
+            self.timerGlobalM.timeout.connect(lambda: updateBWSWM(self))
+
+            self.defaultWindowState()
+            self.connectAllslots()
+
+            self.timerBWM.start()
+            self.timerGlobalM.start()
+
+            self.timerMTM.start()
+            self.timerCMMTM.start()
+
+            # self.timerGreeks.start()
+            # self.timerSCN.start()
+
+
+
         # shareContract(self)
-        # self.timerBWM.start()
-        self.timerGlobalM.start()
-        self.timerMTM.start()
-        self.timerCMMTM.start()
-        self.timerGreeks.start()
-        self.timerSCN.start()
 
 
 
-    def getSetting(self):
-        loc=os.getcwd().split('Application')[0]
-        # print(loc)
-        path=os.path.join(loc,'Resources','config_json.json')
-        # print(path)
 
-        f = open(path)
-        data1 = json.load(f)
-        self.port_fo = data1["UDP_FO"]
-        self.port_cash = data1["UDP_CASH"]
+
+
 
 
     def createObjects(self):
@@ -282,25 +354,29 @@ class Ui_Main(QMainWindow):
         self.Deposit=UI_Deposit()
         self.Limit=UI_Limit()
 
-        self.thread1 = QThread()
-        self.SioClient.moveToThread(self.thread1)
-        self.thread1.start()
+        self.TerminalM=UI_Tmaster()
 
-        self.getSetting()
+
+        # self.thread1 = QThread()
+        # self.SioClient.moveToThread(self.thread1)
+        # self.thread1.start()
+
+
+        get_udp_port(self)
         self.Reciever = Receiver(self.port_fo)
         self.Reciever.join_grp()
 
-        self.t1 = QThread()
-        self.Reciever.moveToThread(self.t1)
-        self.t1.start()
+        # self.t1 = QThread()
+        # self.Reciever.moveToThread(self.t1)
+        # self.t1.start()
 
         self.RecieverCM = Receiver(self.port_cash)
         # print(self.port_cash)
         self.RecieverCM.join_grp()
 
-        self.th34 = QThread()
-        self.RecieverCM.moveToThread(self.th34)
-        self.th34.start()
+        # self.th34 = QThread()
+        # self.RecieverCM.moveToThread(self.th34)
+        # self.th34.start()
 
 
 
@@ -308,19 +384,22 @@ class Ui_Main(QMainWindow):
     def connectAllslots(self):
 
         self.TWM.tableView.doubleClicked.connect(lambda: TWMdoubleClicked(self))
+        self.CMTWM.tableView.doubleClicked.connect(lambda: CMTWMdoubleClicked(self))
         ################################################################
 
         self.headerFrame.setContextMenuPolicy(Qt.CustomContextMenu)
         self.headerFrame.customContextMenuRequested.connect(self.WindowRightclickedMenu)
         self.btnSttn.clicked.connect(self.menuhideshow)
+        self.btnScriptBar.clicked.connect(self.Scriptbarshow)
         self.bt_min.clicked.connect(self.showMinimized)
-        self.bt_close.clicked.connect(self.closeApp)
+        self.bt_close.clicked.connect(self.close)
         self.bt_max.clicked.connect(self.showmaxORnormal)
 
         ##################### CASH #########################
         self.pbCash.clicked.connect(self.CASHshow)
 
         self.CASH.pbPOTW.clicked.connect(self.CMPOTWshow)
+
         self.CASH.pbTWM.clicked.connect(self.CMTWMshow)
 
 
@@ -330,9 +409,18 @@ class Ui_Main(QMainWindow):
         self.SioClient.sgOnTWSWM.connect(self.updateTWSWM)
         self.SioClient.sgOnTWM.connect(self.updateTWM)
 
+        self.SioClient.sgOnPOCW.connect(self.updatePOCW)
+        self.SioClient.sgOnCWSWM.connect(self.updateCWSWM)
+        self.SioClient.sgOnCWM.connect(self.updateCWM)
+
+
+
         ##################Socket Client CM ###########################
         self.SioClient.sgOnCMPosition.connect(self.updateCMPOTW)
         self.SioClient.sgOnCMTWM.connect(self.updateCMTWM)
+
+        self.SioClient.sgOnCMPOCW.connect(self.updateCMPOCW)
+        self.SioClient.sgOnCMCWM.connect(self.updateCMCWM)
 
 
 
@@ -342,48 +430,76 @@ class Ui_Main(QMainWindow):
         self.sgopenPosPOTW.connect(self.on_POTWOpenPosition)
         self.sgDB_TWSWM.connect(self.updateTWSWM)
         self.sgDB_TWM.connect(self.updateTWM)
+        self.sgDB_CWM.connect(self.updateCWM)
+        self.sgDB_CWSWM.connect(self.updateCWSWM)
+        self.sgDB_POCW.connect(self.updatePOCW)
+
         self.sgDB_CMPOTW.connect(self.updateCMPOTW)
+        self.sgDB_CMPOCW.connect(self.updateCMPOCW)
         self.sgDB_CMTWM.connect(self.updateCMTWM)
+
+        self.sgDB_CMCWM.connect(self.updateCMCWM)
 
         ####################### UDP Receiver FO #####################
 
-        self.Reciever.sgData7202.connect(self.update7202)
-        self.RecieverCM.sgCMData7202.connect(self.updateCM7202)
+        self.Reciever.sgData7202.connect(self.update7202POTW)
+        self.RecieverCM.sgCMData7202.connect(self.updateCM7202POTW)
         self.RecieverCM.sgCMData7207.connect(self.updateCM7207)
 
 
         ###################Deposit############################
         self.pbDeposit.clicked.connect(self.Deposit.show)
+        self.pbTMas.clicked.connect(self.TerminalM.show)
+        self.pbLimit.clicked.connect(self.Limit.show)
+
         self.Limit.sgupdateLimitPOTW.connect(self.updateLimitPOTW)
         self.Deposit.sgupdateDepositPOTW.connect(self.updateDepositPOTW)
 
+        self.pbTMas.clicked.connect(self.TerminalM.show)
         self.pbLimit.clicked.connect(self.Limit.show)
 
+        # self.pbRefresh.clicked.connect()
+
+
+
+
+
+
+    @pyqtSlot(dict)
     def updateDepositPOTW(self,data):
         updateDepositPOTW(self,data)
+
+    @pyqtSlot(dict)
     def updateLimitPOTW(self,data):
         updateLimitPOTW(self,data)
 
     def closeApp(self):
         self.SioClient.sio.disconnect()
         sys.exit()
-    def end_task(process_name='SCAN-RISK.exe'):
+    def end_task(self,process_name='SCAN-RISK.exe'):
+        # print('jfkdjfk')
         for proc in psutil.process_iter():
+            # print('nnnn')
             try:
                 if proc.name() == process_name:
+                    # print('tttt')
                     proc.kill()
                     print(f"{process_name} has been terminated.")
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                pass
-            
+                print('rer',traceback.print_exc())
+
     def CASHshow(self):
         self.CASH.show()
 
     def CMPOTWshow(self):
         self.CMPOTW.show()
+    def CMPOCWshow(self):
+        self.CMPOCW.show()
 
     def CMTWMshow(self):
         self.CMTWM.show()
+    def CMCWMshow(self):
+        self.CMCWM.show()
 
 
     @pyqtSlot(list)
@@ -395,6 +511,14 @@ class Ui_Main(QMainWindow):
         updateCMPOTW(self, data)
 
     @pyqtSlot(list)
+    def updateCMPOCW(self, data):
+        updateCMPOCW(self, data)
+
+    @pyqtSlot(list)
+    def updateCMCWM(self, data):
+        updateCMCWM(self, data)
+
+    @pyqtSlot(list)
     def updateCMTWM(self, data):
         updateCMTWM(self, data)
 
@@ -402,9 +526,19 @@ class Ui_Main(QMainWindow):
 
         update_DB_TWSWM(self,data)
 
+    @pyqtSlot(list)
     def updateTWSWM(self,data):
         updateTWSWM(self,data)
 
+    @pyqtSlot(list)
+    def updateCWSWM(self,data):
+        updateCWSWM(self,data)
+
+    @pyqtSlot(list)
+    def updateCWM(self,data):
+        updateCWM(self,data)
+
+    @pyqtSlot(list)
     def updateTWM(self,data):
         updateTWM(self,data)
 
@@ -422,20 +556,47 @@ class Ui_Main(QMainWindow):
 
         # print(data)
         updatePOTWopenPosition(self,data)
+    def updatePOCW(self,data):
+
+        # print(data)
+        updatePOCW(self,data)
 
     @QtCore.pyqtSlot(dict)
-    def update7202(self, data):
+    def update7202POTW(self, data):
         # print('data',data)
         # updateLTP_POCW(self, data)
         updateLTP_POTW(self, data)
         update_contract_fo(self, data)
 
-    # @QtCore.pyqtSlot(dict)
+        # th1 = threading.Thread(target=updateLTP_POTW(self, data))
+        # th1.setDaemon(True)
+        # th1.start()
+
+        # th2 = threading.Thread(target=update_contract_fo(self, data))
+        # th2.setDaemon(True)
+        # th2.start()
+
+
+
+    @QtCore.pyqtSlot(dict)
+    def update7202POCW(self, data):
+        # print('data',data)
+        # updateLTP_POCW(self, data)
+        updateLTP_POCW(self, data)
+
+        # th1 = threading.Thread(target=updateLTP_POCW(self, data))
+        # th1.setDaemon(True)
+        # th1.start()
+
+    @QtCore.pyqtSlot(dict)
     def updateCM7207(self, data):
         # pass
         # print()
         # print(data)
         # updateLTP_POCW(self, data)
+        # th1=threading.Thread(target=updateIndexes(self,data))
+        # th1.setDaemon(True)
+        # th1.start()
         updateIndexes(self, data)
         # update_contract_fo(self, data)
 
@@ -445,11 +606,28 @@ class Ui_Main(QMainWindow):
     #     # updateIndexes(self, data)
     #     # update_contract_fo(self, data)
 
-
-    def updateCM7202(self, data):
+    @QtCore.pyqtSlot(dict)
+    def updateCM7202POTW(self, data):
         # print(data)
         # updateLTP_POCW(self, data)
         updateLTP_CMPOTW(self, data)
+
+        # updateLTP_CMPOCW(self, data)
+        # th1 = threading.Thread(target=updateLTP_CMPOTW(self, data))
+        # th1.setDaemon(True)
+        # th1.start()
+        # update_contract_fo(self,data)
+
+    @QtCore.pyqtSlot(dict)
+    def updateCM7202POCW(self, data):
+        # print(data)
+        # updateLTP_POCW(self, data)
+        # updateLTP_CMPOTW(self, data)
+
+        updateLTP_CMPOCW(self, data)
+        # th1 = threading.Thread(target=updateLTP_CMPOTW(self, data))
+        # th1.setDaemon(True)
+        # th1.start()
         # update_contract_fo(self,data)
 
 
@@ -543,6 +721,14 @@ class Ui_Main(QMainWindow):
             self.settingsMenu.show()
             self.menuhide = False
 
+    def Scriptbarshow(self):
+        if (self.barhide == False):
+            self.scriptBar.show()
+            self.barhide = True
+        else:
+            self.scriptBar.hide()
+            self.barhide = False
+
 
 
 
@@ -577,6 +763,20 @@ if __name__ == "__main__":
     app.setQuitOnLastWindowClosed(False)
     # print('hellofhfhfh')
     form = Ui_Main()
+
+    thread1 = QThread()
+    form.SioClient.moveToThread(thread1)
+    thread1.start()
+
+    t1 = QThread()
+    form.Reciever.moveToThread(t1)
+    t1.start()
+
+    t2 = QThread()
+    form.RecieverCM.moveToThread(t2)
+    t2.start()
+
+
     #
     # form.login.show()
     # form.show()

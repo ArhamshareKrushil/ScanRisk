@@ -1,10 +1,10 @@
 import json
 import traceback
 import pandas as pd
-from Themes import dt1
+from Themes import dt3
 import platform
 from PyQt5 import uic
-from Themes.dt2 import dt1
+from Themes.dt3 import dt3
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 import qdarkstyle
@@ -44,14 +44,14 @@ class PositionDetailsTW(QMainWindow):
         # self.title.sgPoss.connect(self.movWin)
 
         tables_details_POTW(self)
-        self.setStyleSheet(dt1)
+        self.setStyleSheet(dt3)
         # self.FillcbHeads()
 
         self.createSlots()
 
         self.createShortcuts()
         self.defaultColumnProfile()
-        # QSizeGrip(self.frameGrip)
+        # QSizeGrip(self.gripFolio)
 
     def createSlots(self):
         self.pbClearfilter.clicked.connect(self.ClearFilter)
@@ -61,6 +61,7 @@ class PositionDetailsTW(QMainWindow):
         self.pbGetExcel.clicked.connect(self.export)
         self.tableView.horizontalHeader().setContextMenuPolicy(Qt.CustomContextMenu)
         self.tableView.horizontalHeader().customContextMenuRequested.connect(self.headerRightClickMenu)
+        self.tableView.customContextMenuRequested.connect(self.tableRightClickMenu)
 
     def saveAsDefaultColumnProfile(self):
         try:
@@ -197,7 +198,18 @@ class PositionDetailsTW(QMainWindow):
 
         except:
             print(sys.exc_info()[1])
+    def tableRightClickMenu(main, position):
+        try:
+            # a=(self.tableView.selectedIndexes()[0].data())
+            Menu = QMenu()
+            Help = Menu.addAction("Help")
+            action = Menu.exec_(main.tableView.mapToGlobal(position))
 
+            if action == Help:
+                pass
+
+        except:
+            print(sys.exc_info()[1])
     def export(self):
         # abc = pd.DataFrame(self.table)
 

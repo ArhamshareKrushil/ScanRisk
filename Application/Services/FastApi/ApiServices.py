@@ -16,6 +16,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 import pandas as pd
+from Application.Utils.support import *
 from Application.Utils.getMaster import getMaster
 
 
@@ -34,7 +35,7 @@ def login(main):
             "source":"desktop"
 
         }
-        login_url = main.FastApiURL + '/login'
+        login_url = main.FastApiURL + '/v3/login'
 
         # login_url = main.FastApiURL + f'/dlogin?username={User}&password={password}'
         # print("login_url:", login_url)
@@ -68,23 +69,77 @@ def login(main):
 
             main.SioClient.startSocket(token,main.socketIP)
 
-            # th56=threading.Thread(target=update_contract_FO,args=(main,token))
-            # th56.start()
+            if usertype!='master':
 
-            th1 = threading.Thread(target=updatePOTW_DB, args=(main, token))
-            th1.start()
+                th56=threading.Thread(target=update_TerminalMaster,args=(main,token))
+                th56.setDaemon(True)
+                th56.start()
 
-            th2 = threading.Thread(target=getTWSWM, args=(main, token))
-            th2.start()
+                th1 = threading.Thread(target=updatePOTW_DB, args=(main, token))
+                th1.setDaemon(True)
+                th1.start()
 
-            th3 = threading.Thread(target=getTWM, args=(main, token))
-            th3.start()
+                th2 = threading.Thread(target=getTWSWM, args=(main, token))
+                th2.setDaemon(True)
+                th2.start()
 
-            th4 = threading.Thread(target=getCMPOTW, args=(main, token))
-            th4.start()
+                th3 = threading.Thread(target=getTWM, args=(main, token))
+                th3.setDaemon(True)
+                th3.start()
 
-            th5 = threading.Thread(target=getCMTWM, args=(main, token))
-            th5.start()
+                th4 = threading.Thread(target=getCMPOTW, args=(main, token))
+                th4.setDaemon(True)
+                th4.start()
+
+                th5 = threading.Thread(target=getCMTWM, args=(main, token))
+                th5.setDaemon(True)
+                th5.start()
+            else:
+                th56 = threading.Thread(target=update_TerminalMaster, args=(main, token))
+                th56.setDaemon(True)
+                th56.start()
+
+                th1 = threading.Thread(target=updatePOTW_DB, args=(main, token))
+                th1.setDaemon(True)
+                th1.start()
+
+                th2 = threading.Thread(target=getTWSWM, args=(main, token))
+                th2.setDaemon(True)
+                th2.start()
+
+                th3 = threading.Thread(target=getTWM, args=(main, token))
+                th3.setDaemon(True)
+                th3.start()
+
+                th4 = threading.Thread(target=getCMPOTW, args=(main, token))
+                th4.setDaemon(True)
+                th4.start()
+
+                th5 = threading.Thread(target=getCMTWM, args=(main, token))
+                th5.setDaemon(True)
+                th5.start()
+
+                th21 = threading.Thread(target=updatePOCW_DB, args=(main, token))
+                th21.setDaemon(True)
+                th21.start()
+
+                th22 = threading.Thread(target=getCWSWM, args=(main, token))
+                th22.setDaemon(True)
+                th22.start()
+
+                th32 = threading.Thread(target=getCWM, args=(main, token))
+                th32.setDaemon(True)
+                th32.start()
+
+                th33 = threading.Thread(target=getCMPOCW, args=(main, token))
+                th33.setDaemon(True)
+                th33.start()
+
+                th34 = threading.Thread(target=getCMCWM, args=(main, token))
+                th34.setDaemon(True)
+                th34.start()
+
+
 
 
             main.login.close()
@@ -95,13 +150,13 @@ def login(main):
             # versionCheck(main,token)
 
         elif login_access.status_code == 401:
-            print('kkkk')
+            # print('kkkk')
             main.messageBox = QMessageBox()
             main.messageBox.setIcon(QMessageBox.Critical)
             main.messageBox.setWindowTitle('Error')
             main.messageBox.setWindowFlags(Qt.WindowStaysOnTopHint)
             main.messageBox.setText('UserName or Password is Invalid!')
-            main.messageBox.exec()
+            main.messageBox.exec_()
 
             # main.mb = QMessageBox()
             # main.mb.setWindowFlags(Qt.WindowStaysOnTopHint)
@@ -120,14 +175,15 @@ def login(main):
         print(traceback.print_exc())
 
 
+
 def versionCheck(main):
     try:
         get_API_config(main)
         payload = {
-            "version": "2.0.0"
+            "version": "3.0.0"
 
         }
-        login_url = main.FastApiURL + '/scanrisk-version'
+        login_url = main.FastApiURL + '/v3/scanrisk-version'
 
         # login_url = main.FastApiURL + f'/dlogin?username={User}&password={password}'
         # print("login_url:", login_url)
@@ -155,7 +211,7 @@ def versionCheck(main):
             main.messageBox.addButton(QPushButton('Yes'), QMessageBox.YesRole)
             main.messageBox.addButton(QPushButton('No'), QMessageBox.RejectRole)
             main.messageBox.buttonClicked.connect(main.DownloadVersionClicked)
-            main.messageBox.exec()
+            main.messageBox.exec_()
     except:
         # print(traceback.print_exc())
         main.messageBox = QMessageBox()
@@ -239,8 +295,43 @@ def DownloadVersionClicked(main,button):
 
 
 
+def update_TerminalMaster(main,token):
+    url = main.FastApiURL + '/v3/terminals'
+    DBheaders = {
+        'Content-Type': 'application/json',
+        'authToken': token
+    }
+    req = requests.request("POST", url, headers=DBheaders)
+    data = req.json()
+    # print(type(data))
+
+    st = time.time()
+    # a = eval(data)
+    # print(data['data'])
+    # data23 = list(itertools.chain(*data['data']))
+    # print(data23)
+    for pos in data['data']:
+        p=list(pos.values())
+        loadTerminalMaster(main,p)
+        # print('p',p)
+        # main.sg_terminalData.emit(p)
+
+    # print('TWSWMdone')
+
+
+
+    # df = pd.DataFrame(data['data']).to_numpy()
+    # df[:, 12] = np.arange(df.shape[0])
+    # print(df,df.shape)
+    et = time.time()
+
+    # print(df[:,13])
+
+    # print(df.shape)
+    # print('timennn', et - st)
+
 def getTWSWM(main,token):
-    TWSWM_url = main.FastApiURL + '/dbtwswm'
+    TWSWM_url = main.FastApiURL + '/v3/dbtwswm'
     DBheaders = {
         'Content-Type': 'application/json',
         'authToken': token
@@ -272,10 +363,43 @@ def getTWSWM(main,token):
 
     # print(df.shape)
     # print('timennn', et - st)
+def getCWSWM(main,token):
+    CWSWM_url = main.FastApiURL + '/v3/dbcwswm'
+    DBheaders = {
+        'Content-Type': 'application/json',
+        'authToken': token
+    }
+    req = requests.request("POST", CWSWM_url, headers=DBheaders)
+    data = req.json()
+    # print(type(data))
+
+    st = time.time()
+    # a = eval(data)
+    # print(data['data'])
+    # data23 = list(itertools.chain(*data['data']))
+    # print(data23)
+    for pos in data['data']:
+        p=list(pos.values())
+
+        main.sgDB_CWSWM.emit(p)
+
+    # print('TWSWMdone')
+
+
+
+    # df = pd.DataFrame(data['data']).to_numpy()
+    # df[:, 12] = np.arange(df.shape[0])
+    # print(df,df.shape)
+    et = time.time()
+
+    # print(df[:,13])
+
+    # print(df.shape)
+    # print('timennn', et - st)
 
 
 def getCMPOTW(main,token):
-    CMPOTW_url = main.FastApiURL + '/dbCMpotw'
+    CMPOTW_url = main.FastApiURL + '/v3/dbCMpotw'
     DBheaders = {
         'Content-Type': 'application/json',
         'authToken': token
@@ -293,9 +417,28 @@ def getCMPOTW(main,token):
         p = list(pos.values())
 
         main.sgDB_CMPOTW.emit(p)
+def getCMPOCW(main,token):
+    CMPOCW_url = main.FastApiURL + '/v3/dbCMpocw'
+    DBheaders = {
+        'Content-Type': 'application/json',
+        'authToken': token
+    }
+    req = requests.request("POST", CMPOCW_url, headers=DBheaders)
+    data = req.json()
+    # print(type(data))
+
+    st = time.time()
+    # a = eval(data)
+    # print(data['data'])
+    # data23 = list(itertools.chain(*data['data']))
+    # print(data23)
+    for pos in data['data']:
+        p = list(pos.values())
+
+        main.sgDB_CMPOCW.emit(p)
 
 def getCMTWM(main,token):
-    CMTWM_url = main.FastApiURL + '/dbCMtwm'
+    CMTWM_url = main.FastApiURL + '/v3/dbCMtwm'
     DBheaders = {
         'Content-Type': 'application/json',
         'authToken': token
@@ -317,7 +460,7 @@ def getCMTWM(main,token):
 
 
 def getTWM(main,token):
-    TWM_url = main.FastApiURL + '/dbtwm'
+    TWM_url = main.FastApiURL + '/v3/dbtwm'
     DBheaders = {
         'Content-Type': 'application/json',
         'authToken': token
@@ -339,12 +482,58 @@ def getTWM(main,token):
 
     print('TWMdone')
     # print('timennn', et - st)
+def getCWM(main,token):
+    CWM_url = main.FastApiURL + '/v3/dbcwm'
+    DBheaders = {
+        'Content-Type': 'application/json',
+        'authToken': token
+    }
+    req = requests.request("POST", CWM_url, headers=DBheaders)
+    data = req.json()
+    # print(type(data))
+
+    st = time.time()
+    # a = eval(data)
+    # print(data['data'])
+    # data23 = list(itertools.chain(*data['data']))
+    # print(data23)
+
+    for pos in data['data']:
+        p = list(pos.values())
+
+        main.sgDB_CWM.emit(p)
+
+    print('CWMdone')
+    # print('timennn', et - st)
+def getCMCWM(main,token):
+    CWM_url = main.FastApiURL + '/v3/dbCMcwm'
+    DBheaders = {
+        'Content-Type': 'application/json',
+        'authToken': token
+    }
+    req = requests.request("POST", CWM_url, headers=DBheaders)
+    data = req.json()
+    # print(type(data))
+
+    st = time.time()
+    # a = eval(data)
+    # print(data['data'])
+    # data23 = list(itertools.chain(*data['data']))
+    # print(data23)
+
+    for pos in data['data']:
+        p = list(pos.values())
+
+        main.sgDB_CMCWM.emit(p)
+
+    print('CMCWMdone')
+    # print('timennn', et - st)
 
 
 def update_contract_FOletest(main,token):
     try:
         st=time.time()
-        DB_url = main.FastApiURL + '/dbcontractFO'
+        DB_url = main.FastApiURL + '/v1/dbcontractFO'
         # DBheaders = {
         #     'Content-Type': 'application/json',
         #     'authToken': token
@@ -434,7 +623,7 @@ def update_contract_FOold(main):
 
 def updatePOTW_DB(main,token):
 
-    DB_url = main.FastApiURL + '/dbpotw'
+    DB_url = main.FastApiURL + '/v3/dbpotw'
     DBheaders = {
         'Content-Type': 'application/json',
         'authToken': token
@@ -442,7 +631,7 @@ def updatePOTW_DB(main,token):
     req = requests.request("POST", DB_url, headers=DBheaders)
     data = req.json()
 
-    DBLTP_url = main.FastApiURL + '/dbLTP'
+    DBLTP_url = main.FastApiURL + '/v3/dbLTP'
     DBheaders = {
         'Content-Type': 'application/json'
     }
@@ -478,6 +667,58 @@ def updatePOTW_DB(main,token):
         main.sgopenPosPOTW.emit(p)
 
     print('POTWdone')
+
+
+
+    # print(df.shape)
+    # print('timennn', et - st)
+def updatePOCW_DB(main,token):
+    try:
+
+        DB_url = main.FastApiURL + '/v3/dbpocw'
+        DBheaders = {
+            'Content-Type': 'application/json',
+            'authToken': token
+        }
+        req = requests.request("POST", DB_url, headers=DBheaders)
+        data = req.json()
+
+        DBLTP_url = main.FastApiURL + '/v3/dbLTP'
+        DBheaders = {
+            'Content-Type': 'application/json'
+        }
+        req = requests.request("POST", DBLTP_url, headers=DBheaders)
+        dataLTP = req.json()
+
+        # print(type(dataLTP),dataLTP)
+
+
+        for pos in data['data']:
+            p=list(pos.values())
+            d=dataLTP.get(str(p[2]))
+            if d:
+                # print('tt')
+                p[10]=d['LTP']
+
+                # (qty * data['LTP']) + netValue
+                p[11]=(p[15]*d['LTP'])+p[16]
+
+                p[21]=d['IV']
+                p[22]=d['Delta'] *p[15]
+                p[23]=d['Theta']*p[15]
+                p[24]=d['Gama']*p[15]
+                p[25]=d['Vega']*p[15]
+
+                if (p[3] in ['FUTIDX','FUTSTK']):
+                    p[17]=p[11]
+                else:
+                    p[18]=p[11]
+
+            main.sgDB_POCW.emit(p)
+
+        print('POCWdone')
+    except:
+        print(traceback.print_exc())
 
 
 

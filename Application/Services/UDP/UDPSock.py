@@ -131,35 +131,60 @@ class Receiver(QtCore.QObject):
                     pass
                 else:
                     self.classWiseList[classname][Exch].append(token)
-                    self.FinalList[Exch].append(token)
             else:
                 self.classWiseList[classname][Exch] = []
                 self.classWiseList[classname][Exch].append(token)
 
-                if Exch in self.FinalList:
-                    self.FinalList[Exch].append(token)
-                else:
-                    self.FinalList[Exch] = []
-                    self.FinalList[Exch].append(token)
         else:
             self.classWiseList[classname] = {}
             self.classWiseList[classname][Exch] = []
             self.classWiseList[classname][Exch].append(token)
 
-            if Exch in self.FinalList:
-                self.FinalList[Exch].append(token)
-            else:
 
-                self.FinalList[Exch] = []
+        if Exch in self.FinalList:
+            if token in self.FinalList[Exch]:
+                pass
+            else:
                 self.FinalList[Exch].append(token)
+        else:
+
+            self.FinalList[Exch] = []
+            self.FinalList[Exch].append(token)
+
+
+
         # print('FinalList',self.FinalList)
 
     def Unsubscribedlist(self,classname, Exch, token):
+        # print(self.FinalList, self.classWiseList)
         if classname in self.classWiseList:
             if Exch in self.classWiseList[classname]:
                 if token in self.classWiseList[classname][Exch]:
                     self.classWiseList[classname][Exch].remove(token)
-                    self.FinalList[Exch].remove(token)
+
+                    # self.FinalList[Exch].remove(token)
+
+        for key,v in self.classWiseList.items():
+            for i in v.values():
+                # print(i)
+                if token in list(i):
+                    self.valueexist=True
+
+        # print(token,self.valueexist,self.FinalList[Exch])
+        if self.valueexist == False:
+            self.FinalList[Exch].remove(token)
+
+        self.valueexist=False
+
+    def UpdateFinalList(self,Exch):
+        self.FinalList[Exch]=[]
+        for key,value in self.classWiseList.items():
+            for i in value.values():
+                for ik in list(i):
+                    if ik in self.FinalList[Exch]:
+                        pass
+                    else:
+                        self.FinalList[Exch].append(ik)
 
 
 

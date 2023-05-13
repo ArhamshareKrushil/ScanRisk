@@ -77,7 +77,7 @@ for i in a :
                                                             print(ih)
                                                     else:
 
-                                                        xx2 = newPath6.replace('D:\scanRiskDesktop-Branch\\', '').replace(r'\\',
+                                                        xx2 = newPath6.replace('E:\ANVTech\scanRiskDesktop\\', '').replace(r'\\',
                                                                                                             '/').replace(
                                                             '\\',
                                                             '/')
@@ -88,7 +88,7 @@ for i in a :
 
                                             else:
 
-                                                xx2 = newPath5.replace('D:\scanRiskDesktop-Branch\\', '').replace(r'\\', '/').replace(
+                                                xx2 = newPath5.replace('E:\ANVTech\scanRiskDesktop\\', '').replace(r'\\', '/').replace(
                                                     '\\',
                                                     '/')
                                                 xx1 = xx2.replace('/' + iw, '')
@@ -99,7 +99,7 @@ for i in a :
 
                                     else:
 
-                                        xx2 = newPath4.replace('D:\scanRiskDesktop-Branch\\', '').replace(r'\\', '/').replace('\\',
+                                        xx2 = newPath4.replace('E:\ANVTech\scanRiskDesktop\\', '').replace(r'\\', '/').replace('\\',
                                                                                                                 '/')
                                         xx1 = xx2.replace('/' + iy, '')
                                         po = (xx2, xx1)
@@ -109,25 +109,25 @@ for i in a :
 
                             else:
 
-                                xx2 = newPath3.replace('D:\scanRiskDesktop-Branch\\', '').replace(r'\\', '/').replace('\\', '/')
+                                xx2 = newPath3.replace('E:\ANVTech\scanRiskDesktop\\', '').replace(r'\\', '/').replace('\\', '/')
                                 xx1 = xx2.replace('/' + iz, '')
                                 po = (xx2, xx1)
                                 lisFinal.append(po)
 
                     else:
 
-                        xx2 = newPath2.replace('D:\scanRiskDesktop-Branch\\', '').replace(r'\\','/').replace('\\','/')
+                        xx2 = newPath2.replace('E:\ANVTech\scanRiskDesktop\\', '').replace(r'\\','/').replace('\\','/')
                         xx1 = xx2.replace('/'+ix, '')
                         po = (xx2,xx1)
                         lisFinal.append(po)
             else:
-                xx2 = newPath1.replace('D:\scanRiskDesktop-Branch\\', '').replace(r'\\', '/').replace('\\', '/')
+                xx2 = newPath1.replace('E:\ANVTech\scanRiskDesktop\\', '').replace(r'\\', '/').replace('\\', '/')
                 xx1 = xx2.replace('/' + ij, '')
                 po = (xx2, xx1)
                 lisFinal.append(po)
     else:
         path1= os.path.join(cwd,i)
-        xx2 = path1.replace('D:\scanRiskDesktop-Branch\\', '').replace(r'\\', '/').replace('\\', '/')
+        xx2 = path1.replace('E:\ANVTech\scanRiskDesktop\\', '').replace(r'\\', '/').replace('\\', '/')
         xx1 = xx2.replace('/' + i, '')
         po = (xx2, xx1)
         lisFinal.append(po)

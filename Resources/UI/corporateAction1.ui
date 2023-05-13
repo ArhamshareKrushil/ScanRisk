@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>614</width>
-    <height>266</height>
+    <height>270</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,58 +36,27 @@
     <property name="verticalSpacing">
      <number>0</number>
     </property>
-    <item row="0" column="0" colspan="3">
-     <widget class="QFrame" name="headerFrame">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
+    <item row="2" column="0" colspan="3">
+     <widget class="QFrame" name="StatusBar">
       <property name="minimumSize">
        <size>
         <width>0</width>
-        <height>0</height>
+        <height>20</height>
        </size>
       </property>
-      <property name="styleSheet">
-       <string notr="true">/* (dot) .QFrame  fix #141, #126, #123 */
-.QFrame {
-background-color: #222222;
-  border-radius: 4px;
-  border: 0px solid transparent;
-
-  /* No frame */
-  /* HLine */
-  /* HLine */
-}
-
-.QFrame[frameShape=&quot;0&quot;] {
-  border-radius: 4px;
-  border: 1px transparent #2d2d2d;
-}
-
-.QFrame[frameShape=&quot;4&quot;] {
-  max-height: 2px;
-  border: none;
-  background-color: #2d2d2d;
-}
-
-.QFrame[frameShape=&quot;5&quot;] {
-  max-width: 2px;
-  border: none;
-  background-color: #2d2d2d;
-}
-
-</string>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>20</height>
+       </size>
       </property>
       <property name="frameShape">
-       <enum>QFrame::Box</enum>
+       <enum>QFrame::StyledPanel</enum>
       </property>
       <property name="frameShadow">
-       <enum>QFrame::Sunken</enum>
+       <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QGridLayout" name="gridLayout_6">
+      <layout class="QGridLayout" name="gridLayout_7">
        <property name="leftMargin">
         <number>0</number>
        </property>
@@ -103,171 +72,54 @@ background-color: #222222;
        <property name="spacing">
         <number>0</number>
        </property>
-       <item row="0" column="2" alignment="Qt::AlignRight|Qt::AlignTop">
-        <widget class="QFrame" name="btnframe_3">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>25</height>
+           <height>20</height>
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: transparent;</string>
+          <string notr="true">background-color:#27496D;
+  border-radius: 0
+px;</string>
          </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+         <property name="text">
+          <string/>
          </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
+         <property name="wordWrap">
+          <bool>true</bool>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QPushButton" name="bt_min_3">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>35</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton {
-  background-color: transparent;
-  border: 1px solid transparent;
-
-}
-QPushButton:hover {
-  background-color: #148CD2;    
-}
-</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="C:/Users/HP/Desktop/Autotrader-Reborn2.1/Resourses/icons/icons.qrc">
-              <normaloff>:/icon1/minus.svg</normaloff>:/icon1/minus.svg</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>15</width>
-              <height>15</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="bt_close_3">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>35</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton {
-  background-color: transparent;
-  border: 1px solid transparent;
-
-}
-QPushButton:hover {
-  background-color: #148CD2;    
-}
-</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="C:/Users/HP/Desktop/Autotrader-Reborn2.1/Resourses/icons/icons.qrc">
-              <normaloff>:/icon1/x.svg</normaloff>:/icon1/x.svg</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>15</width>
-              <height>15</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QFrame" name="frame_4">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
+        <widget class="QFrame" name="gripFolio">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>25</height>
+           <height>20</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>16777215</width>
-           <height>25</height>
+           <width>20</width>
+           <height>20</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:#27496D;
+  border-radius: 0
+px;</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
+         </property>
+         <property name="lineWidth">
+          <number>0</number>
          </property>
         </widget>
        </item>
@@ -289,6 +141,9 @@ QPushButton:hover {
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
+       <property name="topMargin">
+        <number>9</number>
+       </property>
        <item row="0" column="0">
         <widget class="QFrame" name="fMasters">
          <property name="maximumSize">
@@ -541,19 +396,66 @@ QPushButton:hover {
       </layout>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QFrame" name="StatusBar">
+    <item row="0" column="0" colspan="3">
+     <widget class="QFrame" name="headerFrame">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="minimumSize">
        <size>
         <width>0</width>
-        <height>20</height>
+        <height>27</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>20</height>
+        <height>27</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">/* QFrame -----------------------------------------------------------------
+
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qframe
+https://doc.qt.io/qt-5/qframe.html#-prop
+https://doc.qt.io/qt-5/qframe.html#details
+https://stackoverflow.com/questions/14581498/qt-stylesheet-for-hline-vline-color
+
+--------------------------------------------------------------------------- */
+/* (dot) .QFrame  fix #141, #126, #123 */
+.QFrame {
+  background-color: #2D4059;
+
+  border-radius: 4px;
+  border: 0px solid transparent;
+
+  /* No frame */
+  /* HLine */
+  /* HLine */
+}
+
+.QFrame[frameShape=&quot;0&quot;] {
+  border-radius: 4px;
+  border: 1px transparent #2d2d2d;
+}
+
+.QFrame[frameShape=&quot;4&quot;] {
+  max-height: 2px;
+  border: none;
+  background-color: #2d2d2d;
+}
+
+.QFrame[frameShape=&quot;5&quot;] {
+  max-width: 2px;
+  border: none;
+  background-color: #2d2d2d;
+}
+
+
+</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -561,7 +463,7 @@ QPushButton:hover {
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QGridLayout" name="gridLayout_7">
+      <layout class="QGridLayout" name="gridLayout_4">
        <property name="leftMargin">
         <number>0</number>
        </property>
@@ -578,43 +480,15 @@ QPushButton:hover {
         <number>0</number>
        </property>
        <item row="0" column="0">
-        <widget class="QLabel" name="label">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
+        <widget class="QFrame" name="frame_4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(80, 80, 80);
-  border-radius: 0
-px;</string>
-         </property>
-         <property name="text">
-          <string>log:</string>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QFrame" name="gripFolio">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>20</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(25,25,25);
-  border-radius: 0px;</string>
+          <string notr="true">border-radius:0px;</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -622,9 +496,113 @@ px;</string>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <property name="lineWidth">
-          <number>0</number>
-         </property>
+         <widget class="Line" name="line_7">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>3</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>4</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: transparent;</string>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="bt_min">
+          <property name="geometry">
+           <rect>
+            <x>550</x>
+            <y>0</y>
+            <width>29</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+  background-color: transparent;
+border-radius: 10px;
+
+  border: 1px solid transparent;
+
+}
+QPushButton:hover {
+border-radius: 10px;
+  background-color: #000000;    
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../icons/icons.qrc">
+            <normaloff>:/newPrefix/icons/minus-circle.svg</normaloff>:/newPrefix/icons/minus-circle.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="bt_close">
+          <property name="geometry">
+           <rect>
+            <x>580</x>
+            <y>0</y>
+            <width>31</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+  background-color: transparent;
+border-radius: 10px;
+
+  border: 1px solid transparent;
+
+}
+QPushButton:hover {
+border-radius: 10px;
+  background-color: #ff2626;    
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../icons/icons.qrc">
+            <normaloff>:/newPrefix/icons/x-circle.svg</normaloff>:/newPrefix/icons/x-circle.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
         </widget>
        </item>
       </layout>
@@ -634,7 +612,7 @@ px;</string>
   </widget>
  </widget>
  <resources>
-  <include location="C:/Users/HP/Desktop/Autotrader-Reborn2.1/Resourses/icons/icons.qrc"/>
+  <include location="../icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -199,7 +199,7 @@ def get_udp_port(self):
         jConfig = json.load(f1)
         self.port_fo = jConfig['UDP_FO']
         self.port_cash = jConfig['UDP_CASH']
-        self.port_cd = jConfig['UDP_CD']
+        # self.port_cd = jConfig['UDP_CD']
         f1.close()
     except:
         logging.error(sys.exc_info()[1])

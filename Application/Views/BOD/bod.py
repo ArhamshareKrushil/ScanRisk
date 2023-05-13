@@ -8,11 +8,11 @@ import datetime
 import pandas as pd
 from Application.Views.titlebar import tBar
 
-from Themes import dt1
+from Themes import dt3
 import platform
 from PyQt5 import uic
 from PyQt5.QtCore import *
-from Themes.dt2 import dt1
+from Themes.dt3 import dt3
 from PyQt5.QtWidgets import *
 import qdarkstyle
 
@@ -51,7 +51,7 @@ class Ui_BOD(QMainWindow):
         self.isCMOpenPosupdated=False
 
 
-        self.setStyleSheet(dt1)
+        self.setStyleSheet(dt3)
 
         osType = platform.system()
 

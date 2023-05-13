@@ -26,10 +26,16 @@ class ModelTS(QtCore.QAbstractTableModel):
             value = self._data[index.row(), index.column()]
             if role == Qt.DisplayRole:
 
-                if index.column() in [9, 11, 14, 16, 17, 18, 19, 20]:
+                if index.column() in [9, 11, 14, 16, 17, 18, 19, 20,29,30]:
                     value = int(value)
                     return value
+
+                elif index.column() in [21,22,23,24,25,26,27,28]:
+                    value = float(value)
+                    return value
+
                 return value
+
 
             if role == Qt.TextAlignmentRole:
                 value = self._data[index.row(), index.column()]

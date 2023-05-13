@@ -27,7 +27,7 @@ class ModelTS(QtCore.QAbstractTableModel):
             value = self._data[index.row(), index.column()]
             if role == Qt.DisplayRole:
 
-                if index.column() in [1,2,3,4,5,8,9,10,11,12,13,14,15,22,23,16,17,18,19]:
+                if index.column() in [1,2,3,4,5,8,9,10,11,12,13,14,15,22,23]:
                     value = int(value)
                     return value
 
@@ -43,7 +43,7 @@ class ModelTS(QtCore.QAbstractTableModel):
             if role == Qt.TextAlignmentRole:
                 value = self._data[index.row(), index.column()]
 
-                if index.column() in [1,2,3,4,5,8,9,10,11,12,13,14,15,22,23,16,17,18,19]:
+                if index.column() in [1,2,3,4,5,8,9,10,11,12,13,14,15,22,23]:
                     # Align right, vertical middle.
                     return Qt.AlignVCenter + Qt.AlignRight
 

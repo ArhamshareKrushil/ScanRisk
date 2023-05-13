@@ -1,9 +1,9 @@
 import traceback
 import json
-from Themes import dt1
+from Themes import dt3
 import platform
 from PyQt5 import uic
-from Themes.dt2 import dt1
+from Themes.dt3 import dt3
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 import qdarkstyle
@@ -42,12 +42,12 @@ class BranchScriptSummary(QMainWindow):
         # self.title.sgPoss.connect(self.movWin)
 
         tables_details_BWSWM(self)
-        self.setStyleSheet(dt1)
+        self.setStyleSheet(dt3)
 
         self.createSlots()
 
         self.createShortcuts()
-        # QSizeGrip(self.frameGrip)
+        # QSizeGrip(self.gripFolio)
 
 
     def createSlots(self):
@@ -56,6 +56,7 @@ class BranchScriptSummary(QMainWindow):
         self.le_text_2.textChanged.connect(self.Text2Filter)
         self.tableView.horizontalHeader().setContextMenuPolicy(Qt.CustomContextMenu)
         self.tableView.horizontalHeader().customContextMenuRequested.connect(self.headerRightClickMenu)
+        self.tableView.customContextMenuRequested.connect(self.tableRightClickMenu)
 
     def Text2Filter(self, text):
         self.smodel.setFilterKeyColumn(1)
@@ -200,6 +201,18 @@ class BranchScriptSummary(QMainWindow):
         except:
             print(sys.exc_info()[1])
 
+    def tableRightClickMenu(main, position):
+        try:
+            # a=(self.tableView.selectedIndexes()[0].data())
+            Menu = QMenu()
+            Help = Menu.addAction("Help")
+            action = Menu.exec_(main.tableView.mapToGlobal(position))
+
+            if action == Help:
+                pass
+
+        except:
+            print(sys.exc_info()[1])
     def movWin(self, x, y):
         self.move(self.pos().x() + x, self.pos().y() + y)
 
