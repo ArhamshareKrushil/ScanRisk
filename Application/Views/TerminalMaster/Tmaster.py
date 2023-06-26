@@ -121,7 +121,10 @@ class UI_Tmaster(QMainWindow):
         # self.table[self.model.lastSerialNo] = ['','','','','','']
 
 
-        self.model._data = np.insert(self.model._data, 0, ['','','','','',''], axis=0)
+        # self.model._data = np.insert(self.model._data, 0, ['','','','','',''], axis=0)
+
+        self.table[1:self.lastSerialNo + 1] = self.table[:self.lastSerialNo]
+        self.table[0] = ['', '']
 
 
         self.lastSerialNo += 1
@@ -137,12 +140,16 @@ class UI_Tmaster(QMainWindow):
     def Updaterow(self):
         st=time.time()
 
-        self.sgupdateTWMwithTmaster.emit(self.model.updatedrow)
-        path=os.path.join(loc,'Terminalmasternew2.csv')
 
-        np.savetxt(path, self.table[:self.lastSerialNo], delimiter=",", header='TerminalID,UserID,Name,Branch,GRP,active', fmt='%s')
+        # print('updatedRow',self.model.updatedrow)
+
+        self.sgupdateTWMwithTmaster.emit(self.model.updatedrow)
+
+        # path=os.path.join(loc,'Terminalmasternew2.csv')
+
+        # np.savetxt(path, self.table[:self.lastSerialNo], delimiter=",", header='TerminalID,UserID,Name,Branch,GRP,active', fmt='%s')
         # print(self.model.updatedrow)
-        self.model.updatedrow={}
+        self.model.updatedrow.clear()
 
 
 
@@ -152,15 +159,27 @@ class UI_Tmaster(QMainWindow):
     def REMOVErow(self):
         i=self.tableView.selectionModel().selectedRows()[0].row()
         abc = self.tableView.selectedIndexes()[0].data()
+
+        self.table[i:self.lastSerialNo - 1] = self.table[i+1:self.lastSerialNo]
+        self.table[self.lastSerialNo-1] = [0, 0]
+
+        # main.NetPosition.table[sno:(main.NetPosition.lastSerialNo - 1)] = main.NetPosition.table[
+        #                                                                   sno + 1:(main.NetPosition.lastSerialNo)]
+        # main.NetPosition.table[main.NetPosition.lastSerialNo - 1] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        # main.NetPosition.lastSerialNo -= 1
+        # main.NetPosition.model.lastSerialNo -= 1
+        # main.NetPosition.model.DelRows(sno, sno)
+        # main.NetPosition.model.rowCount()
         # print(i)
 
-        self.model._data=np.delete(self.model._data, i, axis=0)
+        # self.model._data=np.delete(self.model._data, i, axis=0)
+
         # self.model._data=self.model._data[np.where(self.model._data[:,0] != abc)]
         self.lastSerialNo -= 1
         self.model.lastSerialNo -= 1
 
-        self.model.rowCount()
         self.model.DelRows()
+        self.model.rowCount()
 
 
         ind = self.model.index(0, 0)

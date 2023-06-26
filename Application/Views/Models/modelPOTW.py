@@ -19,9 +19,9 @@ class ModelTS(QtCore.QAbstractTableModel):
         # self._data1 = data
         self.heads=heads
         if(isReset):
-            self.lastSerialNo = data.shape[0]
+            self.flastSerialNo = data.shape[0]
         else:
-            self.lastSerialNo = 0
+            self.flastSerialNo = 0
 
 
     def data(self, index, role):
@@ -77,7 +77,7 @@ class ModelTS(QtCore.QAbstractTableModel):
         except:
             print(traceback.print_exc())
     def rowCount(self, index=''):
-        return self.lastSerialNo
+        return self.flastSerialNo
 
 
 
@@ -92,7 +92,7 @@ class ModelTS(QtCore.QAbstractTableModel):
     def insertRows(self, position=0, rows=1, index=QModelIndex()):
         try:
             # self.beginInsertRows(QModelIndex(), position, position + rows - 1)
-            self.beginInsertRows(QModelIndex(), self.lastSerialNo - 1, self.lastSerialNo - 1)
+            self.beginInsertRows(QModelIndex(), self.flastSerialNo - 1, self.flastSerialNo - 1)
             self.endInsertRows()
             return True
         except:
@@ -101,14 +101,14 @@ class ModelTS(QtCore.QAbstractTableModel):
     def insertMultiRows(self, position=0, rows=1, index=QModelIndex()):
         try:
             self.beginInsertRows(QModelIndex(), position, position + rows - 1)
-            # self.beginInsertRows(QModelIndex(), self.lastSerialNo - 1, self.lastSerialNo - 1)
+            # self.beginInsertRows(QModelIndex(), self.flastSerialNo - 1, self.flastSerialNo - 1)
             self.endInsertRows()
             return True
         except:
             print(sys.exc_info())
 
     def DelRows(self, position=0, rows=1, index=QModelIndex()):
-        self.beginRemoveRows(QModelIndex(), 0, 0)
+        self.beginRemoveRows(QModelIndex(), position, rows)
         self.endRemoveRows()
         return  True
 

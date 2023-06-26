@@ -37,15 +37,18 @@ class ModelTS(QtCore.QAbstractTableModel):
                 else:
                     return str(value)
 
-            if role == Qt.TextAlignmentRole:
+            elif role == Qt.TextAlignmentRole:
                 value = self._data[index.row(), index.column()]
 
                 if isinstance(value, int) or isinstance(value, float):
                     # Align right, vertical middle.
                     return Qt.AlignVCenter + Qt.AlignRight
 
-            if role == Qt.EditRole:
+            elif role == Qt.EditRole:
                 value = self._data[index.row(), index.column()]
+                # value=self.editvalue
+                # self._data[index.row(), index.column()]=''
+                # print(self.editvalue)
                 return str(value)
 
 
@@ -53,23 +56,39 @@ class ModelTS(QtCore.QAbstractTableModel):
         except:
             print(traceback.print_exc())
 
-    def setData(self, index, value, role):
+    def setData(self, index, value, role=None):
+        # print('dd')
         if role == Qt.EditRole:
             if value == self._data[index.row()][index.column()]:
-                pass
+                return False
             else:
+                if value=='':
+                    return False
 
-                Tid=self._data[index.row()][0]
-                if Tid not in self.updatedrow:
-                    Uid=self._data[index.row()][1]
-                    self.updatedrow[Tid]=Uid
+                else:
+                    Tid=self._data[index.row()][0]
+                    if Tid!='':
 
-                self._data[index.row()][index.column()] = str(value)
-            return True
+                        if Tid not in self.updatedrow:
+                            Uid=self._data[index.row()][1]
+
+                            self.updatedrow[Tid]={}
+                            self.updatedrow[Tid]['Oldid']=Uid
+                            self.updatedrow[Tid]['Newid']=str(value)
+                        else:
+                            self.updatedrow[Tid]['Newid'] = str(value)
+
+
+
+                    self._data[index.row()][index.column()] = str(value)
+                    return True
+
+
+
 
 
     def flags(self, index):
-        return Qt.ItemIsSelectable | Qt.ItemIsEnabled | Qt.ItemIsEditable
+        return  Qt.ItemIsEnabled | Qt.ItemIsEditable
 
 
     def rowCount(self, index=''):

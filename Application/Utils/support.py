@@ -49,75 +49,82 @@ def getLogPath(xclass):
 
     # print('main.logPath',xclass.logPath)
     logging.basicConfig(filename=xclass.logPath, filemode='a+', level=logging.INFO,
-                        format='%(asctime)s    %(levelname)s    %(module)s  %(funcName)s   %(message)s',
-                        datefmt='%m/%d/%Y %I:%M:%S %p')
+                        format='%(asctime)s    %(levelname)s    %(module)s  %(funcName)s   %(message)s')
 
 
-@QtCore.pyqtSlot(object)
-def updatePOCW(main,data):
+# @QtCore.pyqtSlot(object)
+# def updatePOCW(main,data):
+#
+#
+#
+#     #data[0]=clientID  data[2]=Token
+#     fltrarr1 = main.POCW.table[np.where((main.POCW.table[:main.POCW.lastSerialNo,0]==data[0]) & (main.POCW.table[:main.POCW.lastSerialNo,2]==data[2]))]
+#
+#
+#
+#
+#     if (fltrarr1.size != 0):
+#         #     isRecordExist=True
+#         #
+#         # if(isRecordExist):
+#         #     # print('exist')
+#
+#
+#         SerialNo = fltrarr1[0][12]
+#         # print(SerialNo)
+#         # rowNo = np.where(main.POCW.table[:, 12] == SerialNo)[0][0]
+#         # print('rowNo',rowNo)
+#
+#         TOC = fltrarr1[0][30]
+#
+#         if TOC < data[26]:
+#
+#
+#             editList = [8, 9, 15, 16, 19, 20, 30]
+#             main.POCW.table[SerialNo, editList] = [data[8],data[9],data[15], data[16],data[19],data[20],data[26]]
+#
+#             for i in editList:
+#                 ind = main.POCW.model.index(SerialNo, i)
+#                 main.POCW.model.dataChanged.emit(ind, ind)
+#
+#
+#
+#
+#     else:
+#
+#         # if (data[0] == 0 or data[0] == '0'):
+#         #     print('kkkkkk')
+#
+#         main.POCW.table[main.POCW.lastSerialNo, :] = [data[0], 'NSEFO', data[2], data[3], data[4],  data[5],data[6],  data[7], data[8], data[9], data[10],data[11], main.POCW.lastSerialNo, data[13], data[14], data[15], data[16], data[17], data[18], data[19],data[20],data[21],data[22],data[23],data[24],data[25],0.0,0.0,0.0,0.0,data[26]]
+#
+#
+#
+#         main.POCW.lastSerialNo += 1
+#
+#         main.POCW.model.lastSerialNo += 1
+#         main.POCW.model.insertRows()
+#         main.POCW.model.rowCount()
+#         ind = main.POCW.model.index(0, 0)
+#         ind1 = main.POCW.model.index(0, 1)
+#         main.POCW.model.dataChanged.emit(ind, ind1)
+#
+#         Ftoken = main.fo_contract[data[2] - 35000, 17]
+#         main.Reciever.subscribedlist('POTW', 'NSEFO', data[2])
+#         main.Reciever.subscribedlist('POTW', 'NSEFO', Ftoken)
+#
+#         if main.tokenDict.get(data[2]):
+#                 main.tokenDict[data[2]]['POCW'].append(main.POCW.model.lastSerialNo - 1)
+#         else:
+#             main.tokenDict[data[2]] = {}
+#             main.tokenDict[data[2]]['POCW'] = [main.POCW.model.lastSerialNo - 1]
+#             main.tokenDict[data[2]]['POTW'] = []
+#
+#
+#
+#
+#
+#     #data[0]=clientID  data[2]=Token
 
-
-
-    #data[0]=clientID  data[2]=Token
-    fltrarr1 = main.POCW.table[np.where((main.POCW.table[:main.POCW.lastSerialNo,0]==data[0]) & (main.POCW.table[:main.POCW.lastSerialNo,2]==data[2]))]
-
-
-
-
-    if (fltrarr1.size != 0):
-    #     isRecordExist=True
-    #
-    # if(isRecordExist):
-    #     # print('exist')
-
-
-        SerialNo = fltrarr1[0][12]
-        # print(SerialNo)
-        # rowNo = np.where(main.POCW.table[:, 12] == SerialNo)[0][0]
-        # print('rowNo',rowNo)
-
-        TOC = fltrarr1[0][30]
-
-        if TOC < data[26]:
-
-
-            editList = [8,9,15, 16,19,20,30]
-            main.POCW.table[SerialNo, editList] = [data[8],data[9],data[15], data[16],data[19],data[20],data[26]]
-
-            for i in editList:
-                ind = main.POCW.model.index(SerialNo, i)
-                main.POCW.model.dataChanged.emit(ind, ind)
-
-
-
-
-    else:
-
-
-
-        main.POCW.table[main.POCW.lastSerialNo, :] = [data[0], 'NSEFO', data[2], data[3], data[4],  data[5],data[6],  data[7], data[8], data[9], data[10],data[11], main.POCW.lastSerialNo, data[13], data[14], data[15], data[16], data[17], data[18], data[19],data[20],data[21],data[22],data[23],data[24],data[25],0.0,0.0,0.0,0.0,data[26]]
-
-
-
-        main.POCW.lastSerialNo += 1
-
-        main.POCW.model.lastSerialNo += 1
-        main.POCW.model.insertRows()
-        main.POCW.model.rowCount()
-        ind = main.POCW.model.index(0, 0)
-        ind1 = main.POCW.model.index(0, 1)
-        main.POCW.model.dataChanged.emit(ind, ind1)
-
-        Ftoken = main.fo_contract[data[2] - 35000, 17]
-        main.Reciever.subscribedlist('POTW', 'NSEFO', data[2])
-        main.Reciever.subscribedlist('POTW', 'NSEFO', Ftoken)
-
-        if main.tokenDict.get(data[2]):
-            main.tokenDict[data[2]]['POCW'].append(main.POCW.model.lastSerialNo - 1)
-        else:
-            main.tokenDict[data[2]] = {}
-            main.tokenDict[data[2]]['POCW'] = [main.POCW.model.lastSerialNo - 1]
-            main.tokenDict[data[2]]['POTW'] = []
 
 @QtCore.pyqtSlot(object)
 def updateCWSWM(main, data):
@@ -183,7 +190,7 @@ def updateCWM(main, data):
         Data = main.CWM.table[rowNo, :]
         CashMRG = Data[23]
 
-        NetMRG = data[13] + CashMRG
+        NetMRG = data[9] + CashMRG
 
 
         # Expo,Span,totalMrg,DayPREM,premMRG,NETMRG,NetPRem,PeakMrg
@@ -385,75 +392,454 @@ def loadLimit(main):
     # main.Limit.table[:, 0] = main.Limit.table[:, 0].astype('str')
     # main.isTmasterloaded = True
 
+# @pyqtSlot(list)
+# def updatePOTW(main,data):
+#
+#
+#     # print(data,data[0],data[2])
+#     try:
+#
+#         fltrarr1 = main.POTW.table[np.where((main.POTW.table[:main.POTW.lastSerialNo, 0] == data[0]) & (
+#                 main.POTW.table[:main.POTW.lastSerialNo, 2] == data[2]))]
+#
+#         if (fltrarr1.size != 0):
+#             # print('update')
+#             #     isRecordExist=True
+#             #
+#             # if(isRecordExist):
+#             #     # print('exist')
+#
+#             SerialNo = fltrarr1[0][12]
+#
+#             TOC = fltrarr1[0][33]
+#
+#             if TOC < data[29]:
+#
+#
+#
+#                 editList = [8, 9, 15, 16, 20, 23,33]
+#                 main.POTW.table[SerialNo, editList] = [data[8], data[9], data[15], data[16], data[20], data[23],data[29]]
+#
+#                 for i in editList:
+#                     ind = main.POTW.model.index(SerialNo, i)
+#                     main.POTW.model.dataChanged.emit(ind, ind)
+#
+#
+#
+#         else:
+#
+#             main.POTW.table[main.POTW.lastSerialNo] = [data[0],
+#                                                              data[1], data[2], data[3], data[4], data[5],
+#                                                             data[6], data[7], data[8], data[9],data[10],
+#                                                              data[11], main.POTW.lastSerialNo,data[13], data[14],data[15],
+#                                                              data[16], data[17], data[18],data[19], data[20],
+#                                                        data[21],data[22], data[23],data[24],data[25],
+#                                                              data[26],data[27],data[28],0.0,0.0,
+#                                                              0.0,0.0,data[29]]
+#
+#             # main.POTW.table[main.POTW.lastSerialNo, :] = data
+#
+#             main.POTW.lastSerialNo += 1
+#             main.POTW.lastSerialNo += 1
+#             main.POTW.model.insertRows()
+#             main.POTW.model.rowCount()
+#             ind = main.POTW.model.index(0, 0)
+#             ind1 = main.POTW.model.index(0, 1)
+#             main.POTW.model.dataChanged.emit(ind, ind1)
+#
+#             Ftoken = main.fo_contract[data[2] - 35000, 17]
+#             main.Reciever.subscribedlist('POTW', 'NSEFO', data[2])
+#             main.Reciever.subscribedlist('POTW', 'NSEFO', Ftoken)
+#
+#             if main.tokenDict.get(data[2]):
+#                 main.tokenDict[data[2]]['POTW'].append(main.POTW.lastSerialNo-1)
+#             else:
+#                 main.tokenDict[data[2]]={}
+#                 main.tokenDict[data[2]]['POTW'] = [main.POTW.lastSerialNo-1]
+#                 main.tokenDict[data[2]]['POCW'] = []
+#
+#
+#     except:
+#         print(traceback.print_exc(), len(data))
+#
+#     # print('ppp', main.POTW.lastSerialNo)
+#
+#
+#
+#     # main.isPOTWupdated = True
+#
+#     # if UserID not in main.POTW.clientList:
+#     #     main.POTW.clientList.append(UserID)
+
+
+# @pyqtSlot(list)
+# def updateFilterPOTW(main,data):
+#
+#
+#     # print(data,data[0],data[2])
+#     try:
+#
+#         if data[0]==main.POTW.FilterTable[0,0]:
+#
+#
+#
+#             fltrarr1=np.where(main.POTW.FilterTable[:main.POTW.model.flastSerialNo,2]==data[2])[0]
+#
+#
+#             # fltrarr1 = np.where((main.POTW.FilterTable[:main.POTW.model.flastSerialNo, 0] == data[0]) & (
+#             #         main.POTW.FilterTable[:main.POTW.model.flastSerialNo, 2] == data[2]))[0]
+#
+#             if (fltrarr1.size != 0):
+#                 # print('update')
+#                 #     isRecordExist=True
+#                 #
+#                 # if(isRecordExist):
+#                 #     # print('exist')
+#
+#
+#                 # SerialNo = fltrarr1[0][12]
+#                 SerialNo = fltrarr1[0]
+#
+#                 fltrarr1 = main.POTW.FilterTable[SerialNo, :]
+#                 rowNo=fltrarr1[12]
+#
+#
+#                 TOC = fltrarr1[33]
+#
+#                 if TOC < data[29]:
+#
+#
+#
+#                     editList = [8, 9, 15, 16, 20, 23,33]
+#                     main.POTW.FilterTable[SerialNo, editList] = [data[8], data[9], data[15], data[16], data[20], data[23],data[29]]
+#                     main.POTW.table[rowNo, editList] = [data[8], data[9], data[15], data[16], data[20], data[23],data[29]]
+#
+#                     for i in editList:
+#                         ind = main.POTW.model.index(SerialNo, i)
+#                         main.POTW.model.dataChanged.emit(ind, ind)
+#
+#
+#
+#             else:
+#
+#                 main.POTW.table[main.POTW.lastSerialNo] = [data[0],
+#                                                              data[1], data[2], data[3], data[4], data[5],
+#                                                             data[6], data[7], data[8], data[9],data[10],
+#                                                              data[11], main.POTW.lastSerialNo,data[13], data[14],data[15],
+#                                                              data[16], data[17], data[18],data[19], data[20],
+#                                                        data[21],data[22], data[23],data[24],data[25],
+#                                                              data[26],data[27],data[28],0.0,0.0,
+#                                                              0.0,0.0,data[29]]
+#
+#                 # main.POTW.FilterTable[main.POTW.model.flastSerialNo, :] = data
+#
+#                 main.POTW.FilterTable[main.POTW.model.flastSerialNo] = [data[0],
+#                                                            data[1], data[2], data[3], data[4], data[5],
+#                                                            data[6], data[7], data[8], data[9], data[10],
+#                                                            data[11], main.POTW.lastSerialNo, data[13], data[14],
+#                                                            data[15],
+#                                                            data[16], data[17], data[18], data[19], data[20],
+#                                                            data[21], data[22], data[23], data[24], data[25],
+#                                                            data[26], data[27], data[28], 0.0, 0.0,
+#                                                            0.0, 0.0, data[29]]
+#                 main.POTW.lastSerialNo += 1
+#                 main.POTW.model.flastSerialNo += 1
+#                 main.POTW.model.insertRows()
+#                 main.POTW.model.rowCount()
+#                 ind = main.POTW.model.index(0, 0)
+#                 ind1 = main.POTW.model.index(0, 1)
+#                 main.POTW.model.dataChanged.emit(ind, ind1)
+#
+#                 Ftoken = main.fo_contract[data[2] - 35000, 17]
+#                 main.Reciever.subscribedlist('POTW', 'NSEFO', data[2])
+#                 main.Reciever.subscribedlist('POTW', 'NSEFO', Ftoken)
+#
+#                 if main.tokenDict.get(data[2]):
+#                     main.tokenDict[data[2]]['POTW'].append(main.POTW.model.flastSerialNo - 1)
+#                 else:
+#                     main.tokenDict[data[2]] = {}
+#                     main.tokenDict[data[2]]['POTW'] = [main.POTW.model.flastSerialNo - 1]
+#                     main.tokenDict[data[2]]['POCW'] = []
+#
+#                 if main.maintokenDict.get(data[2]):
+#                     main.maintokenDict[data[2]]['POTW'].append(main.POTW.lastSerialNo - 1)
+#                 else:
+#                     main.maintokenDict[data[2]] = {}
+#                     main.maintokenDict[data[2]]['POTW'] = [main.POTW.lastSerialNo - 1]
+#                     main.maintokenDict[data[2]]['POCW'] = []
+#
+#
+#         else:
+#             fltrarr1 = main.POTW.table[np.where((main.POTW.table[:main.POTW.lastSerialNo, 0] == data[0]) & (
+#                     main.POTW.table[:main.POTW.lastSerialNo, 2] == data[2]))]
+#
+#             if (fltrarr1.size != 0):
+#                 # print('update')
+#                 #     isRecordExist=True
+#                 #
+#                 # if(isRecordExist):
+#                 #     # print('exist')
+#
+#                 SerialNo = fltrarr1[0][12]
+#                 # SerialNo = fltrarr1[0]
+#
+#                 # fltrarr1 = main.POTW.FilterTable[SerialNo, :]
+#                 # rowNo = fltrarr1[12]
+#
+#                 TOC = fltrarr1[0][33]
+#
+#                 if TOC < data[29]:
+#                     editList = [8, 9, 15, 16, 20, 23, 33]
+#
+#                     main.POTW.table[SerialNo, editList] = [data[8], data[9], data[15], data[16], data[20], data[23],
+#                                                         data[29]]
+#             else:
+#                 if main.POTW.lastSerialNo ==0:
+#                     main.POTW.FilterTable[main.POTW.model.flastSerialNo] = [data[0],
+#                                                                            data[1], data[2], data[3], data[4], data[5],
+#                                                                            data[6], data[7], data[8], data[9], data[10],
+#                                                                            data[11], main.POTW.lastSerialNo,
+#                                                                            data[13], data[14],
+#                                                                            data[15],
+#                                                                            data[16], data[17], data[18], data[19],
+#                                                                            data[20],
+#                                                                            data[21], data[22], data[23], data[24],
+#                                                                            data[25],
+#                                                                            data[26], data[27], data[28], 0.0, 0.0,
+#                                                                            0.0, 0.0, data[29]]
+#                     main.POTW.model.flastSerialNo += 1
+#                     main.POTW.model.insertRows()
+#                     main.POTW.model.rowCount()
+#                     ind = main.POTW.model.index(0, 0)
+#                     ind1 = main.POTW.model.index(0, 1)
+#                     main.POTW.model.dataChanged.emit(ind, ind1)
+#
+#                     if main.tokenDict.get(data[2]):
+#                         main.tokenDict[data[2]]['POTW'].append(main.POTW.model.flastSerialNo - 1)
+#                     else:
+#                         main.tokenDict[data[2]] = {}
+#                         main.tokenDict[data[2]]['POTW'] = [main.POTW.model.flastSerialNo - 1]
+#                         main.tokenDict[data[2]]['POCW'] = []
+#
+#
+#
+#                 main.POTW.table[main.POTW.lastSerialNo] = [data[0],
+#                                                            data[1], data[2], data[3], data[4], data[5],
+#                                                            data[6], data[7], data[8], data[9], data[10],
+#                                                            data[11], main.POTW.lastSerialNo, data[13], data[14],
+#                                                            data[15],
+#                                                            data[16], data[17], data[18], data[19], data[20],
+#                                                            data[21], data[22], data[23], data[24], data[25],
+#                                                            data[26], data[27], data[28], 0.0, 0.0,
+#                                                            0.0, 0.0, data[29]]
+#                 main.POTW.lastSerialNo+=1
+#
+#
+#                 Ftoken = main.fo_contract[data[2] - 35000, 17]
+#                 main.Reciever.subscribedlist('POTW', 'NSEFO', data[2])
+#                 main.Reciever.subscribedlist('POTW', 'NSEFO', Ftoken)
+#
+#                 if main.maintokenDict.get(data[2]):
+#                     main.maintokenDict[data[2]]['POTW'].append(main.POTW.lastSerialNo - 1)
+#                 else:
+#                     main.maintokenDict[data[2]] = {}
+#                     main.maintokenDict[data[2]]['POTW'] = [main.POTW.lastSerialNo - 1]
+#                     main.maintokenDict[data[2]]['POCW'] = []
+#
+#
+#     except:
+#         print(traceback.print_exc(), rowNo,fltrarr1[12])
+#
+#     # print('ppp', main.POTW.lastSerialNo)
+#
+#
+#
+#     # main.isPOTWupdated = True
+#
+#     # if UserID not in main.POTW.clientList:
+#     #     main.POTW.clientList.append(UserID)
+
 @pyqtSlot(list)
-def updatePOTW(main,data):
+def updateFilterPOTW(main,data):
 
 
     # print(data,data[0],data[2])
     try:
 
-        fltrarr1 = main.POTW.table[np.where((main.POTW.table[:main.POTW.model.lastSerialNo, 0] == data[0]) & (
-                main.POTW.table[:main.POTW.model.lastSerialNo, 2] == data[2]))]
 
-        if (fltrarr1.size != 0):
-            # print('update')
-            #     isRecordExist=True
-            #
-            # if(isRecordExist):
-            #     # print('exist')
-
-            SerialNo = fltrarr1[0][12]
-
-            TOC = fltrarr1[0][33]
-
-            if TOC < data[29]:
+        if data[0]==main.POTW.FilterTable[0,0]:
 
 
 
-                editList = [8, 9, 15, 16, 20, 23,33]
-                main.POTW.table[SerialNo, editList] = [data[8], data[9], data[15], data[16], data[20], data[23],data[29]]
-
-                for i in editList:
-                    ind = main.POTW.model.index(SerialNo, i)
-                    main.POTW.model.dataChanged.emit(ind, ind)
+            fltrarr1=np.where((main.POTW.FilterTable[:main.POTW.model.flastSerialNo,34]==data[30]) &(main.POTW.FilterTable[:main.POTW.model.flastSerialNo,0]==data[0]) & (main.POTW.FilterTable[:main.POTW.model.flastSerialNo,2]==data[2]))[0]
 
 
+            # fltrarr1 = np.where((main.POTW.FilterTable[:main.POTW.model.flastSerialNo, 0] == data[0]) & (
+            #         main.POTW.FilterTable[:main.POTW.model.flastSerialNo, 2] == data[2]))[0]
 
-        else:
+            if (fltrarr1.size != 0):
+                # print('update')
+                #     isRecordExist=True
+                #
+                # if(isRecordExist):
+                #     # print('exist')
 
-            main.POTW.table[main.POTW.model.lastSerialNo] = [data[0],
+
+                # SerialNo = fltrarr1[0][12]
+                SerialNo = fltrarr1[0]
+
+                fltrarr1 = main.POTW.FilterTable[SerialNo, :]
+                rowNo=fltrarr1[12]
+
+
+                TOC = fltrarr1[33]
+
+                if data[29]>=0:
+
+
+
+                    editList = [8, 9, 15, 16, 20, 23,33]
+                    main.POTW.FilterTable[SerialNo, editList] = [data[8], data[9], data[15], data[16], data[20], data[23],data[29]]
+                    main.POTW.table[rowNo, editList] = [data[8], data[9], data[15], data[16], data[20], data[23],data[29]]
+
+                    for i in editList:
+                        ind = main.POTW.model.index(SerialNo, i)
+                        main.POTW.model.dataChanged.emit(ind, ind)
+
+
+
+
+
+            else:
+
+                main.POTW.table[main.POTW.lastSerialNo] = [data[0],
                                                              data[1], data[2], data[3], data[4], data[5],
                                                             data[6], data[7], data[8], data[9],data[10],
-                                                             data[11], main.POTW.model.lastSerialNo,data[13], data[14],data[15],
+                                                             data[11], main.POTW.lastSerialNo,data[13], data[14],data[15],
                                                              data[16], data[17], data[18],data[19], data[20],
                                                        data[21],data[22], data[23],data[24],data[25],
                                                              data[26],data[27],data[28],0.0,0.0,
-                                                             0.0,0.0,data[29]]
+                                                             0.0,0.0,data[29],data[30]]
 
-            # main.POTW.table[main.POTW.model.lastSerialNo, :] = data
+                # main.POTW.FilterTable[main.POTW.model.flastSerialNo, :] = data
 
-            main.POTW.lastSerialNo += 1
-            main.POTW.model.lastSerialNo += 1
-            main.POTW.model.insertRows()
-            main.POTW.model.rowCount()
-            ind = main.POTW.model.index(0, 0)
-            ind1 = main.POTW.model.index(0, 1)
-            main.POTW.model.dataChanged.emit(ind, ind1)
+                main.POTW.FilterTable[main.POTW.model.flastSerialNo] = [data[0],
+                                                           data[1], data[2], data[3], data[4], data[5],
+                                                           data[6], data[7], data[8], data[9], data[10],
+                                                           data[11], main.POTW.lastSerialNo, data[13], data[14],
+                                                           data[15],
+                                                           data[16], data[17], data[18], data[19], data[20],
+                                                           data[21], data[22], data[23], data[24], data[25],
+                                                           data[26], data[27], data[28], 0.0, 0.0,
+                                                           0.0, 0.0, data[29],data[30]]
+                main.POTW.lastSerialNo += 1
+                main.POTW.model.flastSerialNo += 1
+                main.POTW.model.insertRows()
+                main.POTW.model.rowCount()
+                ind = main.POTW.model.index(0, 0)
+                ind1 = main.POTW.model.index(0, 1)
+                main.POTW.model.dataChanged.emit(ind, ind1)
 
-            Ftoken = main.fo_contract[data[2] - 35000, 17]
-            main.Reciever.subscribedlist('POTW', 'NSEFO', data[2])
-            main.Reciever.subscribedlist('POTW', 'NSEFO', Ftoken)
+                Ftoken = main.fo_contract[data[2] - 35000, 17]
+                main.Reciever.subscribedlist('POTW', 'NSEFO', data[2])
+                main.Reciever.subscribedlist('POTW', 'NSEFO', Ftoken)
 
-            if main.tokenDict.get(data[2]):
-                main.tokenDict[data[2]]['POTW'].append(main.POTW.model.lastSerialNo-1)
+                if main.tokenDict.get(data[2]):
+                    main.tokenDict[data[2]]['POTW'].append(main.POTW.model.flastSerialNo - 1)
+                else:
+                    main.tokenDict[data[2]] = {}
+                    main.tokenDict[data[2]]['POTW'] = [main.POTW.model.flastSerialNo - 1]
+                    main.tokenDict[data[2]]['POCW'] = []
+
+                if main.maintokenDict.get(data[2]):
+                    main.maintokenDict[data[2]]['POTW'].append(main.POTW.lastSerialNo - 1)
+                else:
+                    main.maintokenDict[data[2]] = {}
+                    main.maintokenDict[data[2]]['POTW'] = [main.POTW.lastSerialNo - 1]
+                    main.maintokenDict[data[2]]['POCW'] = []
+
+
+        else:
+            fltrarr1 = main.POTW.table[np.where((main.POTW.table[:main.POTW.lastSerialNo, 34] == data[30]) & (main.POTW.table[:main.POTW.lastSerialNo, 0] == data[0]) & (
+                    main.POTW.table[:main.POTW.lastSerialNo, 2] == data[2]))]
+
+            if (fltrarr1.size != 0):
+                # print('update')
+                #     isRecordExist=True
+                #
+                # if(isRecordExist):
+                #     # print('exist')
+
+                SerialNo = fltrarr1[0][12]
+                # SerialNo = fltrarr1[0]
+
+                # fltrarr1 = main.POTW.FilterTable[SerialNo, :]
+                # rowNo = fltrarr1[12]
+
+                TOC = fltrarr1[0][33]
+
+                if data[29]>=0:
+                    editList = [8, 9, 15, 16, 20, 23, 33]
+
+                    main.POTW.table[SerialNo, editList] = [data[8], data[9], data[15], data[16], data[20], data[23],
+                                                        data[29]]
+
             else:
-                main.tokenDict[data[2]]={}
-                main.tokenDict[data[2]]['POTW'] = [main.POTW.model.lastSerialNo-1]
-                main.tokenDict[data[2]]['POCW'] = []
+                if main.POTW.lastSerialNo ==0:
+                    main.POTW.FilterTable[main.POTW.model.flastSerialNo] = [data[0],
+                                                                           data[1], data[2], data[3], data[4], data[5],
+                                                                           data[6], data[7], data[8], data[9], data[10],
+                                                                           data[11], main.POTW.lastSerialNo,
+                                                                           data[13], data[14],
+                                                                           data[15],
+                                                                           data[16], data[17], data[18], data[19],
+                                                                           data[20],
+                                                                           data[21], data[22], data[23], data[24],
+                                                                           data[25],
+                                                                           data[26], data[27], data[28], 0.0, 0.0,
+                                                                           0.0, 0.0, data[29],data[30]]
+                    main.POTW.model.flastSerialNo += 1
+                    main.POTW.model.insertRows()
+                    main.POTW.model.rowCount()
+                    ind = main.POTW.model.index(0, 0)
+                    ind1 = main.POTW.model.index(0, 1)
+                    main.POTW.model.dataChanged.emit(ind, ind1)
+
+                    if main.tokenDict.get(data[2]):
+                        main.tokenDict[data[2]]['POTW'].append(main.POTW.model.flastSerialNo - 1)
+                    else:
+                        main.tokenDict[data[2]] = {}
+                        main.tokenDict[data[2]]['POTW'] = [main.POTW.model.flastSerialNo - 1]
+                        main.tokenDict[data[2]]['POCW'] = []
+
+
+
+                main.POTW.table[main.POTW.lastSerialNo] = [data[0],
+                                                           data[1], data[2], data[3], data[4], data[5],
+                                                           data[6], data[7], data[8], data[9], data[10],
+                                                           data[11], main.POTW.lastSerialNo, data[13], data[14],
+                                                           data[15],
+                                                           data[16], data[17], data[18], data[19], data[20],
+                                                           data[21], data[22], data[23], data[24], data[25],
+                                                           data[26], data[27], data[28], 0.0, 0.0,
+                                                           0.0, 0.0, data[29],data[30]]
+                main.POTW.lastSerialNo+=1
+
+
+                Ftoken = main.fo_contract[data[2] - 35000, 17]
+                main.Reciever.subscribedlist('POTW', 'NSEFO', data[2])
+                main.Reciever.subscribedlist('POTW', 'NSEFO', Ftoken)
+
+                if main.maintokenDict.get(data[2]):
+                    main.maintokenDict[data[2]]['POTW'].append(main.POTW.lastSerialNo - 1)
+                else:
+                    main.maintokenDict[data[2]] = {}
+                    main.maintokenDict[data[2]]['POTW'] = [main.POTW.lastSerialNo - 1]
+                    main.maintokenDict[data[2]]['POCW'] = []
 
 
     except:
-        print(traceback.print_exc(), len(data))
+        print(traceback.print_exc(), rowNo,fltrarr1[12])
 
     # print('ppp', main.POTW.lastSerialNo)
 
@@ -464,14 +850,286 @@ def updatePOTW(main,data):
     # if UserID not in main.POTW.clientList:
     #     main.POTW.clientList.append(UserID)
 
+@QtCore.pyqtSlot(object)
+def updatePOCW(main,data):
 
+
+    if data[0] == main.POCW.FilterTable[0, 0]:
+        fltrarr1 = np.where(main.POCW.FilterTable[:main.POCW.model.flastSerialNo, 2] == data[2])[0]
+
+        if (fltrarr1.size != 0):
+            #     isRecordExist=True
+            #
+            # if(isRecordExist):
+            #     # print('exist')
+
+            # SerialNo = fltrarr1[0][12]
+            SerialNo = fltrarr1[0]
+
+            fltrarr1 = main.POCW.FilterTable[SerialNo, :]
+            rowNo = fltrarr1[12]
+
+            TOC = fltrarr1[30]
+
+            if TOC < data[26]:
+
+                editList = [8, 9, 15, 16, 19, 20, 30]
+                main.POCW.FilterTable[SerialNo, editList] = [data[8], data[9], data[15], data[16], data[19], data[20],
+                                                       data[26]]
+                main.POCW.table[rowNo, editList] = [data[8], data[9], data[15], data[16], data[19], data[20],
+                                                       data[26]]
+
+                for i in editList:
+                    ind = main.POCW.model.index(SerialNo, i)
+                    main.POCW.model.dataChanged.emit(ind, ind)
+
+
+
+
+        else:
+
+            main.POCW.table[main.POCW.lastSerialNo, :] = [data[0], 'NSEFO', data[2], data[3], data[4], data[5], data[6],
+                                                          data[7], data[8], data[9], data[10], data[11],
+                                                          main.POCW.lastSerialNo, data[13], data[14], data[15],
+                                                          data[16], data[17], data[18], data[19], data[20], data[21],
+                                                          data[22], data[23], data[24], data[25], 0.0, 0.0, 0.0, 0.0,
+                                                          data[26]]
+            main.POCW.FilterTable[main.POCW.model.flastSerialNo, :] = [data[0], 'NSEFO', data[2], data[3], data[4], data[5], data[6],
+                                                          data[7], data[8], data[9], data[10], data[11],
+                                                          main.POCW.lastSerialNo, data[13], data[14], data[15],
+                                                          data[16], data[17], data[18], data[19], data[20], data[21],
+                                                          data[22], data[23], data[24], data[25], 0.0, 0.0, 0.0, 0.0,
+                                                          data[26]]
+
+            main.POCW.lastSerialNo += 1
+
+            main.POCW.model.flastSerialNo += 1
+            main.POCW.model.insertRows()
+            main.POCW.model.rowCount()
+            ind = main.POCW.model.index(0, 0)
+            ind1 = main.POCW.model.index(0, 1)
+            main.POCW.model.dataChanged.emit(ind, ind1)
+
+            Ftoken = main.fo_contract[data[2] - 35000, 17]
+            main.Reciever.subscribedlist('POcW', 'NSEFO', data[2])
+            main.Reciever.subscribedlist('POCW', 'NSEFO', Ftoken)
+
+            if main.maintokenDict.get(data[2]):
+                main.maintokenDict[data[2]]['POCW'].append(main.POCW.lastSerialNo - 1)
+            else:
+                main.maintokenDict[data[2]] = {}
+                main.maintokenDict[data[2]]['POCW'] = [main.POCW.lastSerialNo - 1]
+                main.maintokenDict[data[2]]['POTW'] = []
+
+            if main.tokenDict.get(data[2]):
+                main.tokenDict[data[2]]['POCW'].append(main.POCW.model.flastSerialNo - 1)
+            else:
+                main.tokenDict[data[2]] = {}
+                main.tokenDict[data[2]]['POCW'] = [main.POCW.model.flastSerialNo - 1]
+                main.tokenDict[data[2]]['POTW'] = []
+
+
+    else:
+        fltrarr1 = main.POCW.table[np.where((main.POCW.table[:main.POCW.lastSerialNo, 0] == data[0]) & (
+                    main.POCW.table[:main.POCW.lastSerialNo, 2] == data[2]))]
+
+        if (fltrarr1.size != 0):
+            #     isRecordExist=True
+            #
+            # if(isRecordExist):
+            #     # print('exist')
+
+            SerialNo = fltrarr1[0][12]
+            # print(SerialNo)
+            # rowNo = np.where(main.POCW.table[:, 12] == SerialNo)[0][0]
+            # print('rowNo',rowNo)
+
+            TOC = fltrarr1[0][30]
+
+            if TOC < data[26]:
+
+                editList = [8, 9, 15, 16, 19, 20, 30]
+                main.POCW.table[SerialNo, editList] = [data[8], data[9], data[15], data[16], data[19], data[20],
+                                                       data[26]]
+
+
+
+
+
+
+        else:
+            if main.POCW.lastSerialNo == 0:
+                main.POCW.FilterTable[main.POCW.model.flastSerialNo] = [data[0], 'NSEFO', data[2], data[3], data[4], data[5], data[6],
+                                                          data[7], data[8], data[9], data[10], data[11],
+                                                          main.POCW.lastSerialNo, data[13], data[14], data[15],
+                                                          data[16], data[17], data[18], data[19], data[20], data[21],
+                                                          data[22], data[23], data[24], data[25], 0.0, 0.0, 0.0, 0.0,
+                                                          data[26]]
+                main.POCW.model.flastSerialNo += 1
+                main.POCW.model.insertRows()
+                main.POCW.model.rowCount()
+                ind = main.POCW.model.index(0, 0)
+                ind1 = main.POCW.model.index(0, 1)
+                main.POCW.model.dataChanged.emit(ind, ind1)
+
+                if main.tokenDict.get(data[2]):
+                    main.tokenDict[data[2]]['POCW'].append(main.POCW.model.flastSerialNo - 1)
+                else:
+                    main.tokenDict[data[2]] = {}
+                    main.tokenDict[data[2]]['POCW'] = [main.POCW.model.flastSerialNo - 1]
+                    main.tokenDict[data[2]]['POTW'] = []
+
+
+
+            main.POCW.table[main.POCW.lastSerialNo, :] = [data[0], 'NSEFO', data[2], data[3], data[4], data[5], data[6],
+                                                          data[7], data[8], data[9], data[10], data[11],
+                                                          main.POCW.lastSerialNo, data[13], data[14], data[15],
+                                                          data[16], data[17], data[18], data[19], data[20], data[21],
+                                                          data[22], data[23], data[24], data[25], 0.0, 0.0, 0.0, 0.0,
+                                                          data[26]]
+
+            main.POCW.lastSerialNo += 1
+
+
+
+            Ftoken = main.fo_contract[data[2] - 35000, 17]
+            main.Reciever.subscribedlist('POCW', 'NSEFO', data[2])
+            main.Reciever.subscribedlist('POCW', 'NSEFO', Ftoken)
+
+            if main.maintokenDict.get(data[2]):
+                main.maintokenDict[data[2]]['POCW'].append(main.POCW.lastSerialNo - 1)
+            else:
+                main.maintokenDict[data[2]] = {}
+                main.maintokenDict[data[2]]['POCW'] = [main.POCW.lastSerialNo - 1]
+                main.maintokenDict[data[2]]['POTW'] = []
+
+
+
+
+
+    #data[0]=clientID  data[2]=Token
+
+# def updateFilterPOTWopenPosition(main,data):
+#     try:
+#
+#         fltrarr1 = np.where((main.POTW.FilterTable[:main.POTW.lastSerialNo, 0] == data[0]) & (
+#                 main.POTW.FilterTable[:main.POTW.lastSerialNo, 2] == data[2]))[0]
+#
+#         if (fltrarr1.size != 0):
+#             # print('update')
+#             #     isRecordExist=True
+#             #
+#             # if(isRecordExist):
+#             #     # print('exist')
+#
+#             # SerialNo = fltrarr1[0][12]
+#             SerialNo = fltrarr1[0]
+#
+#             fltrarr1 = main.POTW.FilterTable[SerialNo, :]
+#             rowNo = fltrarr1[12]
+#
+#             TOC = fltrarr1[33]
+#
+#             if TOC < data[29]:
+#
+#                 editList = [8, 9, 15, 16, 20, 23, 33]
+#                 main.POTW.FilterTable[SerialNo, editList] = [data[8], data[9], data[15], data[16], data[20], data[23],
+#                                                              data[29]]
+#                 main.POTW.table[rowNo, editList] = [data[8], data[9], data[15], data[16], data[20], data[23], data[29]]
+#
+#                 for i in editList:
+#                     ind = main.POTW.model.index(SerialNo, i)
+#                     main.POTW.model.dataChanged.emit(ind, ind)
+#
+#
+#
+#         else:
+#
+#             main.POTW.table[main.POTW.lastSerialNo] = [data[0],
+#                                                        data[1], data[2], data[3], data[4], data[5],
+#                                                        data[6], data[7], data[8], data[9], data[10],
+#                                                        data[11], main.POTW.lastSerialNo, data[13], data[14],
+#                                                        data[15],
+#                                                        data[16], data[17], data[18], data[19], data[20],
+#                                                        data[21], data[22], data[23], data[24], data[25],
+#                                                        data[26], data[27], data[28], 0.0, 0.0,
+#                                                        0.0, 0.0, data[29]]
+#
+#             # main.POTW.FilterTable[main.POTW.lastSerialNo, :] = data
+#
+#             if data[0] == main.POTW.FilterTable[0, 0]:
+#                 # print('dddd')
+#                 main.POTW.FilterTable[main.POTW.lastSerialNo] = [data[0],
+#                                                                        data[1], data[2], data[3], data[4], data[5],
+#                                                                        data[6], data[7], data[8], data[9], data[10],
+#                                                                        data[11], main.POTW.lastSerialNo, data[13],
+#                                                                        data[14],
+#                                                                        data[15],
+#                                                                        data[16], data[17], data[18], data[19], data[20],
+#                                                                        data[21], data[22], data[23], data[24], data[25],
+#                                                                        data[26], data[27], data[28], 0.0, 0.0,
+#                                                                        0.0, 0.0, data[29]]
+#                 # main.POTW.lastSerialNo += 1
+#                 main.POTW.lastSerialNo += 1
+#                 main.POTW.model.insertRows()
+#                 main.POTW.model.rowCount()
+#                 ind = main.POTW.model.index(0, 0)
+#                 ind1 = main.POTW.model.index(0, 1)
+#                 main.POTW.model.dataChanged.emit(ind, ind1)
+#
+#             Ftoken = main.fo_contract[data[2] - 35000, 17]
+#             main.Reciever.subscribedlist('POTW', 'NSEFO', data[2])
+#             main.Reciever.subscribedlist('POTW', 'NSEFO', Ftoken)
+#
+#             if main.tokenDict.get(data[2]):
+#                 main.tokenDict[data[2]]['POTW'].append(main.POTW.lastSerialNo - 1)
+#             else:
+#                 main.tokenDict[data[2]] = {}
+#                 main.tokenDict[data[2]]['POTW'] = [main.POTW.lastSerialNo - 1]
+#                 main.tokenDict[data[2]]['POCW'] = []
+#
+#
+#     except:
+#         print(traceback.print_exc(), len(data))
+#
+#     # print('ppp', main.POTW.lastSerialNo)
+#
+#     # main.POTW.table[:data.shape[0], :] = data
+#     # # main.POTW.model._data[:data.shape[0], :] = data[:, 1:]
+#     #
+#     # main.POTW.lastSerialNo += data.shape[0]
+#     #
+#     # main.POTW.lastSerialNo += data.shape[0]
+#     #
+#     # main.POTW.model.insertMultiRows(rows=data.shape[0])
+#     #
+#     # main.POTW.model.rowCount()
+#     # ind = main.POTW.model.index(0, 0)
+#     # ind1 = main.POTW.model.index(0, 1)
+#     # main.POTW.model.dataChanged.emit(ind, ind1)
+#     # # et=time.time()
+#     # print('timettt',et-st)
+#
+#     # main.POTW.table[main.POTW.lastSerialNo, :] = [data['UserID'], data['Exchange'], data['Token'], , sym, exp,
+#     #                                                     strike, opt, TQty, Tamt, 0,
+#     #                                                     0, main.POTW.lastSerialNo, 0, 0, TQty, Tamt, 0.0, 0.0,
+#     #                                                     0.0, netPrem, 0.0, 0.0, premMrg]
+#     # main.POTW.table[main.POTW.lastSerialNo, :] = data
+#
+#     # main.POTW.lastSerialNo += 1
+#     # main.POTW.lastSerialNo += 1
+#     # main.POTW.model.insertRows()
+#     # main.POTW.model.rowCount()
+#     # ind = main.POTW.model.index(0, 0)
+#     # ind1 = main.POTW.model.index(0, 1)
+#     # main.POTW.model.dataChanged.emit(ind, ind1)
 def updatePOTWopenPosition(main,data):
     try:
     # st=time.time()
     # print(data)
 
-        fltrarr1 = main.POTW.table[np.where((main.POTW.table[:main.POTW.model.lastSerialNo, 0] == data[0]) & (
-                main.POTW.table[:main.POTW.model.lastSerialNo, 2] == data[2]))]
+        fltrarr1 = main.POTW.table[np.where((main.POTW.table[:main.POTW.lastSerialNo, 0] == data[0]) & (
+                main.POTW.table[:main.POTW.lastSerialNo, 2] == data[2]))]
 
         if (fltrarr1.size != 0):
             # print('update')
@@ -498,16 +1156,16 @@ def updatePOTWopenPosition(main,data):
 
         else:
 
-            main.POTW.table[main.POTW.model.lastSerialNo] = [data[0], data[1], data[2], data[3], data[4], data[5],
-                                                   data[6], data[7], data[8], data[9],data[10],data[11], main.POTW.model.lastSerialNo,
+            main.POTW.table[main.POTW.lastSerialNo] = [data[0], data[1], data[2], data[3], data[4], data[5],
+                                                   data[6], data[7], data[8], data[9],data[10],data[11], main.POTW.lastSerialNo,
                                                    data[13], data[14],
                                                    data[15], data[16], data[17], data[18],
                                                    data[19], data[20],data[21],data[22] ,data[23],data[24],data[25],data[26],data[27],data[28],0.0,0.0,0.0,0.0,data[29]]
 
-            # main.POTW.table[main.POTW.model.lastSerialNo, :] = data
+            # main.POTW.table[main.POTW.lastSerialNo, :] = data
 
             main.POTW.lastSerialNo += 1
-            main.POTW.model.lastSerialNo += 1
+            main.POTW.lastSerialNo += 1
             main.POTW.model.insertRows()
             main.POTW.model.rowCount()
             ind = main.POTW.model.index(0, 0)
@@ -519,14 +1177,14 @@ def updatePOTWopenPosition(main,data):
             main.Reciever.subscribedlist('POTW', 'NSEFO', Ftoken)
 
             if main.tokenDict.get(data[2])!=None:
-                main.tokenDict[data[2]]['POTW'].append(main.POTW.model.lastSerialNo-1)
+                main.tokenDict[data[2]]['POTW'].append(main.POTW.lastSerialNo-1)
             else:
                 main.tokenDict[data[2]]={}
-                main.tokenDict[data[2]]['POTW'] = [main.POTW.model.lastSerialNo-1]
+                main.tokenDict[data[2]]['POTW'] = [main.POTW.lastSerialNo-1]
                 main.tokenDict[data[2]]['POCW'] = []
     except:
-        pass
-        # print(traceback.print_exc(),main.fo_contract.size,data[2])
+
+        print(traceback.print_exc(),main.fo_contract.size,data[2])
 
     # print('ppp', main.POTW.lastSerialNo)
 
@@ -535,7 +1193,7 @@ def updatePOTWopenPosition(main,data):
     #
     # main.POTW.lastSerialNo += data.shape[0]
     #
-    # main.POTW.model.lastSerialNo += data.shape[0]
+    # main.POTW.lastSerialNo += data.shape[0]
     #
     # main.POTW.model.insertMultiRows(rows=data.shape[0])
     #
@@ -546,14 +1204,14 @@ def updatePOTWopenPosition(main,data):
     # # et=time.time()
     # print('timettt',et-st)
 
-    # main.POTW.table[main.POTW.model.lastSerialNo, :] = [data['UserID'], data['Exchange'], data['Token'], , sym, exp,
+    # main.POTW.table[main.POTW.lastSerialNo, :] = [data['UserID'], data['Exchange'], data['Token'], , sym, exp,
     #                                                     strike, opt, TQty, Tamt, 0,
-    #                                                     0, main.POTW.model.lastSerialNo, 0, 0, TQty, Tamt, 0.0, 0.0,
+    #                                                     0, main.POTW.lastSerialNo, 0, 0, TQty, Tamt, 0.0, 0.0,
     #                                                     0.0, netPrem, 0.0, 0.0, premMrg]
-    # main.POTW.table[main.POTW.model.lastSerialNo, :] = data
+    # main.POTW.table[main.POTW.lastSerialNo, :] = data
 
     # main.POTW.lastSerialNo += 1
-    # main.POTW.model.lastSerialNo += 1
+    # main.POTW.lastSerialNo += 1
     # main.POTW.model.insertRows()
     # main.POTW.model.rowCount()
     # ind = main.POTW.model.index(0, 0)
@@ -778,19 +1436,24 @@ def updateTWM(main, data):
 def updateLTP_POCW(main,data):
     try:
         st=time.time()
-        if (main.POCW.model.lastSerialNo !=0):
-            # print("pt")
-            # x = (np.unique(main.POCW.table[:main.POCW.lastSerialNo, 2]))
+        if (main.POCW.lastSerialNo !=0):
+            # print('kdkk')
+            # if main.tokenDict.get(data['Token']):
+            #     listSno = main.tokenDict[data['Token']]['POCW']
+            #     if listSno!=[]:
+            #         Fsno=listSno[0]
+            #         isFilterUpdate=True
+            #     else:
+            #         isFilterUpdate=False
+            # else:
+            #     isFilterUpdate = False
 
 
-            # if (data['Token'] in x ):
-             #   print("2")
-            # fltr = np.asarray([data['Token']])
-            # x = main.POCW.table[np.in1d(main.POCW.table[:, 2], fltr), 12]
+            if main.maintokenDict.get(data['Token']):
+                x = main.maintokenDict[data['Token']]['POCW']
 
-            # print(x)
-            if main.tokenDict.get(data['Token']):
-                x = main.tokenDict[data['Token']]['POCW']
+
+
                 if x !=[]:
                     for i in x:
                         netValue = main.POCW.table[i, 16]
@@ -807,10 +1470,44 @@ def updateLTP_POCW(main,data):
 
                         main.POCW.table[i, editableList] = [data['LTP'],  mtm,mtm]
 
-                        for j in editableList:
-                            ind = main.POCW.model.index(i, j)
-                            # ind1 = main.marketW.model.index(i,1)
-                            main.POCW.model.dataChanged.emit(ind, ind)
+
+
+                        # for j in editableList:
+                        #     ind = main.POCW.model.index(i, j)
+                        #     # ind1 = main.marketW.model.index(i,1)
+                        #     main.POCW.model.dataChanged.emit(ind, ind)
+
+            # fltrarr1 = np.where(main.POCW.FilterTable[:main.POCW.model.flastSerialNo, 2] == data['Token'])[0]
+            # print('kdkdkk',fltrarr1)
+
+            if main.tokenDict.get(data['Token']):
+                x = main.tokenDict[data['Token']]['POCW']
+
+                if x != []:
+
+                    # print('jfj')
+                    rowNo = x[0]
+                    # netValue = main.POCW.FilterTable[rowNo, 16]
+                    # qty = main.POCW.FilterTable[rowNo, 15]
+                    # ins = main.POCW.FilterTable[rowNo, 3]
+                    sNo = main.POCW.FilterTable[rowNo, 12]
+                    mainData = main.POCW.table[sNo, :]
+
+                    # mtm = (qty * data['LTP']) + netValue
+                    #
+                    # if ins in ['FUTSTK', 'FUTIDX']:
+                    #     editableList = [10, 11, 17]
+                    # else:
+                    #     editableList = [10, 11, 18]
+
+                    editableList = [10, 11, 17,18]
+                    main.POCW.FilterTable[rowNo, editableList] = [mainData[10], mainData[11], mainData[17],mainData[18]]
+
+                    for j in editableList:
+                        ind = main.POCW.model.index(rowNo, j)
+                        main.POCW.model.dataChanged.emit(ind, ind)
+
+
 
         et = time.time()
         # print('timePOCWLTP', et - st)
@@ -826,7 +1523,7 @@ def updateLTP_POCW(main,data):
 # def updateLTP_POTW(main,data):
 #     try:
 #         st=time.time()
-#         if (main.POTW.model.lastSerialNo !=0):
+#         if (main.POTW.lastSerialNo !=0):
 #             # print("pt")
 #             # x = (np.unique(main.POTW.table[:main.POTW.lastSerialNo, 2]))
 #
@@ -868,19 +1565,30 @@ def updateLTP_POCW(main,data):
 def updateLTP_POTW(main,data):
     try:
         st=time.time()
-        if (main.POTW.model.lastSerialNo !=0):
-            # print("pt")
-            # x = (np.unique(main.POTW.table[:main.POTW.lastSerialNo, 2]))
+        # if data['Token']==50134 or data['Token']==50099 or data['Token']==50102 or data['Token']==50132 :
+        #     print('jf',data['LTP'],data['Token'],time.time())
+        if (main.POTW.lastSerialNo !=0):
 
 
-            # if (data['Token'] in x ):
-             #   print("2")
-            # fltr = np.asarray([data['Token']])
-            # x = main.POTW.table[np.in1d(main.POTW.table[:, 2], fltr), 12]
-            if main.tokenDict.get(data['Token']):
-                x=main.tokenDict[data['Token']]['POTW']
+            # if main.tokenDict.get(data['Token']):
+            #     listSno = main.tokenDict[data['Token']]['POCW']
+            #     if listSno!=[]:
+            #         Fsno=listSno[0]
+            #         isFilterUpdate=True
+            #     else:
+            #         isFilterUpdate=False
+            # else:
+            #     isFilterUpdate = False
+
+
+
+            if main.maintokenDict.get(data['Token']):
+                x=main.maintokenDict[data['Token']]['POTW']
+
+                #72448
                 # print(x)
                 if x!= []:
+
                     for i in x:
                         netValue = main.POTW.table[i, 16]
                         qty = main.POTW.table[i, 15]
@@ -895,10 +1603,46 @@ def updateLTP_POTW(main,data):
 
 
                         main.POTW.table[i, editableList] = [data['LTP'],  mtm,mtm]
+                        # if isFilterUpdate==True:
+                        #     if Fsno==i:
 
-                        for j in editableList:
-                            ind = main.POTW.model.index(i, j)
-                            main.POTW.model.dataChanged.emit(ind, ind)
+
+                        # for j in editableList:
+                        #     ind = main.POTW.model.index(i, j)
+                        #     main.POTW.model.dataChanged.emit(ind, ind)
+
+            if main.tokenDict.get(data['Token']):
+                x = main.tokenDict[data['Token']]['POTW']
+            # fltrarr1 = np.where(main.POTW.FilterTable[:main.POTW.model.flastSerialNo, 2] == data['Token'])[0]
+            # print('kdkdkk',fltrarr1)
+
+                if x!=[]:
+                    # print('jfj')
+                    rowNo=x[0]
+                    # netValue = main.POTW.FilterTable[rowNo, 12]
+                    # qty = main.POTW.FilterTable[rowNo, 15]
+                    # ins = main.POTW.FilterTable[rowNo, 3]
+
+                    sNo = main.POTW.FilterTable[rowNo, 12]
+                    mainData = main.POTW.table[sNo,:]
+
+
+
+                    # mtm = (qty * data['LTP']) + netValue
+                    #
+                    # if ins in ['FUTSTK', 'FUTIDX']:
+                    #     editableList = [10, 11, 21]
+                    # else:
+                    #     editableList = [10, 11, 22]
+
+                    editableList = [10, 11, 21,22]
+                    main.POTW.FilterTable[rowNo, editableList] = [mainData[10], mainData[11], mainData[21],mainData[22]]
+
+                    for j in editableList:
+                        ind = main.POTW.model.index(rowNo, j)
+                        main.POTW.model.dataChanged.emit(ind, ind)
+
+
 
         et=time.time()
         # print('timePOTWLTP',et-st)
@@ -1214,12 +1958,14 @@ def updateFOMTMPOTW(main):
         if main.POTW.lastSerialNo!=0:
 
 
-            df3 = dt.Frame(main.POTW.table[:main.POTW.model.lastSerialNo,
+            df3 = dt.Frame(main.POTW.table[:main.POTW.lastSerialNo,
                            [0,4,11,21,22,25,26,27,28,31,32,33]],
                            names=['UserID', 'Symbol', 'MTM','FUT_MTM','OPT_MTM','Delta',
                           'Theta','Gama','Vega','UpSCNMTM','DownSCNMTM','TOC'])
 
             df3[2:] = dt.float64
+
+
 
             x = df3[:, dt.sum(dt.f[2:]), dt.by('UserID', 'Symbol')]
 
@@ -1249,13 +1995,13 @@ def updateFOMTMPOTW(main):
                     editList = [5, 6, 7,10,11,12,13,14,15,16]
                     main.TWSWM.table[rowNo, editList] = [i[3], i[4], i[2],i[5], i[6], i[7],i[8], i[9], i[10],i[11]]
 
-                    # for t in editList:
-                    #     ind = main.TWSWM.model.index(rowNo, t)
-                    #     main.TWSWM.model.dataChanged.emit(ind, ind)
+                    for t in editList:
+                        ind = main.TWSWM.model.index(rowNo, t)
+                        main.TWSWM.model.dataChanged.emit(ind, ind)
 
-            ind = main.TWSWM.model.index(0, 0)
-            ind1 = main.TWSWM.model.index(0, 1)
-            main.TWSWM.model.dataChanged.emit(ind, ind1)
+            # ind = main.TWSWM.model.index(0, 0)
+            # ind1 = main.TWSWM.model.index(0, 1)
+            # main.TWSWM.model.dataChanged.emit(ind, ind1)
 
             for i in x1.to_numpy():
                 # rowarray = np.where(main.TWM.table[:main.TWM.model.lastSerialNo, 0] == i[0])[0]
@@ -1301,16 +2047,137 @@ def updateFOMTMPOTW(main):
 
 
 
-                    # for t in editList:
-                    #     ind = main.TWM.model.index(rowNo, t)
-                    #     main.TWM.model.dataChanged.emit(ind, ind)
-            ind = main.TWM.model.index(0, 0)
-            ind1 = main.TWM.model.index(0, 1)
-            main.TWM.model.dataChanged.emit(ind, ind1)
+                    for t in editList:
+                        ind = main.TWM.model.index(rowNo, t)
+                        main.TWM.model.dataChanged.emit(ind, ind)
+            # ind = main.TWM.model.index(0, 0)
+            # ind1 = main.TWM.model.index(0, 1)
+            # main.TWM.model.dataChanged.emit(ind, ind1)
         et = time.time()
         # print('FOMTMPOTW',et-st)
     except:
         print('hhh',traceback.print_exc())
+
+# def updateFOMTMPOTW(main):
+#     try:
+#         st=time.time()
+#         if main.POTW.lastSerialNo!=0:
+#
+#
+#             df3 = dt.Frame(main.POTW.table[:main.POTW.lastSerialNo,
+#                            [0,4,11,21,22,25,26,27,28,31,32,33,2,15,16,3]],
+#                            names=['UserID', 'Symbol', 'MTM','FUT_MTM','OPT_MTM','Delta',
+#                           'Theta','Gama','Vega','UpSCNMTM','DownSCNMTM','TOC','Token','netQty','netVal','instrument'])
+#
+#             df3[2:12] = dt.float64
+#             df3[12:14] = dt.int64
+#             df3[14] = dt.float64
+#
+#             df4=dt.Frame(main.fo_contract[:,[2,19]],names=['Token','LTP'])
+#             df4[0] = dt.int64
+#             df4[1] = dt.float64
+#             df4.key = "Token"
+#             df3 = df3[:, :, dt.join(df4)]
+#
+#
+#             df3[:, dt.update(MTM=dt.f['netQty'] * dt.abs(dt.f['LTP']) + dt.f['netVal'])]
+#             df3[:, dt.update(FUT_MTM=dt.ifelse((dt.f['instrument'] == 'FUTSTK') | (dt.f['instrument'] == 'FUTIDX'), dt.f.MTM,0.0))]
+#             df3[:, dt.update(OPT_MTM=dt.ifelse((dt.f['instrument'] == 'OPTSTK') | (dt.f['instrument'] == 'OPTIDX'), dt.f.MTM,0.0))]
+#
+#
+#
+#
+#             x = df3[:, dt.sum(dt.f[2:15]), dt.by('UserID', 'Symbol')]
+#
+#             x1=x[:, dt.sum(dt.f[2:15]), dt.by('UserID')]
+#
+#
+#             for i in x.to_numpy():
+#                 # rowarray = np.where((main.TWSWM.table[:main.TWSWM.model.lastSerialNo, 0] == i[0])& (main.TWSWM.table[:main.TWSWM.model.lastSerialNo, 1] == i[1]))[0]
+#
+#                 try:
+#                     rowNo=main.twswmDict.get(i[0]).get(i[1])
+#                 except:
+#                     rowNo=None
+#                 # print(fltrarr)
+#
+#                 # if (fltrarr.size != 0):
+#                 #         isRecordExist = True
+#
+#                 if (rowNo!=None):
+#                     # print('exist')
+#
+#                     # rowNo = np.where(main.BWM.table[:, 0] == data[0])[0][0]
+#                     # rowNo = rowarray[0]
+#
+#                     # print('rowNo',rowNo)
+#
+#                     editList = [5, 6, 7,10,11,12,13,14,15,16]
+#                     main.TWSWM.table[rowNo, editList] = [i[3], i[4], i[2],i[5], i[6], i[7],i[8], i[9], i[10],i[11]]
+#
+#                     # for t in editList:
+#                     #     ind = main.TWSWM.model.index(rowNo, t)
+#                     #     main.TWSWM.model.dataChanged.emit(ind, ind)
+#
+#             ind = main.TWSWM.model.index(0, 0)
+#             ind1 = main.TWSWM.model.index(0, 1)
+#             main.TWSWM.model.dataChanged.emit(ind, ind1)
+#
+#             for i in x1.to_numpy():
+#                 # rowarray = np.where(main.TWM.table[:main.TWM.model.lastSerialNo, 0] == i[0])[0]
+#                 # print(fltrarr)
+#
+#                 # if (fltrarr.size != 0):
+#                 #         isRecordExist = True
+#
+#                 rowNo = main.twmDict.get(i[0])
+#                 if (rowNo != None):
+#                     # print('exist')
+#
+#                     # rowNo = np.where(main.BWM.table[:, 0] == data[0])[0][0]
+#                     # rowNo = rowarray[0]
+#
+#                     data=main.TWM.table[rowNo,:]
+#
+#
+#                     NetPrem=data[15]
+#                     cashMTM=data[11]
+#
+#                     cashTOC = data[27]
+#
+#                     NetTOC = cashTOC + i[10]
+#
+#                     NetMTM= i[1]+  cashMTM - NetTOC
+#
+#                     #FNOMTM -NETPRem
+#                     Ans=i[1] - NetPrem
+#
+#                     if Ans <0:
+#                         deposit = data[16]
+#
+#                         if deposit>0:
+#                             RiskPer=abs(Ans)/deposit
+#                         else:
+#                             RiskPer=0.0
+#                     else:
+#                         RiskPer=0.0
+#
+#                     editList=[4,5, 8,20,22,23,24,26,27,28]
+#                     main.TWM.table[rowNo, editList] = [i[2], i[3], i[1],RiskPer,i[8],i[9],i[10],NetMTM,cashTOC,NetTOC]
+#
+#
+#
+#                     # for t in editList:
+#                     #     ind = main.TWM.model.index(rowNo, t)
+#                     #     main.TWM.model.dataChanged.emit(ind, ind)
+#             ind = main.TWM.model.index(0, 0)
+#             ind1 = main.TWM.model.index(0, 1)
+#             main.TWM.model.dataChanged.emit(ind, ind1)
+#
+#         et = time.time()
+#         # print('FOMTMPOTW',et-st)
+#     except:
+#         print('hhh',traceback.print_exc())
 def updateFOMTMPOCW(main):
     st = time.time()
     try:
@@ -1318,12 +2185,13 @@ def updateFOMTMPOCW(main):
         if main.POCW.lastSerialNo!=0:
 
 
-            df3 = dt.Frame(main.POCW.table[:main.POCW.model.lastSerialNo,
-                           [0,4,11,17,18,22,23,24,25,28,29,30]],
-                           names=['UserID', 'Symbol', 'MTM','FUT_MTM','OPT_MTM','Delta',
-                          'Theta','Gama','Vega','UpSCNMTM','DownSCNMTM','TOC'])
+            df3 = dt.Frame(main.POCW.table[:main.POCW.lastSerialNo,
+                            [0,4,11,17,18,22,23,24,25,28,29,30]],
+                            names=['UserID', 'Symbol', 'MTM','FUT_MTM','OPT_MTM','Delta',
+                            'Theta','Gama','Vega','UpSCNMTM','DownSCNMTM','TOC'])
 
             df3[2:] = dt.float64
+            df3[0:2]=dt.str64
 
             x = df3[:, dt.sum(dt.f[2:]), dt.by('UserID', 'Symbol')]
 
@@ -1356,9 +2224,13 @@ def updateFOMTMPOCW(main):
                         editList = [5, 6, 7,10,11,12,13,14,15,16]
                         main.CWSWM.table[rowNo, editList] = [i[3], i[4], i[2],i[5], i[6], i[7],i[8], i[9], i[10],i[11]]
 
-            ind = main.CWSWM.model.index(0, 0)
-            ind1 = main.CWSWM.model.index(0, 1)
-            main.CWSWM.model.dataChanged.emit(ind, ind1)
+                        for t in editList:
+                            ind = main.CWSWM.model.index(rowNo, t)
+                            main.CWSWM.model.dataChanged.emit(ind, ind)
+
+            # ind = main.CWSWM.model.index(0, 0)
+            # ind1 = main.CWSWM.model.index(0, 1)
+            # main.CWSWM.model.dataChanged.emit(ind, ind1)
 
             for i in x1.to_numpy():
                 # rowarray = np.where(main.CWM.table[:main.CWM.model.lastSerialNo, 0] == i[0])[0]
@@ -1405,19 +2277,148 @@ def updateFOMTMPOCW(main):
 
 
 
-            # for t in editList:
-            #     ind = main.CWM.model.index(rowNo, t)
-            #     main.CWM.model.dataChanged.emit(ind, ind)
+                    for t in editList:
+                        ind = main.CWM.model.index(rowNo, t)
+                        main.CWM.model.dataChanged.emit(ind, ind)
 
-            ind = main.CWM.model.index(0, 0)
-            ind1 = main.CWM.model.index(0, 1)
-            main.CWM.model.dataChanged.emit(ind, ind1)
+            # ind = main.CWM.model.index(0, 0)
+            # ind1 = main.CWM.model.index(0, 1)
+            # main.CWM.model.dataChanged.emit(ind, ind1)
 
 
         et = time.time()
         # print('FOMTMPOCW', et - st)
     except:
-        print('errorFOPOCW',traceback.print_exc())
+        print('errorFOPOCW',traceback.print_exc(),main.POCW.table[0:main.POCW.lastSerialNo,0])
+        # main.POCW.table[0:main.POCW.lastSerialNo, 0].
+
+        # main.POCW.table[0:main.POCW.lastSerialNo, 0].tofile('d:/dddddata2.csv', sep=',')
+
+# def updateFOMTMPOCW(main):
+#     st = time.time()
+#     try:
+#
+#         if main.POCW.lastSerialNo!=0:
+#
+#
+#             df3 = dt.Frame(main.POCW.table[:main.POCW.lastSerialNo,
+#                             [0,4,11,17,18,22,23,24,25,28,29,30,2,15,16,3]],
+#                             names=['UserID', 'Symbol', 'MTM','FUT_MTM','OPT_MTM','Delta',
+#                             'Theta','Gama','Vega','UpSCNMTM','DownSCNMTM','TOC','Token','netQty','netVal','instrument'])
+#
+#             # df3[2:] = dt.float64
+#             df3[0:2]=dt.str64
+#
+#             df3[2:12] = dt.float64
+#             df3[12:14] = dt.int64
+#             df3[14] = dt.float64
+#
+#             df4 = dt.Frame(main.fo_contract[:, [2, 19]], names=['Token', 'LTP'])
+#             df4[0] = dt.int64
+#             df4[1] = dt.float64
+#             df4.key = "Token"
+#             df3 = df3[:, :, dt.join(df4)]
+#
+#             df3[:, dt.update(MTM=dt.f['netQty'] * dt.abs(dt.f['LTP']) + dt.f['netVal'])]
+#             df3[:, dt.update(FUT_MTM=dt.ifelse((dt.f['instrument'] == 'FUTSTK') | (dt.f['instrument'] == 'FUTIDX'), dt.f.MTM, 0.0))]
+#             df3[:, dt.update(OPT_MTM=dt.ifelse((dt.f['instrument'] == 'OPTSTK') | (dt.f['instrument'] == 'OPTIDX'), dt.f.MTM, 0.0))]
+#
+#             x = df3[:, dt.sum(dt.f[2:15]), dt.by('UserID', 'Symbol')]
+#
+#             x1=x[:, dt.sum(dt.f[2:15]), dt.by('UserID')]
+#
+#
+#
+#
+#             for i in x.to_numpy():
+#                 # rowarray = np.where((main.CWSWM.table[:main.CWSWM.model.lastSerialNo, 0] == i[0])& (main.CWSWM.table[:main.CWSWM.model.lastSerialNo, 1] == i[1]))[0]
+#                 # print(fltrarr)
+#
+#                 # if (fltrarr.size != 0):
+#                 #         isRecordExist = True
+#
+#                 # if main.cwswmDict.get(i[0]):
+#                     try:
+#                         rowNo = main.cwswmDict.get(i[0]).get(i[1])
+#                     except:
+#                         rowNo=None
+#
+#                     if (rowNo!=None):
+#                         # print('exist')
+#
+#                         # rowNo = np.where(main.BWM.table[:, 0] == data[0])[0][0]
+#                         # rowNo = rowarray[0]
+#
+#                         # print('rowNo',rowNo)
+#
+#                         editList = [5, 6, 7,10,11,12,13,14,15,16]
+#                         main.CWSWM.table[rowNo, editList] = [i[3], i[4], i[2],i[5], i[6], i[7],i[8], i[9], i[10],i[11]]
+#
+#             ind = main.CWSWM.model.index(0, 0)
+#             ind1 = main.CWSWM.model.index(0, 1)
+#             main.CWSWM.model.dataChanged.emit(ind, ind1)
+#
+#             for i in x1.to_numpy():
+#                 # rowarray = np.where(main.CWM.table[:main.CWM.model.lastSerialNo, 0] == i[0])[0]
+#                 # print(fltrarr)
+#
+#                 # if (fltrarr.size != 0):
+#                 #         isRecordExist = True
+#
+#                 rowNo = main.cwmDict.get(i[0])
+#
+#                 if (rowNo!=None):
+#                     # print('exist')
+#
+#                     # rowNo = np.where(main.BWM.table[:, 0] == data[0])[0][0]
+#                     # rowNo = rowarray[0]
+#
+#                     data=main.CWM.table[rowNo,:]
+#
+#
+#                     NetPrem=data[11]
+#                     cashMTM=data[16]
+#
+#                     cashTOC = data[25]
+#
+#                     NetTOC = cashTOC + i[10]
+#
+#                     NetMTM= i[1]+  cashMTM - NetTOC
+#
+#                     #FNOMTM -NETPRem
+#                     Ans=i[1] - NetPrem
+#
+#                     if Ans <0:
+#                         ledger = data[13]
+#
+#                         if ledger>0:
+#                             RiskPer=abs(Ans)/ledger
+#                         else:
+#                             RiskPer=0.0
+#                     else:
+#                         RiskPer=0.0
+#
+#                     editList=[4,5, 6,18 ,20,21,22,24,25,26]
+#                     main.CWM.table[rowNo, editList] = [i[2], i[3], i[1],RiskPer,i[8],i[9],i[10],NetMTM,cashTOC,NetTOC]
+#
+#
+#
+#             # for t in editList:
+#             #     ind = main.CWM.model.index(rowNo, t)
+#             #     main.CWM.model.dataChanged.emit(ind, ind)
+#
+#             ind = main.CWM.model.index(0, 0)
+#             ind1 = main.CWM.model.index(0, 1)
+#             main.CWM.model.dataChanged.emit(ind, ind1)
+#
+#
+#         et = time.time()
+#         # print('FOMTMPOCW', et - st)
+#     except:
+#         print('errorFOPOCW',traceback.print_exc(),main.POCW.table[0:main.POCW.lastSerialNo,0])
+#         # main.POCW.table[0:main.POCW.lastSerialNo, 0].
+#
+#         # main.POCW.table[0:main.POCW.lastSerialNo, 0].tofile('d:/dddddata2.csv', sep=',')
 
 @QtCore.pyqtSlot(object)
 def updateCMCWM(main, data):
@@ -1694,64 +2695,171 @@ def updateSCNPricePOTW(main):
             # fltr = np.asarray([i])
             # x = main.POTW.table[np.in1d(main.POTW.table[:, 2], fltr)]
 
-            if main.tokenDict.get(i):
-                x=main.tokenDict[i]['POTW']
+            if main.maintokenDict.get(i):
+                x=main.maintokenDict[i]['POTW']
 
-            # Data = main.POTW.table[x[0][12], :]
-                Data = main.POTW.table[x[0], :]
+                if x!=[]:
+                    Data = main.POTW.table[x[0], :]
 
-                if Data[10] != 0:
-                    # print('dkfj',Data)
+                    if Data[10] != 0:
+                        # print('dkfj',Data)
 
-                    if Data[7] in ['CE', 'PE']:
-                        # futureToken = Data[25]
-                        futureToken = main.fo_contract[i - 35000, 17]
-                        fPrice = main.fo_contract[futureToken - 35000, 19]
-                        # fPrice = Data[25]
-                        # exp = datetime.datetime.strftime()[5]
-                        # print('exp...',Data[5])
-                        exp = datetime.datetime.strptime(Data[5], "%Y%m%d")
+                        if Data[7] in ['CE', 'PE']:
+                            # futureToken = Data[25]
+                            futureToken = main.fo_contract[i - 35000, 17]
+                            fPrice = main.fo_contract[futureToken - 35000, 19]
+                            # fPrice = Data[25]
+                            # exp = datetime.datetime.strftime()[5]
+                            # print('exp...',Data[5])
+                            exp = datetime.datetime.strptime(Data[5], "%Y%m%d")
 
-                        exp1 = exp.strftime("%d%b%Y")
-                        # print('exp',exp,type(exp))
-                        optionType = Data[7][0].lower()
+                            exp1 = exp.strftime("%d%b%Y")
+                            # print('exp',exp,type(exp))
+                            optionType = Data[7][0].lower()
 
-                        strikeP = float(Data[6])
-                        expiryDay = datetime.datetime.strptime(exp1, '%d%b%Y')
+                            strikeP = float(Data[6])
+                            expiryDay = datetime.datetime.strptime(exp1, '%d%b%Y')
 
-                        daysRemaaining1 = (expiryDay - main.todate).days
-                        # print('days',daysRemaaining1)
-                        daysRemaaining = 1 if (daysRemaaining1 == 0) else daysRemaaining1
-                        t = daysRemaaining / 365
-                        # ltp = Data[10]
+                            daysRemaaining1 = (expiryDay - main.todate).days
+                            # print('days',daysRemaaining1)
+                            daysRemaaining = 1 if (daysRemaaining1 == 0) else daysRemaaining1
+                            t = daysRemaaining / 365
+                            # ltp = Data[10]
 
-                        price = (fPrice * 10) / 100
-                        UpFprice = fPrice + price
+                            price = (fPrice * 10) / 100
+                            UpFprice = fPrice + price
 
-                        price = (fPrice * 10) / 100
-                        DownFprice = fPrice - price
-
-
-                        UPscnPrice = black_scholes(optionType, UpFprice, strikeP, t, 0.01, Data[24]/100)
-                        DOWNscnPrice1 = black_scholes(optionType, DownFprice, strikeP, t, 0.01, Data[24]/100)
-
-                        # if (Data[4] == 'ABBOTINDIA'):
-                        #     print('ABBOTINDIA , up', UpFprice,UPscnPrice, strikeP, t)
-                        #     print('down', DownFprice,DOWNscnPrice1, strikeP, t,DOWNscnPrice1)
-
-                        for s in x:
-                            i = main.POTW.table[s, :]
-
-                            editableList = [29,30,31,32]
-
-                            UPscnMTM= (i[15] * UPscnPrice) + i[16]
-                            DownscnMTM=(i[15] * DOWNscnPrice1) + i[16]
+                            price = (fPrice * 10) / 100
+                            DownFprice = fPrice - price
 
 
-                            main.POTW.table[i[12], editableList] = [UPscnPrice, DOWNscnPrice1,UPscnMTM,DownscnMTM ]
+                            UPscnPrice = black_scholes(optionType, UpFprice, strikeP, t, 0.01, Data[24]/100)
+                            DOWNscnPrice1 = black_scholes(optionType, DownFprice, strikeP, t, 0.01, Data[24]/100)
+
+                            # if (Data[4] == 'ABBOTINDIA'):
+                            #     print('ABBOTINDIA , up', UpFprice,UPscnPrice, strikeP, t)
+                            #     print('down', DownFprice,DOWNscnPrice1, strikeP, t,DOWNscnPrice1)
+
+                            for s in x:
+                                i = main.POTW.table[s, :]
+
+                                editableList = [29,30,31,32]
+
+                                UPscnMTM= (i[15] * UPscnPrice) + i[16]
+                                DownscnMTM=(i[15] * DOWNscnPrice1) + i[16]
+
+
+                                main.POTW.table[i[12], editableList] = [UPscnPrice, DOWNscnPrice1,UPscnMTM,DownscnMTM ]
+                                row = np.where(main.POTW.FilterTable[:main.POTW.model.flastSerialNo, 12] == i[12])[0]
+                                if row.size != 0:
+                                    main.POTW.FilterTable[row[0], editableList] = [UPscnPrice, DOWNscnPrice1,UPscnMTM,DownscnMTM ]
+
                             ind = main.POTW.model.index(0, 0)
                             ind1 = main.POTW.model.index(0, 1)
                             main.POTW.model.dataChanged.emit(ind, ind1)
+
+                        else:
+
+                            price = (Data[10] * 10) / 100
+                            UPscnPrice = Data[10] + price
+
+                            price = (Data[10]) / 100
+                            DOWNscnPrice1 = Data[10] - price
+
+                            for s in x:
+                                i = main.POTW.table[s, :]
+
+                                editableList = [29,30,31,32]
+
+                                UPscnMTM= (i[15] * UPscnPrice) + i[16]
+                                DownscnMTM=(i[15] * DOWNscnPrice1) + i[16]
+
+
+                                main.POTW.table[i[12], editableList] = [UPscnPrice, DOWNscnPrice1,UPscnMTM,DownscnMTM ]
+                                row = np.where(main.POTW.FilterTable[:main.POTW.model.flastSerialNo, 12] == i[12])[0]
+                                if row.size != 0:
+                                    main.POTW.FilterTable[row[0], editableList] = [UPscnPrice, DOWNscnPrice1,UPscnMTM,DownscnMTM ]
+
+                            ind = main.POTW.model.index(0, 0)
+                            ind1 = main.POTW.model.index(0, 1)
+                            main.POTW.model.dataChanged.emit(ind, ind1)
+
+
+# def updateSCNPricePOTW(main):
+#     if main.POTW.lastSerialNo != 0:
+#
+#         Tokens = np.unique(main.POTW.table[:main.POTW.lastSerialNo, 2])
+#
+#         for i in Tokens:
+#
+#             # fltr = np.asarray([i])
+#             # x = main.POTW.table[np.in1d(main.POTW.table[:, 2], fltr)]
+#
+#             if main.maintokenDict.get(i):
+#                 x=main.maintokenDict[i]['POTW']
+#
+#             # Data = main.POTW.table[x[0][12], :]
+#                 Data = main.POTW.table[x[0], :]
+#                 LTPdata = main.fo_contract[i - 35000, :]
+#
+#                 if LTPdata[19] != 0:
+#                 # if Data[10] != 0:
+#                     # print('dkfj',Data)
+#
+#                     if Data[7] in ['CE', 'PE']:
+#                         # futureToken = Data[25]
+#                         futureToken = LTPdata[17]
+#                         fPrice = main.fo_contract[futureToken - 35000, 19]
+#                         # fPrice = Data[25]
+#                         # exp = datetime.datetime.strftime()[5]
+#                         # print('exp...',Data[5])
+#                         exp = datetime.datetime.strptime(Data[5], "%Y%m%d")
+#
+#                         exp1 = exp.strftime("%d%b%Y")
+#                         # print('exp',exp,type(exp))
+#                         optionType = Data[7][0].lower()
+#
+#                         strikeP = float(Data[6])
+#                         expiryDay = datetime.datetime.strptime(exp1, '%d%b%Y')
+#
+#                         daysRemaaining1 = (expiryDay - main.todate).days
+#                         # print('days',daysRemaaining1)
+#                         daysRemaaining = 1 if (daysRemaaining1 == 0) else daysRemaaining1
+#                         t = daysRemaaining / 365
+#                         # ltp = Data[10]
+#
+#                         price = (fPrice * 10) / 100
+#                         UpFprice = fPrice + price
+#
+#                         price = (fPrice * 10) / 100
+#                         DownFprice = fPrice - price
+#
+#
+#                         UPscnPrice = black_scholes(optionType, UpFprice, strikeP, t, 0.01, Data[24]/100)
+#                         DOWNscnPrice1 = black_scholes(optionType, DownFprice, strikeP, t, 0.01, Data[24]/100)
+#
+#                         # if (Data[4] == 'ABBOTINDIA'):
+#                         #     print('ABBOTINDIA , up', UpFprice,UPscnPrice, strikeP, t)
+#                         #     print('down', DownFprice,DOWNscnPrice1, strikeP, t,DOWNscnPrice1)
+#
+#                         for s in x:
+#                             i = main.POTW.table[s, :]
+#
+#                             editableList = [29,30,31,32]
+#
+#                             UPscnMTM= (i[15] * UPscnPrice) + i[16]
+#                             DownscnMTM=(i[15] * DOWNscnPrice1) + i[16]
+#
+#
+#                             main.POTW.table[i[12], editableList] = [UPscnPrice, DOWNscnPrice1,UPscnMTM,DownscnMTM ]
+#                             row = np.where(main.POTW.FilterTable[:main.POTW.model.flastSerialNo, 12] == i[12])[0]
+#                             if row.size != 0:
+#                                 main.POTW.FilterTable[row[0], editableList] = [UPscnPrice, DOWNscnPrice1,UPscnMTM,DownscnMTM ]
+#
+#                         ind = main.POTW.model.index(0, 0)
+#                         ind1 = main.POTW.model.index(0, 1)
+#                         main.POTW.model.dataChanged.emit(ind, ind1)
+
 def updateSCNPricePOCW(main):
     if main.POCW.lastSerialNo != 0:
 
@@ -1760,63 +2868,168 @@ def updateSCNPricePOCW(main):
         for i in Tokens:
             # fltr = np.asarray([i])
             # x = main.POCW.table[np.in1d(main.POCW.table[:, 2], fltr)]
-            if main.tokenDict.get(i):
-                x=main.tokenDict[i]['POCW']
+            if main.maintokenDict.get(i):
+                x=main.maintokenDict[i]['POCW']
 
             # Data = main.POCW.table[x[0][12], :]
-                Data = main.POCW.table[x[0], :]
+                if x != []:
+                    Data = main.POCW.table[x[0], :]
 
-                if Data[10] != 0:
-                    # print('dkfj',Data)
+                    if Data[10] != 0:
+                        # print('dkfj',Data)
 
-                    if Data[7] in ['CE', 'PE']:
-                        # futureToken = Data[25]
-                        futureToken = main.fo_contract[i - 35000, 17]
-                        fPrice = main.fo_contract[futureToken - 35000, 19]
-                        # fPrice = Data[25]
-                        # exp = datetime.datetime.strftime()[5]
-                        # print('exp...',Data[5])
-                        exp = datetime.datetime.strptime(Data[5], "%Y%m%d")
+                        if Data[7] in ['CE', 'PE']:
+                            # futureToken = Data[25]
+                            futureToken = main.fo_contract[i - 35000, 17]
+                            fPrice = main.fo_contract[futureToken - 35000, 19]
+                            # fPrice = Data[25]
+                            # exp = datetime.datetime.strftime()[5]
+                            # print('exp...',Data[5])
+                            exp = datetime.datetime.strptime(Data[5], "%Y%m%d")
 
-                        exp1 = exp.strftime("%d%b%Y")
-                        # print('exp',exp,type(exp))
-                        optionType = Data[7][0].lower()
+                            exp1 = exp.strftime("%d%b%Y")
+                            # print('exp',exp,type(exp))
+                            optionType = Data[7][0].lower()
 
-                        strikeP = float(Data[6])
-                        expiryDay = datetime.datetime.strptime(exp1, '%d%b%Y')
+                            strikeP = float(Data[6])
+                            expiryDay = datetime.datetime.strptime(exp1, '%d%b%Y')
 
-                        daysRemaaining1 = (expiryDay - main.todate).days
-                        # print('days',daysRemaaining1)
-                        daysRemaaining = 1 if (daysRemaaining1 == 0) else daysRemaaining1
-                        t = daysRemaaining / 365
-                        # ltp = Data[10]
+                            daysRemaaining1 = (expiryDay - main.todate).days
+                            # print('days',daysRemaaining1)
+                            daysRemaaining = 1 if (daysRemaaining1 == 0) else daysRemaaining1
+                            t = daysRemaaining / 365
+                            # ltp = Data[10]
 
-                        price = (fPrice * 10) / 100
-                        UpFprice = fPrice + price
+                            price = (fPrice * 10) / 100
+                            UpFprice = fPrice + price
 
-                        price = (fPrice * 10) / 100
-                        DownFprice = fPrice - price
-
-
-                        UPscnPrice = black_scholes(optionType, UpFprice, strikeP, t, 0.01, Data[24]/100)
-                        DOWNscnPrice1 = black_scholes(optionType, DownFprice, strikeP, t, 0.01, Data[24]/100)
-
-                        # if (Data[4] == 'ABBOTINDIA'):
-                        #     print('ABBOTINDIA , up', UpFprice,UPscnPrice, strikeP, t)
-                        #     print('down', DownFprice,DOWNscnPrice1, strikeP, t,DOWNscnPrice1)
-
-                        for s in x:
-                            i = main.POCW.table[s, :]
-                            editableList = [26,27,28,29]
-
-                            UPscnMTM= (i[15] * UPscnPrice) + i[16]
-                            DownscnMTM=(i[15] * DOWNscnPrice1) + i[16]
+                            price = (fPrice * 10) / 100
+                            DownFprice = fPrice - price
 
 
-                            main.POCW.table[i[12], editableList] = [UPscnPrice, DOWNscnPrice1,UPscnMTM,DownscnMTM ]
+                            UPscnPrice = black_scholes(optionType, UpFprice, strikeP, t, 0.01, Data[24]/100)
+                            DOWNscnPrice1 = black_scholes(optionType, DownFprice, strikeP, t, 0.01, Data[24]/100)
+
+                            # if (Data[4] == 'ABBOTINDIA'):
+                            #     print('ABBOTINDIA , up', UpFprice,UPscnPrice, strikeP, t)
+                            #     print('down', DownFprice,DOWNscnPrice1, strikeP, t,DOWNscnPrice1)
+
+                            for s in x:
+                                i = main.POCW.table[s, :]
+                                editableList = [26,27,28,29]
+
+                                UPscnMTM= (i[15] * UPscnPrice) + i[16]
+                                DownscnMTM=(i[15] * DOWNscnPrice1) + i[16]
+
+
+                                main.POCW.table[i[12], editableList] = [UPscnPrice, DOWNscnPrice1,UPscnMTM,DownscnMTM ]
+                                row = np.where(main.POCW.FilterTable[:main.POCW.model.flastSerialNo, 12] == i[12])[0]
+                                if row.size != 0:
+                                    main.POCW.FilterTable[row[0], editableList] = [UPscnPrice, DOWNscnPrice1, UPscnMTM,
+                                                                                                               DownscnMTM]
                             ind = main.POCW.model.index(0, 0)
                             ind1 = main.POCW.model.index(0, 1)
                             main.POCW.model.dataChanged.emit(ind, ind1)
+
+                        else:
+
+                            price = (Data[10] * 10) / 100
+                            UPscnPrice = Data[10] + price
+
+                            price = (Data[10]) / 100
+                            DOWNscnPrice1 = Data[10] - price
+
+                            for s in x:
+                                i = main.POTW.table[s, :]
+
+                                editableList = [29, 30, 31, 32]
+
+                                UPscnMTM = (i[15] * UPscnPrice) + i[16]
+                                DownscnMTM = (i[15] * DOWNscnPrice1) + i[16]
+
+                                main.POTW.table[i[12], editableList] = [UPscnPrice, DOWNscnPrice1, UPscnMTM, DownscnMTM]
+                                row = np.where(main.POTW.FilterTable[:main.POTW.model.flastSerialNo, 12] == i[12])[0]
+                                if row.size != 0:
+                                    main.POTW.FilterTable[row[0], editableList] = [UPscnPrice, DOWNscnPrice1, UPscnMTM,
+                                                                                   DownscnMTM]
+
+                            ind = main.POTW.model.index(0, 0)
+                            ind1 = main.POTW.model.index(0, 1)
+                            main.POTW.model.dataChanged.emit(ind, ind1)
+
+
+# def updateSCNPricePOCW(main):
+#     if main.POCW.lastSerialNo != 0:
+#
+#         Tokens = np.unique(main.POCW.table[:main.POCW.lastSerialNo, 2])
+#
+#         for i in Tokens:
+#             # fltr = np.asarray([i])
+#             # x = main.POCW.table[np.in1d(main.POCW.table[:, 2], fltr)]
+#             if main.maintokenDict.get(i):
+#                 x=main.maintokenDict[i]['POCW']
+#
+#             # Data = main.POCW.table[x[0][12], :]
+#                 Data = main.POCW.table[x[0], :]
+#
+#                 LTPdata = main.fo_contract[i - 35000, :]
+#
+#                 if LTPdata[19] != 0:
+#                 # if Data[10] != 0:
+#                     # print('dkfj',Data)
+#
+#                     if Data[7] in ['CE', 'PE']:
+#                         # futureToken = Data[25]
+#                         futureToken = LTPdata[17]
+#                         fPrice = main.fo_contract[futureToken - 35000, 19]
+#                         # fPrice = Data[25]
+#                         # exp = datetime.datetime.strftime()[5]
+#                         # print('exp...',Data[5])
+#                         exp = datetime.datetime.strptime(Data[5], "%Y%m%d")
+#
+#                         exp1 = exp.strftime("%d%b%Y")
+#                         # print('exp',exp,type(exp))
+#                         optionType = Data[7][0].lower()
+#
+#                         strikeP = float(Data[6])
+#                         expiryDay = datetime.datetime.strptime(exp1, '%d%b%Y')
+#
+#                         daysRemaaining1 = (expiryDay - main.todate).days
+#                         # print('days',daysRemaaining1)
+#                         daysRemaaining = 1 if (daysRemaaining1 == 0) else daysRemaaining1
+#                         t = daysRemaaining / 365
+#                         # ltp = Data[10]
+#
+#                         price = (fPrice * 10) / 100
+#                         UpFprice = fPrice + price
+#
+#                         price = (fPrice * 10) / 100
+#                         DownFprice = fPrice - price
+#
+#
+#                         UPscnPrice = black_scholes(optionType, UpFprice, strikeP, t, 0.01, Data[24]/100)
+#                         DOWNscnPrice1 = black_scholes(optionType, DownFprice, strikeP, t, 0.01, Data[24]/100)
+#
+#                         # if (Data[4] == 'ABBOTINDIA'):
+#                         #     print('ABBOTINDIA , up', UpFprice,UPscnPrice, strikeP, t)
+#                         #     print('down', DownFprice,DOWNscnPrice1, strikeP, t,DOWNscnPrice1)
+#
+#                         for s in x:
+#                             i = main.POCW.table[s, :]
+#                             editableList = [26,27,28,29]
+#
+#                             UPscnMTM= (i[15] * UPscnPrice) + i[16]
+#                             DownscnMTM=(i[15] * DOWNscnPrice1) + i[16]
+#
+#
+#                             main.POCW.table[i[12], editableList] = [UPscnPrice, DOWNscnPrice1,UPscnMTM,DownscnMTM ]
+#                             row = np.where(main.POCW.FilterTable[:main.POCW.model.flastSerialNo, 12] == i[12])[0]
+#                             if row.size != 0:
+#                                 main.POCW.FilterTable[row[0], editableList] = [UPscnPrice, DOWNscnPrice1, UPscnMTM,
+#                                                                                DownscnMTM]
+#                         ind = main.POCW.model.index(0, 0)
+#                         ind1 = main.POCW.model.index(0, 1)
+#                         main.POCW.model.dataChanged.emit(ind, ind1)
 
 
 def update_Greek_SCNMTM(main):
@@ -1889,8 +3102,8 @@ def update_Greeks_POTW(main):
             # fltr = np.asarray([i])
             # x = main.POTW.table[np.in1d(main.POTW.table[:, 2], fltr)]
 
-            if main.tokenDict.get(i):
-                x=main.tokenDict[i]['POTW']
+            if main.maintokenDict.get(i):
+                x=main.maintokenDict[i]['POTW']
 
                 # Data = main.POTW.table[x[0][12], :]
                 Data = main.POTW.table[x[0], :]
@@ -1967,6 +3180,11 @@ def update_Greeks_POTW(main):
                                 i = main.POTW.table[s, :]
                                 editableList = [24, 25, 26, 27, 28]
                                 main.POTW.table[i[12], editableList] = [imp_v * 100, delt*i[15], tht*i[15], gm*i[15], vg*i[15]]
+
+                                row = np.where(main.POTW.FilterTable[:main.POTW.model.flastSerialNo, 12] == i[12])[0]
+                                if row.size!=0:
+
+                                    main.POTW.FilterTable[row[0],editableList]=[imp_v * 100, delt*i[15], tht*i[15], gm*i[15], vg*i[15]]
                             ind = main.POTW.model.index(0, 0)
                             ind1 = main.POTW.model.index(0, 1)
                             main.POTW.model.dataChanged.emit(ind, ind1)
@@ -1980,12 +3198,133 @@ def update_Greeks_POTW(main):
                         i = main.POTW.table[s, :]
                         editableList = [25]
                         main.POTW.table[i[12], editableList] = [i[15]]
+                        row = np.where(main.POTW.FilterTable[:main.POTW.model.flastSerialNo, 12] == i[12])[0]
+                        if row.size != 0:
+                            main.POTW.FilterTable[row[0],editableList] = [i[15]]
                     ind = main.POTW.model.index(0, 0)
                     ind1 = main.POTW.model.index(0, 1)
                     main.POTW.model.dataChanged.emit(ind, ind1)
 
     et = time.time()
     # print('timegreeks', et - st)
+
+# def update_Greeks_POTW(main):
+#
+#     st=time.time()
+#     if main.POTW.lastSerialNo != 0:
+#
+#         Tokens = np.unique(main.POTW.table[:main.POTW.lastSerialNo, 2])
+#
+#         for i in Tokens:
+#             # fltr = np.asarray([i])
+#             # x = main.POTW.table[np.in1d(main.POTW.table[:, 2], fltr)]
+#
+#             if main.maintokenDict.get(i):
+#                 x=main.maintokenDict[i]['POTW']
+#
+#                 # Data = main.POTW.table[x[0][12], :]
+#                 Data = main.POTW.table[x[0], :]
+#                 LTPdata=main.fo_contract[i - 35000, :]
+#
+#                 if LTPdata[19]!=0:
+#                     # print('dkfj',Data)
+#
+#                     if Data[7] in ['CE', 'PE']:
+#                         # futureToken = Data[25]
+#                         futureToken = LTPdata[17]
+#                         fPrice = main.fo_contract[futureToken - 35000, 19]
+#                         # fPrice = Data[25]
+#                         # exp = datetime.datetime.strftime()[5]
+#                         # print('exp...',Data[5])
+#                         exp = datetime.datetime.strptime(Data[5], "%Y%m%d")
+#
+#                         exp1 = exp.strftime("%d%b%Y")
+#                         # print('exp',exp,type(exp))
+#                         optionType = Data[7][0].lower()
+#
+#                         strikeP = float(Data[6])
+#                         expiryDay = datetime.datetime.strptime(exp1, '%d%b%Y')
+#
+#                         daysRemaaining1 = (expiryDay - main.todate).days
+#                         # print('days',daysRemaaining1)
+#                         daysRemaaining = 1 if (daysRemaaining1 == 0) else daysRemaaining1
+#                         t = daysRemaaining / 365
+#                         ltp = LTPdata[19]
+#
+#                         # print('nnnnn',type(fPrice),type(strikeP),type(ltp))
+#                         # if(i==40688):
+#                         #
+#                         #     print(40688,exp,main.todate,daysRemaaining,t)
+#                         #     # print(40688,data['LTP'], fPrice, strikeP, t, main.r, optionType)
+#                         try:
+#                             # print('jfkdjf',ltp,fPrice,strikeP,t,main.r,optionType)
+#                             imp_v = iv(ltp, fPrice, strikeP, t, main.r, optionType)
+#
+#
+#                         except TypeError:
+#
+#                             # print('jgh', Data)
+#                             imp_v = 0.01
+#                         except BelowIntrinsicException:
+#                             imp_v = 0.01
+#                         except:
+#                             imp_v = 0.01
+#
+#                         # imp_v1=round(imp_v*100,2)
+#
+#                         # main.sender.sendData(dict1)
+#                         try:
+#
+#                             delt = delta(optionType, fPrice, strikeP, t, main.r, imp_v)
+#                             # delt = delta('c', 1064.35, 1100.0, t, main.r, imp_v)
+#                             delt = round(delt, 4)
+#
+#                             gm = gamma(optionType, fPrice, strikeP, t, main.r, imp_v)
+#                             gm = round(gm, 4)
+#
+#                             # rh = rho(optionType, fPrice, strikeP, t, main.r, imp_v)
+#
+#                             tht = theta(optionType, fPrice, strikeP, t, main.r, imp_v)
+#                             tht = round(tht, 4)
+#
+#                             vg = vega(optionType, fPrice, strikeP, t, main.r, imp_v)
+#                             vg = round(vg, 4)
+#
+#                             # print('IV', imp_v * 100,delt,vg,tht,gm,Data[4])
+#
+#                             # print(x)
+#
+#                             for s in x:
+#                                 i = main.POTW.table[s, :]
+#                                 editableList = [24, 25, 26, 27, 28]
+#                                 main.POTW.table[i[12], editableList] = [imp_v * 100, delt*i[15], tht*i[15], gm*i[15], vg*i[15]]
+#                             #     row=np.where(main.POTW.FilterTable[:main.POTW.model.flastSerialNo, 12] == i[12])[0]
+#                             #     if row.size!=0:
+#                             #
+#                             #         main.POTW.FilterTable[row[0],editableList]=[imp_v * 100, delt*i[15], tht*i[15], gm*i[15], vg*i[15]]
+#                             # ind = main.POTW.model.index(0, 0)
+#                             # ind1 = main.POTW.model.index(0, 1)
+#                             # main.POTW.model.dataChanged.emit(ind, ind1)
+#
+#                         except:
+#                             print(traceback.print_exc(), optionType, type(fPrice), type(strikeP), type(ltp), optionType, t,
+#                                   main.r, imp_v, fPrice, strikeP)
+#
+#                 else:
+#                     for s in x:
+#                         i = main.POTW.table[s, :]
+#                         editableList = [25]
+#                         main.POTW.table[i[12], editableList] = [i[15]]
+#                         row = np.where(main.POTW.FilterTable[:main.POTW.model.flastSerialNo, 12] == i[12])[0]
+#                         if row.size != 0:
+#                             main.POTW.FilterTable[row[0],editableList] = [i[15]]
+#                     ind = main.POTW.model.index(0, 0)
+#                     ind1 = main.POTW.model.index(0, 1)
+#                     main.POTW.model.dataChanged.emit(ind, ind1)
+#
+#     et = time.time()
+#     # print('timegreeks', et - st)
+
 def update_Greeks_POCW(main):
     st=time.time()
     if main.POCW.lastSerialNo != 0:
@@ -1998,8 +3337,8 @@ def update_Greeks_POCW(main):
             # fltr = np.asarray([i])
             # x = main.POCW.table[np.in1d(main.POCW.table[:, 2], fltr)]
 
-            if main.tokenDict.get(i):
-                x=main.tokenDict[i]['POCW']
+            if main.maintokenDict.get(i):
+                x=main.maintokenDict[i]['POCW']
 
 
             # Data = main.POCW.table[x[0][12], :]
@@ -2077,9 +3416,16 @@ def update_Greeks_POCW(main):
                                 i= main.POCW.table[s, :]
                                 editableList = [21, 22, 23, 24, 25]
                                 main.POCW.table[i[12], editableList] = [imp_v * 100, delt*i[15], tht*i[15], gm*i[15], vg*i[15]]
-                                ind = main.POCW.model.index(0, 0)
-                                ind1 = main.POCW.model.index(0, 1)
-                                main.POCW.model.dataChanged.emit(ind, ind1)
+
+                                row = np.where(main.POCW.FilterTable[:main.POCW.model.flastSerialNo, 12] == i[12])[0]
+                                if row.size != 0:
+                                    main.POCW.FilterTable[row[0], editableList] = [imp_v * 100, delt * i[15],
+                                                                                   tht * i[15], gm * i[15], vg * i[15]]
+
+
+                            ind = main.POCW.model.index(0, 0)
+                            ind1 = main.POCW.model.index(0, 1)
+                            main.POCW.model.dataChanged.emit(ind, ind1)
 
                         except:
                             print(traceback.print_exc(), optionType, type(fPrice), type(strikeP), type(ltp), optionType, t,
@@ -2090,11 +3436,131 @@ def update_Greeks_POCW(main):
                         i = main.POCW.table[s, :]
                         editableList = [22]
                         main.POCW.table[i[12], editableList] = [i[15]]
-                        ind = main.POCW.model.index(0, 0)
-                        ind1 = main.POCW.model.index(0, 1)
-                        main.POCW.model.dataChanged.emit(ind, ind1)
+                        row = np.where(main.POCW.FilterTable[:main.POCW.model.flastSerialNo, 12] == i[12])[0]
+                        if row.size != 0:
+                            main.POCW.FilterTable[row[0], editableList] = [i[15]]
+                    ind = main.POCW.model.index(0, 0)
+                    ind1 = main.POCW.model.index(0, 1)
+                    main.POCW.model.dataChanged.emit(ind, ind1)
     et=time.time()
     # print('timegreeksPOCW',et-st)
+
+# def update_Greeks_POCW(main):
+#     st = time.time()
+#     if main.POCW.lastSerialNo != 0:
+#
+#         Tokens = np.unique(main.POCW.table[:main.POCW.lastSerialNo, 2])
+#
+#         for i in Tokens:
+#
+#             # fltr = np.asarray([i])
+#             # x = main.POCW.table[np.in1d(main.POCW.table[:, 2], fltr)]
+#
+#             if main.maintokenDict.get(i):
+#                 x = main.maintokenDict[i]['POCW']
+#
+#                 # Data = main.POCW.table[x[0][12], :]
+#                 Data = main.POCW.table[x[0], :]
+#                 LTPdata = main.fo_contract[i - 35000, :]
+#
+#                 if LTPdata[19] != 0:
+#
+#
+#                     # print('dkfj',Data)
+#
+#                     if Data[7] in ['CE', 'PE']:
+#                         # futureToken = Data[25]
+#                         futureToken = LTPdata[17]
+#                         fPrice = main.fo_contract[futureToken - 35000, 19]
+#                         # fPrice = Data[25]
+#                         # exp = datetime.datetime.strftime()[5]
+#                         # print('exp...',Data[5])
+#                         exp = datetime.datetime.strptime(Data[5], "%Y%m%d")
+#
+#                         exp1 = exp.strftime("%d%b%Y")
+#                         # print('exp',exp,type(exp))
+#                         optionType = Data[7][0].lower()
+#
+#                         strikeP = float(Data[6])
+#                         expiryDay = datetime.datetime.strptime(exp1, '%d%b%Y')
+#
+#                         daysRemaaining1 = (expiryDay - main.todate).days
+#                         # print('days',daysRemaaining1)
+#                         daysRemaaining = 1 if (daysRemaaining1 == 0) else daysRemaaining1
+#                         t = daysRemaaining / 365
+#                         ltp = LTPdata[19]
+#
+#                         # print('nnnnn',type(fPrice),type(strikeP),type(ltp))
+#                         # if(i==40688):
+#                         #
+#                         #     print(40688,exp,main.todate,daysRemaaining,t)
+#                         #     # print(40688,data['LTP'], fPrice, strikeP, t, main.r, optionType)
+#                         try:
+#                             # print('jfkdjf',ltp,fPrice,strikeP,t,main.r,optionType)
+#                             imp_v = iv(ltp, fPrice, strikeP, t, main.r, optionType)
+#
+#
+#                         except TypeError:
+#
+#                             # print('jgh', Data)
+#                             imp_v = 0.01
+#                         except BelowIntrinsicException:
+#                             imp_v = 0.01
+#                         except:
+#                             imp_v = 0.01
+#
+#                         # imp_v1=round(imp_v*100,2)
+#
+#                         # main.sender.sendData(dict1)
+#                         try:
+#
+#                             delt = delta(optionType, fPrice, strikeP, t, main.r, imp_v)
+#                             # delt = delta('c', 1064.35, 1100.0, t, main.r, imp_v)
+#                             delt = round(delt, 4)
+#
+#                             gm = gamma(optionType, fPrice, strikeP, t, main.r, imp_v)
+#                             gm = round(gm, 4)
+#
+#                             # rh = rho(optionType, fPrice, strikeP, t, main.r, imp_v)
+#
+#                             tht = theta(optionType, fPrice, strikeP, t, main.r, imp_v)
+#                             tht = round(tht, 4)
+#
+#                             vg = vega(optionType, fPrice, strikeP, t, main.r, imp_v)
+#                             vg = round(vg, 4)
+#
+#                             # print('IV', imp_v * 100,delt,vg,tht,gm,Data[4])
+#
+#                             # print(x)
+#
+#                             for s in x:
+#                                 i = main.POCW.table[s, :]
+#                                 editableList = [21, 22, 23, 24, 25]
+#                                 main.POCW.table[i[12], editableList] = [imp_v * 100, delt * i[15], tht * i[15],
+#                                                                         gm * i[15], vg * i[15]]
+#
+#                             ind = main.POCW.model.index(0, 0)
+#                             ind1 = main.POCW.model.index(0, 1)
+#                             main.POCW.model.dataChanged.emit(ind, ind1)
+#
+#                         except:
+#                             print(traceback.print_exc(), optionType, type(fPrice), type(strikeP), type(ltp), optionType,
+#                                   t,
+#                                   main.r, imp_v, fPrice, strikeP)
+#
+#                 else:
+#                     for s in x:
+#                         i = main.POCW.table[s, :]
+#                         editableList = [22]
+#                         main.POCW.table[i[12], editableList] = [i[15]]
+#                         row = np.where(main.POCW.FilterTable[:main.POCW.model.flastSerialNo, 12] == i[12])[0]
+#                         if row.size != 0:
+#                             main.POCW.FilterTable[row[0],editableList] = [i[15]]
+#                     ind = main.POCW.model.index(0, 0)
+#                     ind1 = main.POCW.model.index(0, 1)
+#                     main.POCW.model.dataChanged.emit(ind, ind1)
+#     et = time.time()
+#     # print('timegreeksPOCW',et-st)
 
 
 def update_contract_fo(main,data):
@@ -2303,7 +3769,7 @@ def updatePhysicalMRG(main):
 #
 #     main.POTW.lastSerialNo += data.shape[0]
 #
-#     main.POTW.model.lastSerialNo += data.shape[0]
+#     main.POTW.lastSerialNo += data.shape[0]
 #
 #     main.POTW.model.insertMultiRows(rows=data.shape[0])
 #
@@ -2314,28 +3780,87 @@ def updatePhysicalMRG(main):
 #     # et=time.time()
 #     # print('timettt',et-st)
 #
-#     # main.POTW.table[main.POTW.model.lastSerialNo, :] = [data['UserID'], data['Exchange'], data['Token'], , sym, exp,
+#     # main.POTW.table[main.POTW.lastSerialNo, :] = [data['UserID'], data['Exchange'], data['Token'], , sym, exp,
 #     #                                                     strike, opt, TQty, Tamt, 0,
-#     #                                                     0, main.POTW.model.lastSerialNo, 0, 0, TQty, Tamt, 0.0, 0.0,
+#     #                                                     0, main.POTW.lastSerialNo, 0, 0, TQty, Tamt, 0.0, 0.0,
 #     #                                                     0.0, netPrem, 0.0, 0.0, premMrg]
-#     # main.POTW.table[main.POTW.model.lastSerialNo, :] = data
+#     # main.POTW.table[main.POTW.lastSerialNo, :] = data
 #
 #     # main.POTW.lastSerialNo += 1
-#     # main.POTW.model.lastSerialNo += 1
+#     # main.POTW.lastSerialNo += 1
 #     # main.POTW.model.insertRows()
 #     # main.POTW.model.rowCount()
 #     # ind = main.POTW.model.index(0, 0)
 #     # ind1 = main.POTW.model.index(0, 1)
 #     # main.POTW.model.dataChanged.emit(ind, ind1)
 
+# def TWMdoubleClicked(main):
+#     UserID = main.TWM.tableView.selectedIndexes()[0].data()
+#
+#     main.cFrame.DPOTW.show()
+#     main.cFrame.DPOTW.raise_()
+#
+#     main.POTW.smodel.setClientCode(UserID)
+#     main.POTW.smodel.setFilterFixedString(UserID)
+#
+#     main.POTW.le_text.setText(UserID)
+#
+#     main.TWSWM.smodel.setClientCode(UserID)
+#     main.TWSWM.smodel.setFilterFixedString(UserID)
 def TWMdoubleClicked(main):
     UserID = main.TWM.tableView.selectedIndexes()[0].data()
+
+
 
     main.cFrame.DPOTW.show()
     main.cFrame.DPOTW.raise_()
 
-    main.POTW.smodel.setClientCode(UserID)
-    main.POTW.smodel.setFilterFixedString(UserID)
+    temp = np.zeros_like(main.POTW.FilterTable[0:main.POTW.model.flastSerialNo, :])
+
+    main.POTW.FilterTable[0:main.POTW.model.flastSerialNo, :] = temp
+
+    main.POTW.model.DelRows(0, main.POTW.model.flastSerialNo)
+
+    # main.OrderBook.modelO.DelRows()
+    main.POTW.model.flastSerialNo = 0
+    main.POTW.model.rowCount()
+    # st=time.time()
+    fltr=main.POTW.table[np.where(main.POTW.table[:main.POTW.lastSerialNo,0]==UserID)]
+
+    for i in main.tokenDict:
+        main.tokenDict[i]['POTW'] = []
+    for data in fltr:
+        main.POTW.FilterTable[main.POTW.model.flastSerialNo] = [data[0],
+                                                                data[1], data[2], data[3], data[4], data[5],
+                                                                data[6], data[7], data[8], data[9], data[10],
+                                                                data[11], data[12], data[13], data[14],
+                                                                data[15],
+                                                                data[16], data[17], data[18], data[19], data[20],
+                                                                data[21], data[22], data[23], data[24], data[25],
+                                                                data[26], data[27], data[28], data[29], data[30],
+                                                                data[31],data[32], data[33],data[34]]
+
+        main.POTW.model.flastSerialNo += 1
+        main.POTW.model.insertRows()
+        main.POTW.model.rowCount()
+
+        if main.tokenDict.get(data[2]):
+            main.tokenDict[data[2]]['POTW'].append(main.POTW.model.flastSerialNo - 1)
+        else:
+            main.tokenDict[data[2]] = {}
+            main.tokenDict[data[2]]['POTW'] = [main.POTW.model.flastSerialNo - 1]
+            main.tokenDict[data[2]]['POCW'] = []
+
+
+
+
+
+    ind = main.POTW.model.index(0, 0)
+    ind1 = main.POTW.model.index(0, 1)
+    main.POTW.model.dataChanged.emit(ind, ind1)
+
+    # main.POTW.smodel.setClientCode(UserID)
+    # main.POTW.smodel.setFilterFixedString(UserID)
 
     main.POTW.le_text.setText(UserID)
 
@@ -2355,8 +3880,53 @@ def CWMdoubleClicked(main):
     main.cFrame.DPOCW.show()
     main.cFrame.DPOCW.raise_()
 
-    main.POCW.smodel.setClientCode(clientcode)
-    main.POCW.smodel.setFilterFixedString(clientcode)
+    temp = np.zeros_like(main.POCW.FilterTable[0:main.POCW.model.flastSerialNo, :])
+
+    main.POCW.FilterTable[0:main.POCW.model.flastSerialNo, :] = temp
+
+    main.POCW.model.DelRows(0, main.POCW.model.flastSerialNo)
+
+
+    main.POCW.model.flastSerialNo = 0
+    main.POCW.model.rowCount()
+    # ind = main.POCW.model.index(0, 0)
+    # ind1 = main.POCW.model.index(0, 1)
+    # main.POCW.model.dataChanged.emit(ind, ind1)
+
+    # st=time.time()
+    fltr = main.POCW.table[np.where(main.POCW.table[:main.POCW.lastSerialNo, 0] == clientcode)]
+
+    for i in main.tokenDict:
+        main.tokenDict[i]['POCW'] = []
+    for data in fltr:
+        main.POCW.FilterTable[main.POCW.model.flastSerialNo, :] = [data[0], data[1], data[2], data[3], data[4], data[5],
+                                                                   data[6],
+                                                                   data[7], data[8], data[9], data[10], data[11],
+                                                                   data[12], data[13], data[14], data[15],
+                                                                   data[16], data[17], data[18], data[19], data[20],
+                                                                   data[21],
+                                                                   data[22], data[23], data[24], data[25], data[26],
+                                                                   data[27],
+                                                                   data[28], data[29],
+                                                                   data[30]]
+
+        main.POCW.model.flastSerialNo += 1
+        main.POCW.model.insertRows()
+        main.POCW.model.rowCount()
+
+        if main.tokenDict.get(data[2]):
+            main.tokenDict[data[2]]['POCW'].append(main.POCW.model.flastSerialNo - 1)
+        else:
+            main.tokenDict[data[2]] = {}
+            main.tokenDict[data[2]]['POCW'] = [main.POCW.model.flastSerialNo - 1]
+            main.tokenDict[data[2]]['POTW'] = []
+
+    ind = main.POCW.model.index(0, 0)
+    ind1 = main.POCW.model.index(0, 1)
+    main.POCW.model.dataChanged.emit(ind, ind1)
+
+    # main.POCW.smodel.setClientCode(clientcode)
+    # main.POCW.smodel.setFilterFixedString(clientcode)
 
     main.POCW.le_text.setText(clientcode)
 
@@ -2444,3 +4014,121 @@ def BWMdoubleClicked(main):
 
     main.TWM.smodel.setFilterKeyColumn(6)
     main.TWM.smodel.setFilterFixedString(Branch)
+
+
+def UserIDfilterPOTW(main):
+
+
+    UserID=main.POTW.le_text.text()
+    # main.cFrame.DPOTW.show()
+    # main.cFrame.DPOTW.raise_()
+
+    temp = np.zeros_like(main.POTW.FilterTable[0:main.POTW.model.flastSerialNo, :])
+
+    main.POTW.FilterTable[0:main.POTW.model.flastSerialNo, :] = temp
+
+    main.POTW.model.DelRows(0, main.POTW.model.flastSerialNo)
+
+    # main.OrderBook.modelO.DelRows()
+    main.POTW.model.flastSerialNo = 0
+    main.POTW.model.rowCount()
+    # st=time.time()
+    fltr = main.POTW.table[np.where(main.POTW.table[:main.POTW.lastSerialNo, 0] == UserID)]
+
+
+
+    for i in main.tokenDict:
+        main.tokenDict[i]['POTW']=[]
+
+    for data in fltr:
+        main.POTW.FilterTable[main.POTW.model.flastSerialNo] = [data[0],
+                                                                data[1], data[2], data[3], data[4], data[5],
+                                                                data[6], data[7], data[8], data[9], data[10],
+                                                                data[11], data[12], data[13], data[14],
+                                                                data[15],
+                                                                data[16], data[17], data[18], data[19], data[20],
+                                                                data[21], data[22], data[23], data[24], data[25],
+                                                                data[26], data[27], data[28], data[29], data[30],
+                                                                data[31], data[32], data[33],data[34]]
+
+        main.POTW.model.flastSerialNo += 1
+        main.POTW.model.insertRows()
+        main.POTW.model.rowCount()
+
+        if main.tokenDict.get(data[2]):
+            main.tokenDict[data[2]]['POTW'].append(main.POTW.model.flastSerialNo - 1)
+        else:
+            main.tokenDict[data[2]] = {}
+            main.tokenDict[data[2]]['POTW'] = [main.POTW.model.flastSerialNo - 1]
+            main.tokenDict[data[2]]['POCW'] = []
+
+    ind = main.POTW.model.index(0, 0)
+    ind1 = main.POTW.model.index(0, 1)
+    main.POTW.model.dataChanged.emit(ind, ind1)
+
+    # main.POTW.smodel.setClientCode(UserID)
+    # main.POTW.smodel.setFilterFixedString(UserID)
+
+    # main.POTW.le_text.setText(UserID)
+
+    # main.TWSWM.smodel.setClientCode(UserID)
+    # main.TWSWM.smodel.setFilterFixedString(UserID)
+
+
+def UserIDfilterPOCW(main):
+
+
+    clientcode=main.POCW.le_text.text()
+    # main.cFrame.DPOTW.show()
+    # main.cFrame.DPOTW.raise_()
+
+    temp = np.zeros_like(main.POCW.FilterTable[0:main.POCW.model.flastSerialNo, :])
+
+    main.POCW.FilterTable[0:main.POCW.model.flastSerialNo, :] = temp
+
+    main.POCW.model.DelRows(0, main.POCW.model.flastSerialNo)
+
+    # main.OrderBook.modelO.DelRows()
+    main.POCW.model.flastSerialNo = 0
+    main.POCW.model.rowCount()
+    ind = main.POCW.model.index(0, 0)
+    ind1 = main.POCW.model.index(0, 1)
+    main.POCW.model.dataChanged.emit(ind, ind1)
+    # st=time.time()
+    fltr = main.POCW.table[np.where(main.POCW.table[:main.POCW.lastSerialNo, 0] == clientcode)]
+
+    for i in main.tokenDict:
+        main.tokenDict[i]['POCW'] = []
+    for data in fltr:
+        main.POCW.FilterTable[main.POCW.model.flastSerialNo, :] = [data[0], data[1], data[2], data[3], data[4], data[5],
+                                                                   data[6],
+                                                                   data[7], data[8], data[9], data[10], data[11],
+                                                                  data[12], data[13], data[14], data[15],
+                                                                   data[16], data[17], data[18], data[19], data[20],
+                                                                   data[21],
+                                                                   data[22], data[23], data[24], data[25],data[26],data[27],
+                                                                   data[28], data[29],
+                                                                   data[30]]
+
+        main.POCW.model.flastSerialNo += 1
+        main.POCW.model.insertRows()
+        main.POCW.model.rowCount()
+
+        if main.tokenDict.get(data[2]):
+            main.tokenDict[data[2]]['POCW'].append(main.POCW.model.flastSerialNo - 1)
+        else:
+            main.tokenDict[data[2]] = {}
+            main.tokenDict[data[2]]['POCW'] = [main.POCW.model.flastSerialNo - 1]
+            main.tokenDict[data[2]]['POTW'] = []
+
+    ind = main.POCW.model.index(0, 0)
+    ind1 = main.POCW.model.index(0, 1)
+    main.POCW.model.dataChanged.emit(ind, ind1)
+
+    # main.POTW.smodel.setClientCode(UserID)
+    # main.POTW.smodel.setFilterFixedString(UserID)
+
+    # main.POTW.le_text.setText(UserID)
+
+    # main.TWSWM.smodel.setClientCode(UserID)
+    # main.TWSWM.smodel.setFilterFixedString(UserID)

@@ -58,8 +58,9 @@ class PositionDetailsCW(QMainWindow):
 
     def createSlots(self):
         self.pbClearfilter.clicked.connect(self.ClearFilter)
-        self.le_text.textChanged.connect(self.Text1Filter)
+        # self.le_text.textChanged.connect(self.Text1Filter)
         self.le_text_2.textChanged.connect(self.Text2Filter)
+        self.pbNeg.clicked.connect(self.negativeFilter)
 
         # self.cbHeads.currentIndexChanged.connect(self.setfilterColumn)
         self.pbGetExcel.clicked.connect(self.export)
@@ -274,9 +275,16 @@ class PositionDetailsCW(QMainWindow):
         self.smodel.setFilterFixedString(text)
         # self.smodel.filterAcceptsRow()
 
+
+    def negativeFilter(self,text):
+        self.smodel.Neg=True
+        self.smodel.setFilterFixedString('')
+
+        # self.smodel.filterAcceptsRow()
     def ClearFilter(self):
         self.smodel.setClientCode('')
         self.smodel.setSymbol('')
+        self.smodel.Neg = False
         self.smodel.setFilterFixedString('')
         # self.smodel.setFilterKeyColumn(0)
 

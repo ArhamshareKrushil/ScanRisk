@@ -1,4 +1,4 @@
-import psutil
+# import psutil
 
 import threading
 from  py_vollib.black_scholes import black_scholes
@@ -20,6 +20,8 @@ from Application.Views.BWM.BWM import BranchSummary
 from Application.Views.BWSWM.BWSWM import BranchScriptSummary
 from Application.Views.Deposit.Deposit import UI_Deposit
 from Application.Views.Limit.Limit import UI_Limit
+
+
 
 from Application.Utils.support import getLogPath
 
@@ -57,7 +59,7 @@ import os
 import platform
 import json
 from Application.Services.Socket.SocketClient import SioClient
-from Application.Services.FastApi.ApiServices import versionCheck,DownloadVersionClicked
+from Application.Services.FastApi.ApiServices import versionCheck,DownloadVersionClicked,updateTerminalAPI
 
 
 
@@ -99,6 +101,7 @@ class Ui_Main(QMainWindow):
         self.r = 0.1
 
         self.tokenDict={}
+        self.maintokenDict={}
         self.twswmDict={}
         self.twmDict={}
         self.cwswmDict = {}
@@ -158,16 +161,16 @@ class Ui_Main(QMainWindow):
         # self.timerBWM.timeout.connect(lambda: updateBWM(self))
 
         self.timerGlobalM = QTimer()
-        self.timerGlobalM.setInterval(40000)
+        self.timerGlobalM.setInterval(30000)
         self.timerGlobalM.timeout.connect(lambda: updateBWSWM(self))
         self.timerGlobalM.timeout.connect(lambda: updateGlobalMargin(self))
 
         self.timerMTM = QTimer()
-        self.timerMTM.setInterval(10000)
+        self.timerMTM.setInterval(5000)
         self.timerMTM.timeout.connect(lambda: updateFOMTMPOTW(self))
 
         self.timerCMMTM = QTimer()
-        self.timerCMMTM.setInterval(15000)
+        self.timerCMMTM.setInterval(10000)
         self.timerCMMTM.timeout.connect(lambda :update_CASH_MTMPOTW(self))
 
         self.timerGreeks = QTimer()
@@ -175,7 +178,7 @@ class Ui_Main(QMainWindow):
         self.timerGreeks.timeout.connect(lambda: update_Greeks_POTW(self))
 
         self.timerSCN = QTimer()
-        self.timerSCN.setInterval(30000)
+        self.timerSCN.setInterval(25000)
         self.timerSCN.timeout.connect(lambda: updateSCNPricePOTW(self))
 
         self.timerBWM = QTimer()
@@ -244,6 +247,8 @@ class Ui_Main(QMainWindow):
             self.connectAllslots()
 
             self.timerGlobalM.start()
+
+            self.timerMTM.setInterval(2000)
             self.timerMTM.start()
             self.timerCMMTM.start()
             self.timerGreeks.start()
@@ -289,6 +294,8 @@ class Ui_Main(QMainWindow):
             self.cFrame.DBWM.setWidget(self.BWM)
             self.cFrame.DBWSWM.setWidget(self.BWSWM)
 
+            ##########Slots#####################################
+
             self.Reciever.sgData7202.connect(self.update7202POCW)
             self.RecieverCM.sgCMData7202.connect(self.updateCM7202POCW)
 
@@ -312,6 +319,10 @@ class Ui_Main(QMainWindow):
             self.CMPOCW.tableView.doubleClicked.connect(lambda: CMPOCWdoubleClicked(self))
 
             self.POCW.tableView.doubleClicked.connect(lambda: POCWdoubleClicked(self))
+
+            self.POCW.le_text.returnPressed.connect(lambda: UserIDfilterPOCW(self))
+
+            self.TerminalM.sgupdateTWMwithTmaster.connect(self.updateTerminalAPI)
 
             self.timerMTM.timeout.connect(lambda :updateFOMTMPOCW(self))
             self.timerCMMTM.timeout.connect(lambda :update_CASH_MTMPOCW(self))
@@ -458,13 +469,20 @@ class Ui_Main(QMainWindow):
         self.pbTMas.clicked.connect(self.TerminalM.show)
         self.pbLimit.clicked.connect(self.Limit.show)
 
+        self.POTW.le_text.returnPressed.connect(lambda :UserIDfilterPOTW(self))
+
+
+
         # self.pbRefresh.clicked.connect()
 
 
 
 
+    # def UserIDfilterPOTW(self,userid):
+    #     UserIDfilterPOTW(self,userid)
 
-
+    def updateTerminalAPI(self,data):
+        updateTerminalAPI(self,data)
     @pyqtSlot(dict)
     def updateDepositPOTW(self,data):
         updateDepositPOTW(self,data)
@@ -504,11 +522,15 @@ class Ui_Main(QMainWindow):
 
     @pyqtSlot(list)
     def updatePOTW(self,data):
-        updatePOTW(self,data)
+        # th01=threading.Thread(target=updateFilterPOTW,args=(self,data))
+        # th01.start()
+        updateFilterPOTW(self,data)
 
     @pyqtSlot(list)
     def updateCMPOTW(self, data):
         updateCMPOTW(self, data)
+
+
 
     @pyqtSlot(list)
     def updateCMPOCW(self, data):
@@ -555,7 +577,9 @@ class Ui_Main(QMainWindow):
     def on_POTWOpenPosition(self,data):
 
         # print(data)
-        updatePOTWopenPosition(self,data)
+        updateFilterPOTW(self,data)
+
+    @QtCore.pyqtSlot(list)
     def updatePOCW(self,data):
 
         # print(data)

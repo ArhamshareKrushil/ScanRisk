@@ -114,7 +114,7 @@ color:white
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>algo</string>
+       <string/>
       </property>
       <property name="placeholderText">
        <string>UserName</string>
@@ -142,7 +142,7 @@ color:white
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>Ar@123S!</string>
+       <string/>
       </property>
       <property name="placeholderText">
        <string>Password</string>

@@ -50,7 +50,9 @@ class SioClient(QObject):
     def connect(self):
         try:
             # self.sio.connect('http://192.168.113.52:3332')
-            self.sio.connect(self.socketIP)
+
+            print('socketip',self.socketIP)
+            self.sio.connect(url = self.socketIP)
             # self.sio.wait()
 
         except:
@@ -135,6 +137,10 @@ class SioClient(QObject):
         self.IN += 1
 
         # print('POTW',data)
+        # if data[0]=='222':
+        #     print('222',data)
+        # elif data[0]=='360001001029110':
+        #     print('360001001029110',data)
         self.sgOnPosition.emit(data)
 
 

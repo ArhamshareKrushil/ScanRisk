@@ -30,6 +30,7 @@ class PositionDetailsTW(QMainWindow):
         uic.loadUi(ui_login, self)
         dark = qdarkstyle.load_stylesheet_pyqt5()
         self.lastSerialNo = 0
+        self.FilterlastSerialNo = 0
         self.clientList=[]
 
         osType = platform.system()
@@ -43,6 +44,9 @@ class PositionDetailsTW(QMainWindow):
         # self.headerFrame.layout().addWidget(self.title, 0, 0)
         # self.title.sgPoss.connect(self.movWin)
 
+
+
+
         tables_details_POTW(self)
         self.setStyleSheet(dt3)
         # self.FillcbHeads()
@@ -53,9 +57,12 @@ class PositionDetailsTW(QMainWindow):
         self.defaultColumnProfile()
         # QSizeGrip(self.gripFolio)
 
+
+
     def createSlots(self):
         self.pbClearfilter.clicked.connect(self.ClearFilter)
-        self.le_text.textChanged.connect(self.Text1Filter)
+        # self.le_text.textChanged.connect(self.Text1Filter)
+        self.pbNeg.clicked.connect(self.NegativeFilter)
         self.le_text_2.textChanged.connect(self.Text2Filter)
         # self.cbHeads.currentIndexChanged.connect(self.setfilterColumn)
         self.pbGetExcel.clicked.connect(self.export)
@@ -256,10 +263,20 @@ class PositionDetailsTW(QMainWindow):
         self.smodel.token = ''
         # self.smodel.filterAcceptsRow()
 
+    def NegativeFilter(self, text):
+        # self.smodel.setClientCode('')
+        # self.smodel.setSymbol('')
+        self.smodel.token = ''
+        self.smodel.Neg=True
+        self.smodel.setFilterFixedString('')
+
+        # self.smodel.filterAcceptsRow()
+
     def ClearFilter(self):
         self.smodel.setClientCode('')
         self.smodel.setSymbol('')
         self.smodel.setToken('')
+        self.smodel.Neg = False
         self.smodel.setFilterFixedString('')
         # self.smodel.setFilterKeyColumn(0)
 

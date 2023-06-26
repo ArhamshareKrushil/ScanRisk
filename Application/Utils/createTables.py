@@ -107,14 +107,23 @@ def tables_details_POTW(POTW):
                           'NetValue','PrevDExpo_Mrg','PrevDSpan_Mrg','Total_Margin','Net_Prem',
                             'FUT_MTM','OPT_MTM','PRM_MRG','IV','Delta',
                             'Theta','Gama','Vega','UpSCNPrice','DownSCNPrice',
-                            'UpSCNMTM','DownSCNMTM','TOC']
+                            'UpSCNMTM','DownSCNMTM','TOC','TerminalID']
 
         #############################################################################################################
 
 
         POTW.visibleColumns = len(POTW.heads)
-        POTW.table = np.zeros((20000, 34), dtype=object)
-        POTW.model = modelPOTW.ModelTS(POTW.table, POTW.heads)
+        POTW.table = np.zeros((20000,35), dtype=object)
+
+        POTW.FilterTable = np.zeros((10000, 35), dtype=object)
+
+        # POTW.model = modelPOTW.ModelTS(POTW.table, POTW.heads)
+
+
+        POTW.model = modelPOTW.ModelTS(POTW.FilterTable, POTW.heads)
+
+
+
         POTW.smodel = modelSortfilterPOTW.ProxyModel()
         POTW.smodel.setSourceModel(POTW.model)
         POTW.tableView.setModel(POTW.smodel)
@@ -433,8 +442,11 @@ def tables_details_POCW(POCW):
         POCW.visibleColumns = len(POCW.heads)
         POCW.table = np.zeros((20000, 31), dtype=object)
 
-        POCW.model = modelPOCW.ModelTS(POCW.table, POCW.heads)
+        POCW.FilterTable = np.zeros((10000, 31), dtype=object)
+
+        POCW.model = modelPOCW.ModelTS(POCW.FilterTable, POCW.heads)
         # POCW.smodel = QSortFilterProxyModel()
+
         POCW.smodel = modelSortfilterPOCW.ProxyModel()
         POCW.smodel.setSourceModel(POCW.model)
         POCW.tableView.setModel(POCW.smodel)

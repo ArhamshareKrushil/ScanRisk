@@ -51,6 +51,13 @@ class TerminalSummary(QMainWindow):
 
         self.createShortcuts()
         self.defaultColumnProfile()
+
+        # self.selCB334 = QShortcut(QKeySequence('tab'), self.cbHeads)
+        # self.selCB334.setContext(Qt.WidgetWithChildrenShortcut)
+        # # self.selCB334.activated.connect(lambda: print('lll'))
+        # self.selCB334.activated.connect(lambda: print('ddd'))
+        # self.selCB334.activated.connect(lambda: self.le_text_2.setFocus(True))
+        # self.selCB334.activated.connect(lambda: self.tableView.selectRow(0))
         # QSizeGrip(self.frameGrip)
 
     def createSlots(self):

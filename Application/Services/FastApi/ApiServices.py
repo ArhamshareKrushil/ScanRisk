@@ -64,6 +64,8 @@ def login(main):
             else:
                 update_contract_FOold(main)
 
+            updateLTP_ContractFO(main)
+
             main.createUserObject()
 
 
@@ -71,71 +73,71 @@ def login(main):
 
             if usertype!='master':
 
-                th56=threading.Thread(target=update_TerminalMaster,args=(main,token))
+                th56=threading.Thread(target=update_TerminalMaster,args=(main,token,))
                 th56.setDaemon(True)
                 th56.start()
 
-                th1 = threading.Thread(target=updatePOTW_DB, args=(main, token))
+                th1 = threading.Thread(target=updatePOTW_DB, args=(main, token,))
                 th1.setDaemon(True)
                 th1.start()
 
-                th2 = threading.Thread(target=getTWSWM, args=(main, token))
+                th2 = threading.Thread(target=getTWSWM, args=(main, token,))
                 th2.setDaemon(True)
                 th2.start()
 
-                th3 = threading.Thread(target=getTWM, args=(main, token))
+                th3 = threading.Thread(target=getTWM, args=(main, token,))
                 th3.setDaemon(True)
                 th3.start()
 
-                th4 = threading.Thread(target=getCMPOTW, args=(main, token))
+                th4 = threading.Thread(target=getCMPOTW, args=(main, token,))
                 th4.setDaemon(True)
                 th4.start()
 
-                th5 = threading.Thread(target=getCMTWM, args=(main, token))
+                th5 = threading.Thread(target=getCMTWM, args=(main, token,))
                 th5.setDaemon(True)
                 th5.start()
             else:
-                th56 = threading.Thread(target=update_TerminalMaster, args=(main, token))
+                th56 = threading.Thread(target=update_TerminalMaster, args=(main, token,))
                 th56.setDaemon(True)
                 th56.start()
 
-                th1 = threading.Thread(target=updatePOTW_DB, args=(main, token))
+                th1 = threading.Thread(target=updatePOTW_DB, args=(main, token,))
                 th1.setDaemon(True)
                 th1.start()
 
-                th2 = threading.Thread(target=getTWSWM, args=(main, token))
+                th2 = threading.Thread(target=getTWSWM, args=(main, token,))
                 th2.setDaemon(True)
                 th2.start()
 
-                th3 = threading.Thread(target=getTWM, args=(main, token))
+                th3 = threading.Thread(target=getTWM, args=(main, token,))
                 th3.setDaemon(True)
                 th3.start()
 
-                th4 = threading.Thread(target=getCMPOTW, args=(main, token))
+                th4 = threading.Thread(target=getCMPOTW, args=(main, token,))
                 th4.setDaemon(True)
                 th4.start()
 
-                th5 = threading.Thread(target=getCMTWM, args=(main, token))
+                th5 = threading.Thread(target=getCMTWM, args=(main, token,))
                 th5.setDaemon(True)
                 th5.start()
 
-                th21 = threading.Thread(target=updatePOCW_DB, args=(main, token))
+                th21 = threading.Thread(target=updatePOCW_DB, args=(main, token,))
                 th21.setDaemon(True)
                 th21.start()
 
-                th22 = threading.Thread(target=getCWSWM, args=(main, token))
+                th22 = threading.Thread(target=getCWSWM, args=(main, token,))
                 th22.setDaemon(True)
                 th22.start()
 
-                th32 = threading.Thread(target=getCWM, args=(main, token))
+                th32 = threading.Thread(target=getCWM, args=(main, token,))
                 th32.setDaemon(True)
                 th32.start()
 
-                th33 = threading.Thread(target=getCMPOCW, args=(main, token))
+                th33 = threading.Thread(target=getCMPOCW, args=(main, token,))
                 th33.setDaemon(True)
                 th33.start()
 
-                th34 = threading.Thread(target=getCMCWM, args=(main, token))
+                th34 = threading.Thread(target=getCMCWM, args=(main, token,))
                 th34.setDaemon(True)
                 th34.start()
 
@@ -225,6 +227,8 @@ def versionCheck(main):
 
 
 
+
+
 def DownloadVersionClicked(main,button):
     if (button.text() == 'Yes'):
         get_API_config(main)
@@ -244,6 +248,28 @@ def DownloadVersionClicked(main,button):
 
     else:
         pass
+
+
+
+
+def updateTerminalAPI(main,data):
+    # print('kdkd')
+    # get_API_config(main)
+    DB_url = main.FastApiURL + '/v3/updateterminal'
+    print('data',data)
+    for i in data:
+        # print('ddd',data)
+        # print('idata',data[i]['Oldid'],data[i]['Newid'])
+        DBheaders = {
+            'Content-Type': 'application/json',
+            'Token': main.token,
+            'Terminal': str(i),
+            'oldUserid': str(data[i]['Oldid']),
+            'newUserid': str(data[i]['Newid'])
+        }
+        req = requests.request("POST", DB_url, json=DBheaders)
+        data1 = req.json()
+        print('res',data1)
 
 
 # def getPositionPOTW(main,token):
@@ -303,14 +329,18 @@ def update_TerminalMaster(main,token):
     }
     req = requests.request("POST", url, headers=DBheaders)
     data = req.json()
+    # print(data)
     # print(type(data))
 
     st = time.time()
+
+    # print(data['data'])
     # a = eval(data)
     # print(data['data'])
     # data23 = list(itertools.chain(*data['data']))
     # print(data23)
     for pos in data['data']:
+        # print(pos,type(pos))
         p=list(pos.values())
         loadTerminalMaster(main,p)
         # print('p',p)
@@ -619,6 +649,13 @@ def update_contract_FOold(main):
     main.fo_contract = fo_contract.to_numpy()
 
 
+def updateLTP_ContractFO(main):
+    DBLTP_url = main.FastApiURL + '/v3/dbLTP'
+    DBheaders = {
+        'Content-Type': 'application/json'
+    }
+    req = requests.request("POST", DBLTP_url, headers=DBheaders)
+    dataLTP = req.json()
 
 
 def updatePOTW_DB(main,token):
@@ -696,6 +733,8 @@ def updatePOCW_DB(main,token):
         for pos in data['data']:
             p=list(pos.values())
             d=dataLTP.get(str(p[2]))
+            if (p[0]==0 or p[0]=='0'):
+                print('kkkkkk')
             if d:
                 # print('tt')
                 p[10]=d['LTP']
